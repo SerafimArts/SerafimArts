@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8"/>
+    <title>SerafimArts</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300&subset=latin,cyrillic"
+          rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/app.css"/>
+    <script src="/assets/app.js"></script>
+</head>
+<body>
+{% block header %}
+    <header data-vm="Header" data-bind="attr: {class: fixed() ? 'fixed' : ''}">
+        <nav>
+            {#
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            #}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// тут будет менюшка
+        </nav>
+    </header>
+{% endblock %}
+
+
+{% block parallax %}
+    <section class="parallax" data-vm="Parallax">
+        <div class="layer layer-bg" data-type="parallax" data-depth="0"></div>
+        <div class="layer layer-1" data-type="parallax" data-depth=".2"></div>
+        <div class="layer layer-2" data-type="parallax" data-depth=".3"></div>
+        <div class="layer layer-3" data-type="parallax" data-depth=".6"></div>
+        <div class="layer layer-4" data-type="parallax" data-depth=".7"></div>
+        <div class="layer layer-5" data-type="parallax" data-depth=".8"></div>
+        <div class="layer layer-6" data-type="parallax" data-depth="1"></div>
+        <div class="layer layer-overlay" data-type="parallax" data-depth="1.2"></div>
+    </section>
+{% endblock %}
+
+
+{% block content %}
+{% endblock %}
+
+
+<footer class="section section-dark">
+    <div class="content">
+        Enjoy! Special for you by <br />
+        <img src="/img/me/logo.png" alt="SerafimArts" />
+    </div>
+</footer>
+
+<script>new (require('Application').default)</script>
+</body>
+</html>

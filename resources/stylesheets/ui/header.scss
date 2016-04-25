@@ -1,0 +1,48 @@
+header {
+  width: 100%;
+  position: absolute;
+  height: 132px;
+  background: url(/img/header/header.png) center top repeat-x;
+  z-index: 20;
+  margin-top: 43px;
+  top: -43px;
+
+  nav {
+    width: $width;
+    margin: 0 auto;
+    box-sizing: border-box;
+    padding-left: 120px;
+    transition: padding .3s ease;
+    height: 30px;
+    line-height: 30px;
+
+    a {
+      display: block;
+      float: left;
+      margin: 0 15px;
+      transition: margin .3s ease;
+      text-decoration: none;
+      color: #999;
+
+      &:hover {
+        color: #fff;
+      }
+    }
+  }
+
+  &.fixed {
+    top: 0;
+    margin-top: 0;
+    height: 43px;
+    transition: top .3s ease;
+    background-position: center bottom;
+    position: fixed;
+
+    nav {
+      padding-left: 60px;
+      a {
+        margin: 0 20px;
+      }
+    }
+  }
+}

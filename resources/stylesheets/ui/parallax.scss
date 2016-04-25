@@ -1,0 +1,49 @@
+.parallax {
+  $height: 800px;
+  width: 100%;
+  height: $height;
+  position: relative;
+  overflow: hidden;
+  background: #7f776b;
+
+  .layer {
+    background-position: bottom center;
+    background-size: auto;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: $height;
+    position: absolute;
+    transition: .5s ease;
+  }
+
+  .layer-bg {
+    background: #9f9b99 url(/img/header/parallax/bg.jpg) center bottom repeat;
+  }
+
+  @for $i from 1 through 6 {
+    .layer-#{$i} {
+      background: url(/img/header/parallax/#{$i}.png) center bottom no-repeat;
+    }
+  }
+
+  .layer-overlay {
+    background: url(/img/header/parallax/overlay.png) center bottom repeat-x;
+    height: 1080px;
+  }
+}
+
+.parallax + .section {
+  &:after {
+    content: '';
+    width: 100%;
+    background: url(/img/header/bottom.png) 0 center repeat-x;
+    height: 40px;
+    position: absolute;
+    top: -40px;
+    left: 0;
+  }
+
+  &.section-dark:after {
+    background-position: bottom center;
+  }
+}
