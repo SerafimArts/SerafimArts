@@ -48,6 +48,7 @@ body {
 }
 
 @import "ui/header";
+@import "ui/footer";
 @import "ui/parallax";
 
 .section {
@@ -258,15 +259,3 @@ body {
   }
 }
 
-
-footer {
-  margin-top: 100px;
-  color: #383b3d;
-
-  .content {
-    text-align: center;
-    @include clear;
-    display: block;
-    padding: 20px 0 10px 0;
-  }
-}

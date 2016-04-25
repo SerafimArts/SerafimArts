@@ -12,18 +12,19 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
     (new builder)
-        .withMinify()
-        .withGzip()
+        //.withMinify()
+        //.withGzip()
         .withCommonJs()
         .withPolyfill()
         .withSourceMaps()
 
         .then.js(require.resolve('knockout/build/output/knockout-latest'))
+        .then.js('resources/javascripts/vendor/pixi-3.0.10.js')
         .then.es7(function (compiler) {
             compiler
                 .plugin('syntax-flow')
                 .plugin('transform-flow-strip-types')
-                .path('resources/javascripts/')
+                .path('resources/javascripts/app/')
                 .namespace('/');
         })
         .build('./public/assets/app.js');

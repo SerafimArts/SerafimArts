@@ -11,7 +11,7 @@ export default class View {
      * @type {Function}
      */
     controller = null;
-
+    
     /**
      * @param {HTMLElement} node
      * @returns {View}
