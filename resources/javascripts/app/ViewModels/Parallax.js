@@ -51,6 +51,9 @@ export default class Parallax {
 
         window.addEventListener('scroll', event => {
             this._scrollY = window.pageYOffset;
+            if (this._scrollY > this.renderer.height) {
+                this._scrollY = this.renderer.height;
+            }
         }, true);
 
         context.appendChild(this.renderer.view);
@@ -70,7 +73,7 @@ export default class Parallax {
             }
 
             for (i = 0, len = this.smoke.children.length; i < len; i++) {
-                this.smoke.getChildAt(i).visible = (value === this.highQuality);
+                this.smoke.getChildAt(i).visible = (value === this.highQuality || i < 10);
             }
         });
 
@@ -79,15 +82,16 @@ export default class Parallax {
 
         for (var i = 0; i < 50; i++) {
             var sprite              = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
+            sprite.id               = i;
             sprite.x                = Math.random() * screen.width - 128;
             sprite.y                = Math.random() * 250 + this.renderer.height - 400;
-            sprite.visible          = false;
+            sprite.visible          = i < 10;
             sprite.movementSpeed    = (Math.random() + .5) * (Math.random() > 0.5 ? -1 : 1);
 
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.alpha = .3;
+        this.smoke.alpha = .5;
         this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
 
@@ -138,10 +142,13 @@ export default class Parallax {
         sprite.y = sprite.shift.y + this._scrollY * (sprite.depth - 1) * -1;
 
         if (sprite.blurFilter) {
-            sprite.x = (this.renderer.width - sprite.width) / 2;
+            if (sprite.centrize) {
+                sprite.x = (this.renderer.width - sprite.width) / 2;
+            }
+            var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 50);
 
             if (this.quality() > this.lowQuality && this._scrollY < this.renderer.height) {
-                sprite.blurFilter.blur = Math.abs(this._scrollY * (1 - sprite.depth) / 50) + sprite.depth * 5;
+                sprite.blurFilter.blur = delta + sprite.depth * 5;
             } else if (this.quality() === this.lowQuality) {
                 sprite.blurFilter.blur = 0;
             }
@@ -174,6 +181,7 @@ export default class Parallax {
             data.item.blurFilter = new Blur;
             data.item.blurFilter.passes = this.quality();
             data.item.filters = [data.item.blurFilter];
+            data.item.centrize = !!data.centrize;
 
             container.addChild(data.item);
 
@@ -184,48 +192,63 @@ export default class Parallax {
     get layers() {
         return [
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/bg.jpg')),
                 depth: 0,
                 x: 0,
                 y: 0
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/1.png')),
                 depth: .2,
                 x: 0,
                 y: 86
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/2.png')),
                 depth: .3,
                 x: 0,
                 y: 138
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/3.png')),
                 depth: .6,
                 x: 0,
                 y: 254
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/4.png')),
                 depth: .7,
                 x: 0,
                 y: 503
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/5.png')),
                 depth: .8,
                 x: 0,
                 y: 358
             },
             {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/6.png')),
                 depth: 1,
                 x: 0,
                 y: 300
             },
             {
+                centrize: false,
+                item: new Sprite(Texture.fromImage('/img/header/parallax/sun.png')),
+                depth: .1,
+                x: 0,
+                y: 0
+            },
+            {
+                centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/overlay.png')),
                 depth: 1.2,
                 x: 0,
