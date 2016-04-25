@@ -6,6 +6,34 @@
   overflow: hidden;
   background: #7f776b;
 
+  .controls {
+    position: absolute;
+    z-index: 999;
+    bottom: 30px;
+    right: 20px;
+    background: rgba(#fff, .2);
+    @include clear;
+
+    .button {
+      height: 18px;
+      line-height: 18px;
+      font-size: 12px;
+      display: block;
+      float: left;
+
+      &:hover {
+        background: #fff;
+        box-shadow: 0 0 0 1px #fff;
+      }
+
+      &.active {
+        background: #f00;
+        color: #fff;
+        box-shadow: 0 0 0 1px #f00;
+      }
+    }
+  }
+
   & + .section {
     &:after {
       content: '';

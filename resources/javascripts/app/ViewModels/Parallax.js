@@ -2,7 +2,6 @@ import Video from "/Render/Video";
 
 var Renderer = PIXI.WebGLRenderer;
 var Blur = PIXI.filters.BlurFilter;
-var ColorMatrix = PIXI.filters.ColorMatrixFilter;
 var Container = PIXI.Container;
 var Sprite = PIXI.Sprite;
 var Texture = PIXI.Texture;
@@ -11,6 +10,11 @@ var Texture = PIXI.Texture;
  * Class Parallax
  */
 export default class Parallax {
+    /**
+     * @type {void|KnockoutObservable<T>}
+     */
+    quality = ko.observable(1);
+
     /**
      * @type {Renderer}
      */
@@ -28,10 +32,15 @@ export default class Parallax {
     _scrollY = 0;
 
     /**
+     * @type {PIXI.Container}
+     */
+    smoke = new Container();
+
+    /**
      * @type {number}
      */
     width = 1100;
-    
+
     /**
      * @param context
      */
@@ -47,7 +56,44 @@ export default class Parallax {
 
         this._load(this.stage);
 
+        this.stage.addChild(this.smoke);
+
+        this.quality.subscribe(value => {
+            for (var i = 0, len = this.stage.children.length; i < len; i++) {
+                this.stage.getChildAt(i).blurFilter.passes = value;
+            }
+        });
+
+        var smoke = Texture.fromImage('/img/header/parallax/smoke/smoke.png');
+        for (var i = 0; i < 10; i++) {
+            var sprite = new Sprite(smoke);
+            sprite.x = Math.random() * 1920 - 400;
+            sprite.y = Math.random() * 100 + this.renderer.height - 300;
+            sprite.movement = Math.random() * 3 - 1.5;
+
+            this.smoke.addChild(sprite);
+        }
+
+        this.smoke.depth = .7;
+        this.smoke.shift = {x: 0, y: 0};
+
         this._render();
+    }
+
+    /**
+     * @returns {Parallax}
+     */
+    setLowQuality() {
+        this.quality(1);
+        return this;
+    }
+
+    /**
+     * @returns {Parallax}
+     */
+    setHighQuality() {
+        this.quality(3);
+        return this;
     }
 
     /**
@@ -78,8 +124,20 @@ export default class Parallax {
         sprite.x = (this.renderer.width - sprite.width) / 2;
         sprite.y = sprite.shift.y + this._scrollY * (sprite.depth - 1) * -1;
 
-        if (sprite.blurFilter && this._scrollY < this.renderer.height) {
-            sprite.blurFilter.blur = Math.abs(this._scrollY * (1 - sprite.depth) / 50);
+
+        if (this.quality() > 1 && sprite.blurFilter && this._scrollY < this.renderer.height) {
+            sprite.blurFilter.blur = Math.abs(this._scrollY * (1 - sprite.depth) / 50) + sprite.depth * 3;
+        }
+
+        if (this.quality() === 1 && sprite.blurFilter) {
+            sprite.blurFilter.blur = 0;
+        }
+
+        if (sprite instanceof Container) {
+            for (var i = 0, len = sprite.children.length; i < len; i++) {
+                var smoke = sprite.getChildAt(i);
+                smoke.x += smoke.movement;
+            }
         }
     }
 
@@ -87,14 +145,6 @@ export default class Parallax {
      * @private
      */
     _load(container:Container) {
-        var colorMatrix = new ColorMatrix;
-        colorMatrix.matrix = [
-            1, 0, 0, .5,
-            0, 1, 0, .5,
-            0, 0, 1, .5,
-            0, 0, 0, 1
-        ];
-
         for (var i = 0, len = this.layers.length; i < len; i++) {
             var data = this.layers[i];
 
@@ -102,7 +152,7 @@ export default class Parallax {
             data.item.depth = data.depth;
 
             data.item.blurFilter = new Blur;
-            data.item.blurFilter.passes = 2;
+            data.item.blurFilter.passes = this.quality();
             data.item.filters = [data.item.blurFilter];
 
             container.addChild(data.item);

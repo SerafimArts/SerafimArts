@@ -1,1 +1,8 @@
-<section class="parallax" data-vm="Parallax"></section>
+<section class="parallax" data-vm="Parallax">
+    <nav class="controls">
+        <a href="#" class="button"
+           data-bind="click: setLowQuality, css: { active: (quality() === 1) }">Low</a>
+        <a href="#" class="button"
+           data-bind="click: setHighQuality, css: { active: (quality() === 3) }">High</a>
+    </nav>
+</section>
