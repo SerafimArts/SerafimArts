@@ -43,6 +43,11 @@ export default class Parallax {
     width = 1100;
 
     /**
+     * @type {number}
+     */
+    mill = 0;
+
+    /**
      * @param context
      */
     constructor(context:HTMLElement) {
@@ -129,6 +134,7 @@ export default class Parallax {
 
         for (i = 0, len = this.stage.children.length; i < len; i++) {
             this._updatePosition(this.stage.getChildAt(i));
+
         }
 
         this.renderer.render(this.stage);
@@ -143,7 +149,7 @@ export default class Parallax {
 
         if (sprite.blurFilter) {
             if (sprite.centrize) {
-                sprite.x = (this.renderer.width - sprite.width) / 2;
+                sprite.x = (this.renderer.width - sprite.width) / 2 + sprite.shift.x;
             }
             var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 50);
 
@@ -151,6 +157,11 @@ export default class Parallax {
                 sprite.blurFilter.blur = delta + sprite.depth * 5;
             } else if (this.quality() === this.lowQuality) {
                 sprite.blurFilter.blur = 0;
+            }
+
+            if (sprite.rotatable) {
+                sprite.anchor.set(.5, .5);
+                sprite.rotation += .001;
             }
         }
 
@@ -182,6 +193,7 @@ export default class Parallax {
             data.item.blurFilter.passes = this.quality();
             data.item.filters = [data.item.blurFilter];
             data.item.centrize = !!data.centrize;
+            data.item.rotatable = !!data.rotate;
 
             container.addChild(data.item);
 
@@ -204,6 +216,14 @@ export default class Parallax {
                 depth: .2,
                 x: 0,
                 y: 86
+            },
+            {
+                rotate: true,
+                centrize: true,
+                item: new Sprite(Texture.fromImage('/img/header/parallax/mill.png')),
+                depth: .3,
+                x: 100,
+                y: 330
             },
             {
                 centrize: true,
