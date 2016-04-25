@@ -12,8 +12,8 @@ gulp.task('css', function () {
 
 gulp.task('js', function () {
     (new builder)
-        //.withMinify()
-        //.withGzip()
+        .withMinify()
+        .withGzip()
         .withCommonJs()
         .withPolyfill()
         .withSourceMaps()

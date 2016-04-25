@@ -1,5 +1,3 @@
-import Video from "/Render/Video";
-
 var Renderer = PIXI.WebGLRenderer;
 var Blur = PIXI.filters.BlurFilter;
 var Container = PIXI.Container;
@@ -10,10 +8,13 @@ var Texture = PIXI.Texture;
  * Class Parallax
  */
 export default class Parallax {
+    highQuality = 5;
+    lowQuality = 1;
+
     /**
      * @type {void|KnockoutObservable<T>}
      */
-    quality = ko.observable(1);
+    quality = ko.observable(this.lowQuality);
 
     /**
      * @type {Renderer}
@@ -59,22 +60,35 @@ export default class Parallax {
         this.stage.addChild(this.smoke);
 
         this.quality.subscribe(value => {
-            for (var i = 0, len = this.stage.children.length; i < len; i++) {
-                this.stage.getChildAt(i).blurFilter.passes = value;
+            var i = 0, len = 0;
+            for (i = 0, len = this.stage.children.length; i < len; i++) {
+                var sprite = this.stage.getChildAt(i);
+
+                if (sprite.blurFilter) {
+                    sprite.blurFilter.passes = value;
+                }
+            }
+
+            for (i = 0, len = this.smoke.children.length; i < len; i++) {
+                this.smoke.getChildAt(i).visible = (value === this.highQuality);
             }
         });
 
-        var smoke = Texture.fromImage('/img/header/parallax/smoke/smoke.png');
-        for (var i = 0; i < 10; i++) {
-            var sprite = new Sprite(smoke);
-            sprite.x = Math.random() * 1920 - 400;
-            sprite.y = Math.random() * 100 + this.renderer.height - 300;
-            sprite.movement = Math.random() * 3 - 1.5;
+        var smoke1 = Texture.fromImage('/img/header/parallax/smoke/smoke-1.png');
+        var smoke2 = Texture.fromImage('/img/header/parallax/smoke/smoke-2.png');
+
+        for (var i = 0; i < 50; i++) {
+            var sprite              = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
+            sprite.x                = Math.random() * screen.width - 128;
+            sprite.y                = Math.random() * 250 + this.renderer.height - 400;
+            sprite.visible          = false;
+            sprite.movementSpeed    = (Math.random() + .5) * (Math.random() > 0.5 ? -1 : 1);
 
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.depth = .7;
+        this.smoke.alpha = .3;
+        this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
 
         this._render();
@@ -84,7 +98,7 @@ export default class Parallax {
      * @returns {Parallax}
      */
     setLowQuality() {
-        this.quality(1);
+        this.quality(this.lowQuality);
         return this;
     }
 
@@ -92,7 +106,7 @@ export default class Parallax {
      * @returns {Parallax}
      */
     setHighQuality() {
-        this.quality(3);
+        this.quality(this.highQuality);
         return this;
     }
 
@@ -121,22 +135,28 @@ export default class Parallax {
      * @private
      */
     _updatePosition(sprite:Sprite) {
-        sprite.x = (this.renderer.width - sprite.width) / 2;
         sprite.y = sprite.shift.y + this._scrollY * (sprite.depth - 1) * -1;
 
+        if (sprite.blurFilter) {
+            sprite.x = (this.renderer.width - sprite.width) / 2;
 
-        if (this.quality() > 1 && sprite.blurFilter && this._scrollY < this.renderer.height) {
-            sprite.blurFilter.blur = Math.abs(this._scrollY * (1 - sprite.depth) / 50) + sprite.depth * 3;
-        }
-
-        if (this.quality() === 1 && sprite.blurFilter) {
-            sprite.blurFilter.blur = 0;
+            if (this.quality() > this.lowQuality && this._scrollY < this.renderer.height) {
+                sprite.blurFilter.blur = Math.abs(this._scrollY * (1 - sprite.depth) / 50) + sprite.depth * 5;
+            } else if (this.quality() === this.lowQuality) {
+                sprite.blurFilter.blur = 0;
+            }
         }
 
         if (sprite instanceof Container) {
             for (var i = 0, len = sprite.children.length; i < len; i++) {
                 var smoke = sprite.getChildAt(i);
-                smoke.x += smoke.movement;
+                smoke.x += smoke.movementSpeed;
+
+                if (smoke.movementSpeed > 0 && smoke.x > this.renderer.width) {
+                    smoke.x = -smoke.width;
+                } else if (smoke.movementSpeed < 0 && smoke.x < -smoke.width) {
+                    smoke.x = this.renderer.width;
+                }
             }
         }
     }
