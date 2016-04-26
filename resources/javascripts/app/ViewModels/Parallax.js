@@ -65,8 +65,6 @@ export default class Parallax {
 
         this._load(this.stage);
 
-        this.stage.addChild(this.smoke);
-
         this.quality.subscribe(value => {
             var i = 0, len = 0;
             for (i = 0, len = this.stage.children.length; i < len; i++) {
@@ -85,13 +83,13 @@ export default class Parallax {
         var smoke1 = Texture.fromImage('/img/header/parallax/smoke/smoke-1.png');
         var smoke2 = Texture.fromImage('/img/header/parallax/smoke/smoke-2.png');
 
-        for (var i = 0; i < 50; i++) {
+        for (var i = 0; i < 40; i++) {
             var sprite              = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
             sprite.id               = i;
             sprite.x                = Math.random() * screen.width - 128;
-            sprite.y                = Math.random() * 250 + this.renderer.height - 400;
+            sprite.y                = Math.random() * 400 - 150;
             sprite.visible          = i < 10;
-            sprite.movementSpeed    = (Math.random() + .5) * (Math.random() > 0.5 ? -1 : 1);
+            sprite.movementSpeed    = (Math.random() + .1) * 2;
 
             this.smoke.addChild(sprite);
         }
@@ -194,6 +192,10 @@ export default class Parallax {
             data.item.filters = [data.item.blurFilter];
             data.item.centrize = !!data.centrize;
             data.item.rotatable = !!data.rotate;
+
+            if (i === 4) {
+                this.stage.addChild(this.smoke);
+            }
 
             container.addChild(data.item);
 
