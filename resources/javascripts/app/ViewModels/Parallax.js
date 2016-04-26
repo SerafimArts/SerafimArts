@@ -52,7 +52,7 @@ export default class Parallax {
      */
     constructor(context:HTMLElement) {
         PIXI.utils._saidHello = true;
-        this.renderer.backgroundColor = 0x7f776b;
+        this.renderer.backgroundColor = 0xab998d;
 
         window.addEventListener('scroll', event => {
             this._scrollY = window.pageYOffset;

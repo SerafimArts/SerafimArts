@@ -4,7 +4,7 @@ var builder = require('lightweb-builder').default;
 gulp.task('css', function () {
     (new builder)
         .withMinify()
-        .withGzip()
+        //.withGzip()
         .withSourceMaps()
         .scss('resources/stylesheets/layout.scss')
         .build('./public/assets/app.css')
