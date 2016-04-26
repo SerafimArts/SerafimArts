@@ -16,10 +16,6 @@ class CreateUserGroupsTable extends Migration
             $t->uuid('id')->primaryKey()->unique();
             $t->string('title')->unique();
         });
-
-        Schema::table('users', function(Blueprint $t){
-            $t->uuid('group_id')->index()->nullable();
-        });
     }
 
     /**
@@ -30,8 +26,5 @@ class CreateUserGroupsTable extends Migration
     public function down()
     {
         Schema::drop('user_groups');
-        Schema::table('users', function(Blueprint $t){
-            $t->dropColumn('group_id');
-        });
     }
 }

@@ -17,6 +17,7 @@
         "rcrowe/twigbridge": "0.9.*",
         "analogue/orm": "5.1.*",
         "analogue/support": "5.1.*",
+        "ramsey/uuid": "3.4.*",
         "analogue/laravel-auth": "5.1.*"
     },
     "require-dev": {
@@ -32,7 +33,11 @@
         "psr-4": {
             "App\\": "app/",
             "Core\\": "app/Core/",
-            "Interfaces\\": "app/Interfaces/"
+            "Interfaces\\": "app/Interfaces/",
+            "Domains\\": "app/Domains/",
+            "Repositories\\": "app/Repositories/",
+            "Observers\\": "app/Observers/",
+            "Mappers\\": "app/Mappers/"
         }
     },
     "scripts": {

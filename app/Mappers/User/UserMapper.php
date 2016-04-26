@@ -8,16 +8,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Core\Mappers;
+namespace Mappers\User;
 
 use Analogue\ORM\EntityMap;
-use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class UserMapper
- * @package Core\Mappers
+ * @package Mappers\User
  */
 class UserMapper extends EntityMap
 {
+    /**
+     * @var string
+     */
     protected $table = 'users';
+
+    /**
+     * @var bool
+     */
+    public $timestamps = true;
 }

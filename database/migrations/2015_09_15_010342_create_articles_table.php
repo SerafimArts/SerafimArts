@@ -16,10 +16,13 @@ class CreateArticlesTable extends Migration
             $t->uuid('id')->primaryKey()->unique();
             $t->string('url')->unique()->index();
             $t->string('title', 255);
+            $t->string('type')->index();
 
             $t->uuid('user_id')->index();
             $t->uuid('category_id')->index()->nullable();
 
+            $t->text('images')->nullable();
+            
             $t->text('preview')->nullable();
             $t->text('preview_rendered')->nullable();
             $t->longText('content')->nullable();

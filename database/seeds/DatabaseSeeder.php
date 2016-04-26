@@ -1,19 +1,14 @@
 <?php
-
-
-use Admin\Blog\Models\Comment;
-use Admin\Group;
-use Admin\User;
+use Analogue\ORM\System\Manager;
 use Carbon\Carbon;
-use Admin\Support\Slug;
-use Admin\Support\Uuid;
-use Admin\Blog\Models\Article;
-use Admin\Blog\Models\Category;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
-use Admin\Blog\Models\Like;
+use Domains\User\Group;
 
 
+/**
+ * Class DatabaseSeeder
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
@@ -26,21 +21,15 @@ class DatabaseSeeder extends Seeder
     {
         $faker = \Faker\Factory::create('ru_RU');
 
+        $this->call(GroupsSeeder::class);
+        $this->call(UserSeeder::class);
+
+        die;
+
 
         Model::unguarded(function() use ($faker) {
 
-            // Groups
-            Group::truncate();
-            $groups = [
-                Group::GROUP_GUEST => 'Гость',
-                Group::GROUP_USER  => 'Участник',
-                Group::GROUP_ADMIN => 'Администратор',
-            ];
-            foreach ($groups as $uuid => $title) {
-                Group::create([ 'uuid' => $uuid, 'title' => $title ]);
-                echo '> group ' . $title . "\n";
-                flush();
-            }
+            
 
 
             // Users
