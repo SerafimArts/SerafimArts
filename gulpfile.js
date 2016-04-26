@@ -13,7 +13,7 @@ gulp.task('css', function () {
 gulp.task('js', function () {
     (new builder)
         .withMinify()
-        .withGzip()
+        //.withGzip()
         .withCommonJs()
         .withPolyfill()
         .withSourceMaps()

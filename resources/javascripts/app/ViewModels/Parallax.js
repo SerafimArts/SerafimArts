@@ -237,14 +237,14 @@ export default class Parallax {
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/3.png')),
-                depth: .6,
+                depth: .4,
                 x: 0,
                 y: 254
             },
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/4.png')),
-                depth: .7,
+                depth: .6,
                 x: 0,
                 y: 503
             },
@@ -258,7 +258,7 @@ export default class Parallax {
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/6.png')),
-                depth: 1,
+                depth: .9,
                 x: 0,
                 y: 300
             },
@@ -272,7 +272,7 @@ export default class Parallax {
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/overlay.png')),
-                depth: 1.2,
+                depth: 0,
                 x: 0,
                 y: -140 // -280
             }
