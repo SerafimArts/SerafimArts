@@ -76,25 +76,25 @@ export default class Parallax {
             }
 
             for (i = 0, len = this.smoke.children.length; i < len; i++) {
-                this.smoke.getChildAt(i).visible = (value === this.highQuality || i < 10);
+                this.smoke.getChildAt(i).visible = (value === this.highQuality || i < 5);
             }
         });
 
         var smoke1 = Texture.fromImage('/img/header/parallax/smoke/smoke-1.png');
         var smoke2 = Texture.fromImage('/img/header/parallax/smoke/smoke-2.png');
 
-        for (var i = 0; i < 30; i++) {
+        for (var i = 0; i < 20; i++) {
             var sprite = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
             sprite.id = i;
             sprite.x = Math.random() * screen.width - 128;
             sprite.y = Math.random() * 400 - 150;
-            sprite.visible = i < 10;
+            sprite.visible = i < 5;
             sprite.movementSpeed = (Math.random() + .1);
 
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.alpha = 1;
+        this.smoke.alpha = .7;
         this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
 
@@ -152,7 +152,7 @@ export default class Parallax {
             var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 40);
 
             if (this.quality() > this.lowQuality && this._scrollY < this.renderer.height) {
-                sprite.blurFilter.blur = delta + sprite.depth * 8;
+                sprite.blurFilter.blur = delta + sprite.depth * 3;
             } else if (this.quality() === this.lowQuality) {
                 sprite.blurFilter.blur = 0;
             }
@@ -193,7 +193,7 @@ export default class Parallax {
             data.item.centrize = !!data.centrize;
             data.item.rotatable = !!data.rotate;
 
-            if (i === 4) {
+            if (i === 5) {
                 this.stage.addChild(this.smoke);
             }
 
@@ -258,7 +258,7 @@ export default class Parallax {
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/6.png')),
-                depth: 1.3,
+                depth: 1.1,
                 x: 0,
                 y: 500
             },
