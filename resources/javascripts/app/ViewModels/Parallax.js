@@ -83,18 +83,18 @@ export default class Parallax {
         var smoke1 = Texture.fromImage('/img/header/parallax/smoke/smoke-1.png');
         var smoke2 = Texture.fromImage('/img/header/parallax/smoke/smoke-2.png');
 
-        for (var i = 0; i < 40; i++) {
-            var sprite              = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
-            sprite.id               = i;
-            sprite.x                = Math.random() * screen.width - 128;
-            sprite.y                = Math.random() * 400 - 150;
-            sprite.visible          = i < 10;
-            sprite.movementSpeed    = (Math.random() + .1) * 2;
+        for (var i = 0; i < 30; i++) {
+            var sprite = new Sprite(Math.random() > 0.5 ? smoke1 : smoke2);
+            sprite.id = i;
+            sprite.x = Math.random() * screen.width - 128;
+            sprite.y = Math.random() * 400 - 150;
+            sprite.visible = i < 10;
+            sprite.movementSpeed = (Math.random() + .1);
 
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.alpha = .5;
+        this.smoke.alpha = .8;
         this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
 
@@ -170,9 +170,9 @@ export default class Parallax {
 
                 if (smoke.movementSpeed > 0 && smoke.x > this.renderer.width) {
                     smoke.x = -smoke.width;
-                } else if (smoke.movementSpeed < 0 && smoke.x < -smoke.width) {
+                } /*else if (smoke.movementSpeed < 0 && smoke.x < -smoke.width) {
                     smoke.x = this.renderer.width;
-                }
+                }*/
             }
         }
     }
