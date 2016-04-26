@@ -35,7 +35,7 @@ export default class Parallax {
     /**
      * @type {PIXI.Container}
      */
-    smoke = new Container();
+    smoke = new PIXI.Container();
 
     /**
      * @type {number}
@@ -94,7 +94,7 @@ export default class Parallax {
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.alpha = .8;
+        this.smoke.alpha = 1;
         this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
 
@@ -149,10 +149,10 @@ export default class Parallax {
             if (sprite.centrize) {
                 sprite.x = (this.renderer.width - sprite.width) / 2 + sprite.shift.x;
             }
-            var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 50);
+            var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 40);
 
             if (this.quality() > this.lowQuality && this._scrollY < this.renderer.height) {
-                sprite.blurFilter.blur = delta + sprite.depth * 5;
+                sprite.blurFilter.blur = delta + sprite.depth * 8;
             } else if (this.quality() === this.lowQuality) {
                 sprite.blurFilter.blur = 0;
             }
@@ -258,9 +258,9 @@ export default class Parallax {
             {
                 centrize: true,
                 item: new Sprite(Texture.fromImage('/img/header/parallax/6.png')),
-                depth: .9,
+                depth: 1.3,
                 x: 0,
-                y: 300
+                y: 500
             },
             {
                 centrize: false,
