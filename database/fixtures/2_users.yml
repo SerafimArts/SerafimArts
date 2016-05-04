@@ -1,0 +1,20 @@
+Fixtures\Entity:
+  admin:
+    __construct: ['users']
+    id: <uuid()>
+    group_id: '@group_admin'
+    name: 'Serafim'
+    email: 'nesk@xakep.ru'
+    password: '$2y$10$b6gsWFB8ikiwu0SJ8yPSquPnMhBYHWZc9W0hPAmTuC5UVkYfn.pyu'
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>
+
+  user_{1..100}:
+    __construct: ['users']
+    id: <uuid()>
+    group_id: '@group_user'
+    name: <username()>
+    email: <email()>
+    password: <hash($fake('username'))>
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>

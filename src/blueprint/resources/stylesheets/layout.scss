@@ -1,0 +1,31 @@
+@charset "utf-8";
+
+/** Fonts **/
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400italic,700,700italic&subset=latin,cyrillic);
+
+/** Vendors **/
+@import "vendor/normalize/import-now";
+$fa-font-path: '/admin/assets/fonts';
+@import "vendor/font-awesome/font-awesome";
+
+/** User Interface **/
+@import "ui/support";
+@import "ui/button";
+@import "ui/input";
+@import "ui/labels";
+@import "ui/pagination";
+
+@import "ui/header";
+@import "ui/aside";
+@import "ui/content";
+
+/** Pages Customization **/
+@import "pages/auth";
+
+
+html, body {
+  background: #f3f3f4;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 13px;
+  color: #313242;
+}

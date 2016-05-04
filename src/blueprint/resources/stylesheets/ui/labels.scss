@@ -1,0 +1,12 @@
+.label {
+  padding: 5px 15px;
+  display: inline-block;
+  font-size: 11px;
+  line-height: 16px;
+  border-radius: 2px;
+
+  &-error {
+    background: #e74c3c;
+    color: #fff;
+  }
+}

@@ -139,18 +139,18 @@ return [
 
         //
         TwigBridge\ServiceProvider::class,
-        Analogue\ORM\AnalogueServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Analogue\LaravelAuth\AnalogueAuthServiceProvider::class,
+        Serafim\Blueprint\LaravelServiceProvider::class,
+        Serafim\Annotations\LaravelServiceProvider::class,
         
         /*
          * Application Service Providers...
          */
-        Core\Providers\AppServiceProvider::class,
-        Core\Providers\AuthServiceProvider::class,
-        Core\Providers\EventServiceProvider::class,
-        Core\Providers\RouteServiceProvider::class,
-        Core\Providers\OrmServiceProvider::class,
+        Providers\AppServiceProvider::class,
+        Providers\AuthServiceProvider::class,
+        Providers\EventServiceProvider::class,
+        Providers\RouteServiceProvider::class,
+        Providers\OrmServiceProvider::class,
 
     ],
 

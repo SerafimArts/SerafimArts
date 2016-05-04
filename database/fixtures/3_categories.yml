@@ -1,0 +1,6 @@
+Fixtures\Entity:
+  category_{1..10}:
+    __construct: ['categories']
+    id: <uuid()>
+    title: <word()>
+    description: <words(3, true)>

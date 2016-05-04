@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'driver' => 'analogue',
+    'driver' => 'eloquent',
 
     /*
     |--------------------------------------------------------------------------
@@ -28,7 +28,7 @@ return [
     |
     */
 
-    'model' => Analogue\LaravelAuth\User::class,
+    'model' => \Domains\User\User::class,
 
     /*
     |--------------------------------------------------------------------------

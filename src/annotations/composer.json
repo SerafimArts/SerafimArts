@@ -1,0 +1,16 @@
+{
+    "name": "serafim/annotations-bridge",
+    "type": "library",
+    "description": "Laravel annotations bridge",
+    "autoload": {
+        "psr-4": {
+            "Serafim\\Annotations\\": "src/"
+        }
+    },
+    "require": {
+        "doctrine/annotations": "1.2.*",
+        "doctrine/common": "2.6.*",
+        "illuminate/contracts": "5.*",
+        "illuminate/support": "5.*"
+    }
+}

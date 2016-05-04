@@ -1,0 +1,16 @@
+input[type=text],
+input[type=password],
+textarea {
+  @include ui-size;
+  @include ui-dark;
+  padding: 0 15px;
+  box-sizing: border-box;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+
+  &:focus {
+    @include ui-dark(hover);
+    transition: color .2s ease;
+  }
+}

@@ -10,8 +10,15 @@
  */
 namespace Domains\User;
 
-use Analogue\ORM\Entity;
 use Carbon\Carbon;
+use Illuminate\Auth\Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Serafim\Blueprint\Authorization\AdminAuthorizable;
 
 /**
  * Class User
@@ -21,33 +28,36 @@ use Carbon\Carbon;
  * @property-read string $name
  * @property-read string $email
  * @property-read string $password
+ * @property-read string $avatar
+ * @property-read string $remember_token
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
+ *
+ * @property-read Group $group
  */
-class User extends Entity
+class User extends Model implements
+    AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, AdminAuthorizable
 {
+    use Authenticatable, Authorizable, CanResetPassword;
+
     /**
-     * User constructor.
-     * @param string $name
-     * @param string $email
-     * @param string $password
+     * @var string
      */
-    public function __construct(string $name, string $email, string $password)
+    protected $table = 'users';
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function group()
     {
-        $this->attributes['name'] = $name;
-        $this->attributes['email'] = $email;
-        $this->attributes['password'] = \Hash::make($password);
-        $this->attributes['group_id'] = Group::GROUP_USER;
+        return $this->belongsTo(Group::class, 'group_id', 'id');
     }
 
     /**
-     * @param Group $group
-     * @return $this|User
+     * @return bool
      */
-    public function setGroup(Group $group) : User
+    public function isAdmin()
     {
-        $this->attributes['group_id'] = $group->id;
-
-        return $this;
+        return $this->group->id === Group::GROUP_ADMIN;
     }
 }

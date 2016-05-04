@@ -10,9 +10,8 @@
  */
 namespace Observers;
 
+use Illuminate\Database\Eloquent\Model;
 use Ramsey\Uuid\Uuid;
-use Analogue\ORM\Entity;
-use Analogue\ORM\System\Manager;
 
 /**
  * Class IdObserver
@@ -21,32 +20,14 @@ use Analogue\ORM\System\Manager;
 class IdObserver
 {
     /**
-     * @var Manager
+     * @param Model $entity
      */
-    private $manager;
-
-    /**
-     * IdObserver constructor.
-     * @param Manager $manager
-     */
-    public function __construct(Manager $manager)
+    public function creating(Model $entity)
     {
-        $this->manager = $manager;
-    }
+        $primaryKey = $entity->getKeyName();
 
-    /**
-     * @param Entity $entity
-     * @throws \Analogue\ORM\Exceptions\MappingException
-     */
-    public function creating(Entity $entity)
-    {
-        $primaryKey = $this->manager
-            ->mapper(get_class($entity))
-            ->getEntityMap()
-            ->getKeyName();
-
-        if (!$entity->getEntityAttribute($primaryKey)) {
-            $entity->setEntityAttribute($primaryKey, Uuid::uuid4()->toString());
+        if (!$entity->getAttribute($primaryKey)) {
+            $entity->setAttribute($primaryKey, Uuid::uuid4()->toString());
         }
     }
 }

@@ -1,0 +1,14 @@
+Fixtures\Entity:
+  article_{1..100}:
+    __construct: ['articles']
+    id: <uuid()>
+    url (unique): <word()>
+    title: <words(3, true)>
+    type: 'article'
+    user_id: '@user_<numberBetween(1, 100)>'
+    category_id: '@category_<numberBetween(1, 10)>'
+    preview: <sentences(5, true)>
+    preview_rendered: <sentences(5, true)>
+    content: <sentences(45, true)>
+    content_rendered: <sentences(45, true)>
+    is_draft: false

@@ -10,7 +10,7 @@
  */
 namespace Domains\User;
 
-use Analogue\ORM\Entity;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Group
@@ -18,17 +18,13 @@ use Analogue\ORM\Entity;
  * @property-read string $id
  * @property-read string $title
  */
-class Group extends Entity
+class Group extends Model
 {
     const GROUP_USER  = '2dc71a6e-85d2-48db-9f1d-d1fe89b905b4';
     const GROUP_ADMIN = '4a1f7e61-3b32-4c23-8a80-bbb3272a7f12';
 
     /**
-     * Group constructor.
-     * @param string $title
+     * @var string
      */
-    public function __construct(string $title)
-    {
-        $this->attributes['title'] = $title;
-    }
+    protected $table = 'user_groups';
 }

@@ -5,3 +5,4 @@ Homestead.json
 .env
 /.idea
 /public/.well-known
+/src/blueprint/node_modules

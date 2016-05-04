@@ -10,16 +10,16 @@
  */
 namespace Domains\Article;
 
-use Analogue\ORM\Entity;
+use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Article
  * @package Domains\Article
  */
-class Article extends Entity
+class Article extends Model
 {
-    public function __construct()
-    {
-        
-    }
+    /**
+     * @var string
+     */
+    protected $table = 'articles';
 }

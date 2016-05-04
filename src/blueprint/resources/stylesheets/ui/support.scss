@@ -1,0 +1,86 @@
+
+$ui-aside-size: 200px !default;
+
+
+@mixin ui-color($font, $bg, $state: normal) {
+  @if ($state == normal) {
+    color: $font;
+    background: $bg;
+  }
+
+  @if ($state == hover) {
+    color: lighten($font, 15%);
+    background: lighten($bg, 5%);
+  }
+
+  @if ($state == focus) {
+    color: lighten($font, 25%);
+    background: darken($bg, 5%);
+  }
+}
+
+@mixin ui-dark($state: normal) {
+  @include ui-color(#ced4de, #3c4149, $state);
+}
+
+@mixin ui-main($state: normal) {
+  @include ui-color(#fff, #e74c3c, $state);
+}
+
+@mixin ui-light($state: normal) {
+  @include ui-color(#313242, #f3f3f4, $state);
+}
+
+@mixin ui-size($size: 30px) {
+  line-height: $size;
+  height: $size;
+  font-size: 13px;
+  display: inline-block;
+}
+
+@mixin centrize() {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+}
+
+@mixin clear($legacy: false)
+{
+  @if $legacy {
+    &:after {
+      content    : "\0020";
+      display    : block;
+      height     : 0;
+      clear      : both;
+      overflow   : hidden;
+      visibility : hidden;
+    }
+    *zoom: 1;
+  } @else {
+    &:after {
+      display: table;
+      width: 100%;
+      content: '';
+      clear: both;
+    }
+  }
+}
+
+.light {
+  @include ui-light;
+}
+
+.dark {
+  @include ui-dark;
+}
+
+.form-item {
+  padding: 5px 10px;
+  &-x2 {
+    padding: 10px 10px;
+  }
+  &-x3 {
+    padding: 15px 10px;
+  }
+}

@@ -1,0 +1,9 @@
+Fixtures\Entity:
+  group_admin:
+    __construct: ['user_groups']
+    id: '4a1f7e61-3b32-4c23-8a80-bbb3272a7f12'
+    title: 'Администратор'
+  group_user:
+    __construct: ['user_groups']
+    id: '2dc71a6e-85d2-48db-9f1d-d1fe89b905b4'
+    title: 'Пользователь'

@@ -1,0 +1,24 @@
+.auth {
+  width: 260px;
+  height: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -100px 0 0 -130px;
+
+  h2 {
+    text-align: center;
+    display: block;
+    width: 100%;
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .button {
+    display: block;
+    width: 80px;
+    margin: 0 auto;
+  }
+}

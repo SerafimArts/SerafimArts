@@ -1,0 +1,68 @@
+.pagination {
+  @include ui-size;
+  @include ui-dark;
+  display: block;
+  float: left;
+  margin: 0;
+  padding: 0;
+  border-radius: 2px;
+
+  ul,
+  li {
+    list-style: none;
+  }
+
+  li {
+    display: block;
+    float: left;
+    width: 30px;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+
+    &:first-child {
+      border-top-left-radius: 3px;
+      border-bottom-left-radius: 3px;
+    }
+
+    &:last-child {
+      border-top-right-radius: 3px;
+      border-bottom-right-radius: 3px;
+    }
+
+    span,
+    a {
+      font-weight: normal;
+      display: block;
+      width: 30px;
+      text-align: center;
+      text-decoration: none;
+      color: #b4bac6;
+    }
+
+    a:hover {
+      @include ui-dark(hover);
+    }
+
+    a:focus {
+      @include ui-dark(focus);
+    }
+
+    &.disabled {
+      cursor: default;
+      span {
+        @include ui-dark(hover);
+        color: lighten(#3c4149, 20%);
+      }
+    }
+
+    &.active {
+      span {
+        background: #e74c3c;
+        color: #fff;
+        font-weight: bold;
+      }
+      z-index: 2;
+    }
+  }
+}
