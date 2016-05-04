@@ -141,7 +141,7 @@ class LaravelServiceProvider extends BaseServiceProvider
 
         $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bp');
 
-        $views->composer(['bp::partials.*', 'bp::layout.master'],  ConfigComposer::class);
+        $views->composer(['bp::partials.*', 'bp::layout.master', 'bp::page.*'],  ConfigComposer::class);
         $views->composer('bp::partials.aside', BlueprintsComposer::class);
     }
 
