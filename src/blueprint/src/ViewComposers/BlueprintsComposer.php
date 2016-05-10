@@ -10,8 +10,9 @@
  */
 namespace Serafim\Blueprint\ViewComposers;
 
+use Illuminate\Contracts\Container\Container;
 use Illuminate\View\View;
-use Serafim\Blueprint\Repositories\BlueprintsRepository;
+use Serafim\Blueprint\MetadataManager;
 
 /**
  * Class BlueprintsComposer
@@ -20,13 +21,26 @@ use Serafim\Blueprint\Repositories\BlueprintsRepository;
 class BlueprintsComposer
 {
     /**
+     * @var Container
+     */
+    private $app;
+
+    /**
+     * BlueprintsComposer constructor.
+     * @param Container $container
+     */
+    public function __construct(Container $container)
+    {
+        $this->app = $container;
+    }
+
+    /**
      * @param View $view
      */
     public function compose(View $view)
     {
-        /** @var BlueprintsRepository $repository */
-        $repository = app(BlueprintsRepository::class);
+        $repo = $this->app->make(MetadataManager::class);
 
-        $view->with('bp', $repository);
+        $view->with('bp', $repo);
     }
 }

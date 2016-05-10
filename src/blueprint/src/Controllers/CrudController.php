@@ -11,8 +11,9 @@
 namespace Serafim\Blueprint\Controllers;
 
 use Illuminate\Contracts\View\View;
-use Serafim\Blueprint\Blueprints\Metadata;
-use Serafim\Blueprint\Repositories\EntityRepository;
+use Serafim\Blueprint\Metadata;
+use Serafim\Blueprint\Presenter;
+use Serafim\Blueprint\Repositories\EloquentRepository;
 
 /**
  * Class CrudController
@@ -22,16 +23,15 @@ class CrudController extends Controller
 {
     /**
      * @param Metadata $metadata
-     * @param EntityRepository $entities
      * @return View
      */
-    public function index(Metadata $metadata, EntityRepository $entities)
+    public function index(Metadata $metadata, EloquentRepository $repository)
     {
-        $items = $entities->index($metadata);
-        
+        $repo = new EloquentRepository();
+        $items = $repo->get($metadata);
+
         return view('bp::crud.index', [
-            'items' => $items,
-            'meta'  => $metadata
+            'data' => new Presenter($metadata, $items),
         ]);
     }
 }

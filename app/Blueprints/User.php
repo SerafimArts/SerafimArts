@@ -11,9 +11,10 @@
 namespace Blueprints;
 
 use Serafim\Blueprint\Mapping as UI;
+use Domains\User\User as UserEntity;
 
 /**
- * @UI\Blueprint(title="Пользователи", icon="user", perPage=15)
+ * @UI\Blueprint(entity=UserEntity::class, title="Пользователи", icon="user", perPage=15)
  */
 class User
 {

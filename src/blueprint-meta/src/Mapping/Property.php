@@ -14,12 +14,12 @@ use Doctrine\Common\Annotations\Annotation\Target;
 use Illuminate\Contracts\View\View;
 
 /**
- * Class Field
+ * Class Property
  * @package Serafim\Blueprint\Mapping
  * @Annotation
  * @Target("PROPERTY")
  */
-abstract class Field
+abstract class Property
 {
     /**
      * @var mixed

@@ -24,6 +24,8 @@ use Illuminate\Http\Response;
  */
 class Middleware
 {
+    const MIDDLEWARE_AUTH_NAME      = 'bp.admin';
+
     /**
      * @param Request $request
      * @param \Closure $next

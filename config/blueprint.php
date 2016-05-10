@@ -54,9 +54,8 @@ return [
     |
     */
     'blueprints' => [
-
         'items' => [
-            
+            Blueprints\User::class
         ]
     ],
 ];

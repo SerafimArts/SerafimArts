@@ -10,20 +10,16 @@
  */
 namespace Serafim\Blueprint;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
-use Illuminate\Contracts\View\Factory;
+use Doctrine\Common\Annotations\Reader;
+use Illuminate\Contracts\Container\Container;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
-use Serafim\Blueprint\Authorization\AdminAuthorizable;
+use Serafim\Blueprint\Authorization\Kernel as AuthKernel;
 use Serafim\Blueprint\Authorization\Middleware;
 use Serafim\Blueprint\Blueprints\MetadataInjectorMiddleware;
-use Serafim\Blueprint\Repositories\BlueprintsRepository;
 use Serafim\Blueprint\Repositories\ConfigRepository;
-use Serafim\Blueprint\Repositories\EloquentEntityRepository;
-use Serafim\Blueprint\Repositories\EntityRepository;
 use Serafim\Blueprint\Repositories\IlluminateConfigRepository;
-use Serafim\Blueprint\ViewComposers\BlueprintsComposer;
-use Serafim\Blueprint\ViewComposers\ConfigComposer;
+use Serafim\Blueprint\ViewComposers\Kernel as ViewKernel;
 
 /**
  * Class LaravelServiceProvider
@@ -31,20 +27,13 @@ use Serafim\Blueprint\ViewComposers\ConfigComposer;
  */
 class LaravelServiceProvider extends BaseServiceProvider
 {
-    const MIDDLEWARE_INJECTOR_NAME  = 'bp.metadata';
-    const MIDDLEWARE_AUTH_NAME      = 'bp.admin';
-    const GATE_AUTH_NAME            = 'bp.auth';
-    const CONTROLLERS_NAMESPACE     = '\\Serafim\\Blueprint\\Controllers';
+    const MIDDLEWARE_INJECTOR_NAME = 'bp.metadata';
+    const CONTROLLERS_NAMESPACE = '\\Serafim\\Blueprint\\Controllers';
 
     /**
      * @var ConfigRepository
      */
     private $config;
-
-    /**
-     * @var BlueprintsRepository
-     */
-    private $meta;
 
     /**
      * Register
@@ -75,13 +64,23 @@ class LaravelServiceProvider extends BaseServiceProvider
      */
     public function boot()
     {
-        $this->meta = $this->getMetadataRepository();
+        $this->app->singleton(MetadataManager::class, function (Container $container) {
+            $manager = new MetadataManager($container->make(Reader::class));
 
-        $this->registerAuthGate();
-        $this->registerViews();
+            foreach ($this->config->get('blueprints.items') as $blueprint) {
+                $manager->register($blueprint);
+            }
+
+            return $manager;
+        });
+
+        $this->app->make(AuthKernel::class);
+        $this->app->make(ViewKernel::class);
+
         $this->registerRoutes();
-        $this->registerEntityRepository();
 
+
+        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bp');
         $this->publishes([
             // Config
             __DIR__ . '/../config/blueprint.php' => config_path('blueprint.php'),
@@ -94,77 +93,23 @@ class LaravelServiceProvider extends BaseServiceProvider
     /**
      * @return void
      */
-    private function registerEntityRepository()
-    {
-        $repo = $this->app->make($this->config->get('blueprints.driver'));
-
-        $this->app->singleton(EntityRepository::class, function() use ($repo) {
-            return $repo;
-        });
-    }
-
-    /**
-     * @return BlueprintsRepository
-     * @throws \LogicException
-     */
-    private function getMetadataRepository()
-    {
-        $reader = $this->app->make($this->config->get('blueprints.reader'));
-
-        $this->app->singleton(BlueprintsRepository::class, function () use ($reader) {
-            return $reader;
-        });
-
-        return $this->app->make(BlueprintsRepository::class);
-    }
-
-    /**
-     * @return void
-     */
-    private function registerAuthGate()
-    {
-        /** @var GateContract $gate */
-        $gate = $this->app->make(GateContract::class);
-
-        $gate->define(static::GATE_AUTH_NAME, function (AdminAuthorizable $user) {
-            return $user->isAdmin();
-        });
-    }
-
-    /**
-     * @return void
-     */
-    private function registerViews()
-    {
-        /** @var Factory $views */
-        $views = $this->app->make(Factory::class);
-
-        $this->loadViewsFrom(__DIR__ . '/../resources/views', 'bp');
-
-        $views->composer(['bp::partials.*', 'bp::layout.master', 'bp::page.*'],  ConfigComposer::class);
-        $views->composer('bp::partials.aside', BlueprintsComposer::class);
-    }
-
-    /**
-     * @return void
-     */
     private function registerRoutes()
     {
         /** @var Router $router */
-        $route          = $this->app->make(Router::class);
-        $prefix         = $this->config->get('path');
-        $authrorizable  = $this->config->get('middleware');
-        $routeConfig    = [
-            'prefix' => $prefix,
-            'namespace' => static::CONTROLLERS_NAMESPACE
+        $route = $this->app->make(Router::class);
+        $prefix = $this->config->get('path');
+        $authrorizable = $this->config->get('middleware');
+        $routeConfig = [
+            'prefix'    => $prefix,
+            'namespace' => static::CONTROLLERS_NAMESPACE,
         ];
 
-        $route->middleware(static::MIDDLEWARE_AUTH_NAME, Middleware::class);
+        $route->middleware(Middleware::MIDDLEWARE_AUTH_NAME, Middleware::class);
         $route->middleware(static::MIDDLEWARE_INJECTOR_NAME, MetadataInjectorMiddleware::class);
 
         $route->group($routeConfig, function () use ($authrorizable, $route) {
-            $blueprints = $this->meta;
-            $injector   = static::MIDDLEWARE_INJECTOR_NAME;
+            $injector = static::MIDDLEWARE_INJECTOR_NAME;
+            $meta = $this->app->make(MetadataManager::class);
 
             require __DIR__ . '/routes.php';
         });

@@ -14,6 +14,8 @@ use Illuminate\Contracts\Container\Container;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Serafim\Blueprint\Metadata;
+use Serafim\Blueprint\MetadataManager;
 use Serafim\Blueprint\Repositories\BlueprintsRepository;
 
 /**
@@ -35,8 +37,8 @@ class MetadataInjectorMiddleware
         $container->singleton(Metadata::class, function(Container $app) use ($request) {
             $resourceName = explode('.', $request->route()->getName())[2];
 
-            /** @var BlueprintsRepository $repo */
-            $repo = $app->make(BlueprintsRepository::class);
+            
+            $repo = $app->make(MetadataManager::class);
 
             return $repo->getByRoute($resourceName);
         });

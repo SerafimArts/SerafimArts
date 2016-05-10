@@ -3,7 +3,7 @@
  * This file is part of SerafimArts package.
  *
  * @author Serafim <nesk@xakep.ru>
- * @date 03.05.2016 20:23
+ * @date 10.05.2016 4:49
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -12,46 +12,41 @@ namespace Serafim\Blueprint\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\AbstractPaginator;
-use Illuminate\Pagination\LengthAwarePaginator;
-use Serafim\Blueprint\Blueprints\Metadata;
-use Serafim\Blueprint\Blueprints\Record;
+use Serafim\Blueprint\Factory;
+use Serafim\Blueprint\Metadata;
 
 /**
- * Class EloquentEntityRepository
+ * Class EloquentRepository
  * @package Serafim\Blueprint\Repositories
  */
-class EloquentEntityRepository implements EntityRepository
+class EloquentRepository
 {
     /**
-     * @var BlueprintsRepository
+     * @var Factory
      */
-    private $repo;
+    private $factory;
 
     /**
-     * EloquentEntityRepository constructor.
-     * @param BlueprintsRepository $repository
+     * EloquentRepository constructor.
      */
-    public function __construct(BlueprintsRepository $repository)
+    public function __construct()
     {
-        $this->repo = $repository;
+        $this->factory = new Factory();
     }
 
     /**
      * @param Metadata $metadata
-     * @return AbstractPaginator
+     * @return mixed
      */
-    public function index(Metadata $metadata)
+    public function get(Metadata $metadata)
     {
-        /** @var Model $model */
-        $model = new $metadata->entity;
-
-        /** @var AbstractPaginator|LengthAwarePaginator $paginator */
-        $paginator = $model->paginate($metadata->class->perPage);
+        $query = new $metadata->class->entity;
+        $collection = $query->paginate($metadata->class->perPage);
 
         $setter = function(AbstractPaginator $paginator) use ($metadata) {
             $collection = $paginator->getCollection()
                 ->map(function (Model $item) use ($metadata) {
-                    return new Record($metadata, $item->toArray());
+                    return $this->factory->create($metadata->getBlueprint(), $item);
                 });
 
             $reflection = new \ReflectionObject($paginator);
@@ -60,8 +55,9 @@ class EloquentEntityRepository implements EntityRepository
             $property->setValue($paginator, $collection);
         };
 
-        call_user_func($setter, $paginator);
+        call_user_func($setter, $collection);
 
-        return $paginator;
+        return $collection;
+
     }
 }

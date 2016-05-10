@@ -59,7 +59,7 @@
         "merge-plugin": {
             "require": [
                 "src/blueprint/composer.json",
-                "src/annotations/composer.json"
+                "src/blueprint-meta/composer.json"
             ]
         }
     }

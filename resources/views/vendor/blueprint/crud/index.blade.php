@@ -9,12 +9,12 @@
 
     <section class="content">
 
-        <h2>{{ $data->class->title }}</h2>
+        <h2>{{ $meta->class->title }}</h2>
 
         <table>
             <thead>
                 <tr>
-                    <td class="controls" colspan="{{ $data->class->fields + 1 }}">
+                    <td class="controls" colspan="{{ count($meta->properties) + 1 }}">
                         <a href="#" class="button button-main">
                             <span class="fa fa-plus"></span>
                             Создать
@@ -22,16 +22,14 @@
                     </td>
                 </tr>
                 <tr>
-                    @foreach($data->class->titles as $title)
-                        <td>{{ $title }}</td>
+                    @foreach($meta->properties as $prop)
+                        <td>{{ $prop->title }}</td>
                     @endforeach
-
                     <td>&nbsp;</td>
                 </tr>
             </thead>
-
             <tbody>
-                @foreach($data->items as $item)
+                @foreach($items as $item)
                     <tr>
                         @foreach($item->properties as $prop)
                             <td>
@@ -52,11 +50,11 @@
                 @endforeach
             </tbody>
             <tfoot>
-                <td colspan="{{ $data->class->fields + 1 }}">
-                    {!! $data->paginator->render() !!}
+                <td colspan="{{ count($meta->properties) + 1 }}">
+                    {!! $items->render() !!}
 
                     <div class="label items-count">
-                        Всего {{ $data->paginator->total() }} элемент
+                        Всего {{ $items->total() }} элемент
                     </div>
                 </td>
             </tfoot>

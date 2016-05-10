@@ -11,7 +11,6 @@
 namespace Serafim\Blueprint\Mapping;
 
 use Doctrine\Common\Annotations\Annotation\Target;
-use Illuminate\Contracts\View\View;
 
 /**
  * Class Text
@@ -19,31 +18,10 @@ use Illuminate\Contracts\View\View;
  * @Annotation
  * @Target("PROPERTY")
  */
-class Image extends Field
+class Text extends Property
 {
     /**
-     * @var int
+     * @var mixed
      */
-    public $width = 32;
-
-    /**
-     * @var int
-     */
-    public $height = 32;
-
-    /**
-     * @return View
-     */
-    public function read()
-    {
-        return view('bp::field.image.read');
-    }
-
-    /**
-     * @return View
-     */
-    public function write()
-    {
-        return view('bp::field.image.write');
-    }
+    public $maxSize = false;
 }

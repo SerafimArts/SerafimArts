@@ -21,6 +21,11 @@ use Doctrine\Common\Annotations\Annotation\Target;
 class Blueprint
 {
     /**
+     * @var string
+     */
+    public $entity;
+
+    /**
      * @var mixed
      */
     public $title = null;

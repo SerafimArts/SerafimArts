@@ -14,7 +14,7 @@ namespace Serafim\Blueprint\Mapping;
  * Class Relation
  * @package Serafim\Blueprint\Mapping
  */
-abstract class Relation extends Field
+abstract class Relation extends Property
 {
     /**
      * @var string
