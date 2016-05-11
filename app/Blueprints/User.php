@@ -10,6 +10,7 @@
  */
 namespace Blueprints;
 
+use Carbon\Carbon;
 use Serafim\Blueprint\Mapping as UI;
 use Domains\User\User as UserEntity;
 
@@ -18,6 +19,12 @@ use Domains\User\User as UserEntity;
  */
 class User
 {
+    /**
+     * @var string
+     * @UI\Image(title="Аватар", width=32, height=32)
+     */
+    protected $avatar;
+
     /**
      * @var string
      * @UI\Text(title="Имя", sortable=true)
@@ -32,19 +39,36 @@ class User
 
     /**
      * @var string
-     * @UI\Image(title="Аватар", width=48, height=48)
-     */
-    protected $avatar;
-
-    /**
-     * @var string
-     * @UI\Text(title="Дата создания", sortable=true)
+     * @UI\DateTime(title="Cоздан", readDecorator="dateFormat", sortable=true, width=150)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\Text(title="Дата обновления", sortable=true)
+     * @UI\DateTime(title="Обновлён", readDecorator="dateFormat", sortable=true, width=150)
      */
     protected $updated_at;
+
+    /**
+     * @var string
+     * @UI\HasOne(title="Группа", field="title", width=100)
+     */
+    protected $group;
+
+    /**
+     * @param string $date
+     * @return string
+     */
+    private function dateFormat($date)
+    {
+        $locale = Carbon::getLocale();
+
+        Carbon::setLocale(app('config')->get('app.locale'));
+
+        $result = (new Carbon($date))->diffForHumans();
+
+        Carbon::setLocale($locale);
+
+        return $result;
+    }
 }

@@ -11,19 +11,31 @@
 namespace Serafim\Blueprint\Presenter;
 
 use Serafim\Blueprint\Mapping\Blueprint;
+use Serafim\Blueprint\Mapping\Property;
 use Serafim\Blueprint\Metadata;
 use Serafim\Properties\Getters;
 
 /**
  * Class ClassInformation
  * @package Serafim\Blueprint\Presenter
+ * @property-read string $entity
+ * @property-read string $title
+ * @property-read string $icon
+ * @property-read string $route
+ * @property-read int $perPage
  * @property-read Blueprint $info
- * @property-read int $fields
- * @property-read \Traversable|string[] $titles
+ * @property-read int $properties_count
+ * @property-read int $readable_properties_count
+ * @property-read int $writable_properties_count
+ * @property-read \Traversable|string[] $properties
+ * @property-read \Traversable|string[] $readable_properties
+ * @property-read \Traversable|string[] $writable_properties
  */
 class ClassInformation
 {
-    use Getters;
+    use Getters {
+        Getters::__get as __gettersGet;
+    }
     
     /**
      * @var Metadata
@@ -40,19 +52,19 @@ class ClassInformation
     }
 
     /**
-     * @return int
+     * @param $name
+     * @return mixed
+     * @throws \LogicException
+     * @throws \InvalidArgumentException
      */
-    public function getFields()
+    public function __get($name)
     {
-        return count($this->meta->properties);
-    }
+        $reflection = new \ReflectionClass($this->meta->class);
+        if ($reflection->hasProperty($name)) {
+            return $this->meta->class->{$name};
+        }
 
-    /**
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->meta->class->title;
+        return $this->__gettersGet($name);
     }
 
     /**
@@ -64,12 +76,60 @@ class ClassInformation
     }
 
     /**
-     * @return \Generator
+     * @return int
      */
-    public function getTitles()
+    public function getPropertiesCount()
+    {
+        return count(iterator_to_array($this->getProperties()));
+    }
+
+    /**
+     * @return int
+     */
+    public function getReadablePropertiesCount()
+    {
+        return count(iterator_to_array($this->getReadableProperties()));
+    }
+
+    /**
+     * @return int
+     */
+    public function getWritablePropertiesCount()
+    {
+        return count(iterator_to_array($this->getWritableProperties()));
+    }
+
+    /**
+     * @return \Generator|Property[]
+     */
+    public function getProperties()
     {
         foreach ($this->meta->properties as $property) {
             yield $property->title;
+        }
+    }
+
+    /**
+     * @return \Generator|Property[]
+     */
+    public function getReadableProperties()
+    {
+        foreach ($this->meta->properties as $property) {
+            if ($property->read) {
+                yield $property;
+            }
+        }
+    }
+
+    /**
+     * @return \Generator|Property[]
+     */
+    public function getWritableProperties()
+    {
+        foreach ($this->meta->properties as $property) {
+            if ($property->write) {
+                yield $property;
+            }
         }
     }
 }

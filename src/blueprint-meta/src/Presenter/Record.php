@@ -16,7 +16,9 @@ use Serafim\Properties\Getters;
 /**
  * Class Record
  * @package Serafim\Blueprint\Presenter
- * @property-read array $properties
+ * @property-read array|Property[] $properties
+ * @property-read array|Property[] $writable_properties
+ * @property-read array|Property[] $readable_properties
  */
 class Record
 {
@@ -44,7 +46,7 @@ class Record
     }
 
     /**
-     * @return \Generator
+     * @return \Generator|Property[]
      */
     public function getProperties()
     {
@@ -61,10 +63,36 @@ class Record
                 : $property->getValue($this->blueprint);
 
             yield new Property(
+                $this->blueprint,
                 $this->metadata->getPropertyAnnotation($property->name),
-                $property->name,
                 $value
             );
+        }
+    }
+
+    /**
+     * @return \Generator|Property[]
+     */
+    public function getReadableProperties()
+    {
+        /** @var Property $property */
+        foreach ($this->getProperties() as $property) {
+            if ($property->read) {
+                yield $property;
+            }
+        }
+    }
+
+    /**
+     * @return \Generator|Property[]
+     */
+    public function getWritableProperties()
+    {
+        /** @var Property $property */
+        foreach ($this->getProperties() as $property) {
+            if ($property->write) {
+                yield $property;
+            }
         }
     }
 }

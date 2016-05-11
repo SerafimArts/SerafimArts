@@ -14,6 +14,7 @@ use Doctrine\Common\Annotations\Reader;
 use Illuminate\Support\Str;
 use Serafim\Blueprint\Mapping\Blueprint;
 use Serafim\Blueprint\Mapping\Property;
+use Serafim\Blueprint\Mapping\Relation;
 use Serafim\Properties\Getters;
 
 /**
@@ -22,6 +23,7 @@ use Serafim\Properties\Getters;
  * @property-read Blueprint $class
  * @property-read Property[] $properties
  * @property-read string $blueprint
+ * @property-read array|Relation[] $relations
  */
 class Metadata
 {
@@ -122,15 +124,19 @@ class Metadata
                 continue;
             }
 
-            if (!$meta->title) {
+            if ($meta->title === null) {
                 $meta->title = ucfirst((string)$property->name);
             }
 
-            if ($property->isDefault()) {
+            if ($meta->value === null && $property->isDefault()) {
                 if (!$property->isPublic()) {
                     $property->setAccessible(true);
                 }
                 $meta->value = $property->getValue($instance);
+            }
+
+            if ($meta->name === null) {
+                $meta->name = $property->name;
             }
 
             $result[$property->name] = $meta;
@@ -140,12 +146,33 @@ class Metadata
     }
 
     /**
-     * @param $name
+     * @return \Generator|Relation[]
+     */
+    public function getRelations()
+    {
+        foreach ($this->properties as $property) {
+            if ($property instanceof Relation) {
+                yield $property;
+            }
+        }
+    }
+
+    /**
+     * @param string $name
      * @return mixed|Property
      */
     public function getPropertyAnnotation($name)
     {
         return $this->propertiesMetadata[$name];
+    }
+
+    /**
+     * @param string $name
+     * @return bool
+     */
+    public function hasPropertyAnnotation($name)
+    {
+        return isset($this->propertiesMetadata[$name]);
     }
     
     /**

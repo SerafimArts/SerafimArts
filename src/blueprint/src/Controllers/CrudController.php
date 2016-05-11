@@ -11,6 +11,7 @@
 namespace Serafim\Blueprint\Controllers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 use Serafim\Blueprint\Metadata;
 use Serafim\Blueprint\Presenter;
 use Serafim\Blueprint\Repositories\EloquentRepository;
@@ -23,15 +24,19 @@ class CrudController extends Controller
 {
     /**
      * @param Metadata $metadata
+     * @param EloquentRepository $repo
+     * @param Request $request
      * @return View
      */
-    public function index(Metadata $metadata, EloquentRepository $repository)
+    public function index(Metadata $metadata, EloquentRepository $repo, Request $request)
     {
-        $repo = new EloquentRepository();
-        $items = $repo->get($metadata);
+        $items = $repo->get($metadata, $request->get('orderBy'), $request->get('sort', 'asc') === 'asc' ? 'asc' : 'desc');
 
         return view('bp::crud.index', [
-            'data' => new Presenter($metadata, $items),
+            'orderBy' => $request->get('orderBy'),
+            'sort'    => $request->get('sort'),
+            'page'    => $request->get('page'),
+            'data'    => new Presenter($metadata, $items),
         ]);
     }
 }

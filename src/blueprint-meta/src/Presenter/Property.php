@@ -16,6 +16,17 @@ use Serafim\Blueprint\Mapping\Property as PropertyAnnotation;
 /**
  * Class Property
  * @package Serafim\Blueprint\Presenter
+ * @property-read mixed $value
+ * @property-read string $name
+ * @property-read string|null $title
+ * @property-read bool $read
+ * @property-read bool $write
+ * @property-read bool $sortable
+ * @property-read int $width
+ * @property-read int $readDecorator
+ * @property-read int $writeDecorator
+ * @method string read()
+ * @method string write()
  */
 class Property
 {
@@ -30,21 +41,22 @@ class Property
     private $value;
 
     /**
-     * @var string
+     * Blueprint object
+     * @var object
      */
-    private $name;
+    private $context;
 
     /**
      * Property constructor.
+     * @param object $context
      * @param PropertyAnnotation $property
-     * @param string $name
      * @param $value
      */
-    public function __construct(PropertyAnnotation $property, $name, $value)
+    public function __construct($context, PropertyAnnotation $property, $value)
     {
-        $this->annotation = $property;
-        $this->name = $name;
-        $this->value = $value;
+        $this->value        = $value;
+        $this->context      = $context;
+        $this->annotation   = $property;
     }
 
     /**
@@ -53,8 +65,9 @@ class Property
      */
     public function __get($name)
     {
-        if ($name === 'value') {
-            return $this->value;
+        switch ($name) {
+            case 'value':
+                return $this->value;
         }
 
         return $this->annotation->{$name};
@@ -62,13 +75,35 @@ class Property
 
     /**
      * @param View $view
+     * @param string $type
      * @return View
      */
-    private function extend(View $view)
+    private function extend(View $view, $type)
     {
-        $view->with('name', $this->name);
-        $view->with('value', $this->value);
+        $value = $this->value;
+
+        $decorator = function($method) use ($value) {
+            return call_user_func([$this, $method], $value);
+        };
+        $decorator = $decorator->bindTo($this->context, $this->context);
+
+        switch ($type) {
+            case 'read':
+                if ($this->annotation->readDecorator !== null) {
+                    $value = $decorator($this->annotation->readDecorator);
+                }
+                break;
+
+            case 'write':
+                if ($this->annotation->writeDecorator !== null) {
+                    $value = $decorator($this->annotation->writeDecorator);
+                }
+                break;
+        }
+
+        $view->with('value', $value);
         $view->with('meta', $this->annotation);
+        $view->with('name', $this->annotation->name);
 
         return $view;
     }
@@ -84,7 +119,7 @@ class Property
     {
         if ($name === 'read' || $name === 'write') {
             return $this
-                ->extend(call_user_func([$this->annotation, $name]))
+                ->extend(call_user_func([$this->annotation, $name]), $name)
                 ->render();
         }
 

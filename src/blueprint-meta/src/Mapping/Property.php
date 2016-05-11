@@ -37,16 +37,6 @@ abstract class Property
     public $write = true;
 
     /**
-     * @var mixed
-     */
-    public $before = null;
-
-    /**
-     * @var mixed
-     */
-    public $after = null;
-
-    /**
      * @var bool
      */
     public $sortable = false;
@@ -54,7 +44,28 @@ abstract class Property
     /**
      * @var mixed
      */
+    public $name = null;
+
+    /**
+     * Default value of property
+     * @var mixed
+     */
     public $value = null;
+
+    /**
+     * @var mixed
+     */
+    public $readDecorator = null;
+
+    /**
+     * @var mixed
+     */
+    public $writeDecorator = null;
+
+    /**
+     * @var int
+     */
+    public $width = 0;
 
     /**
      * @return View
