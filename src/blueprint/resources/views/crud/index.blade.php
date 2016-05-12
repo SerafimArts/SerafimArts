@@ -67,14 +67,20 @@
                         @endforeach
                         <td class="controls">
                             <nav class="button-group" style="width: 90px;">
-                                <a href="{{ route('bp.res.' . $data->class->route . '.show', [
+
+                                <a href="{{ route('bp.res.' . $data->class->route . '.edit', [
                                     'resource' => urlencode($item->primary_key->value)
                                 ]) }}" class="button">
+
                                     <span class="icon material-icons">create</span>
+
                                 </a>
+
+
                                 <form action="{{ route('bp.res.' . $data->class->route . '.destroy', [
                                     'resource' => urlencode($item->primary_key->value)
                                 ]) }}" method="POST">
+
                                     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
                                     <input type="hidden" name="_method" value="DELETE" />
 
@@ -82,6 +88,7 @@
                                         <span class="icon material-icons">clear</span>
                                     </button>
                                 </form>
+
                             </nav>
                         </td>
                     </tr>
