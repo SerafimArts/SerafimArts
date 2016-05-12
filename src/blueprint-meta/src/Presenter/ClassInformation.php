@@ -11,6 +11,7 @@
 namespace Serafim\Blueprint\Presenter;
 
 use Serafim\Blueprint\Mapping\Blueprint;
+use Serafim\Blueprint\Mapping\PrimaryKey;
 use Serafim\Blueprint\Mapping\Property;
 use Serafim\Blueprint\Metadata;
 use Serafim\Properties\Getters;
@@ -24,6 +25,7 @@ use Serafim\Properties\Getters;
  * @property-read string $route
  * @property-read int $perPage
  * @property-read Blueprint $info
+ * @property-read PrimaryKey $primary_key
  * @property-read int $properties_count
  * @property-read int $readable_properties_count
  * @property-read int $writable_properties_count
@@ -65,6 +67,14 @@ class ClassInformation
         }
 
         return $this->__gettersGet($name);
+    }
+
+    /**
+     * @return PrimaryKey
+     */
+    public function getPrimaryKey()
+    {
+        return $this->meta->getPrimaryKey();
     }
 
     /**

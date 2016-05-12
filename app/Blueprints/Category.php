@@ -12,54 +12,43 @@ namespace Blueprints;
 
 use Carbon\Carbon;
 use Serafim\Blueprint\Mapping as UI;
-use Domains\User\User as UserEntity;
+use Domains\Article\Category as CategoryEntity;
 
 /**
- * @UI\Blueprint(entity=UserEntity::class, title="Пользователи", icon="supervisor_account")
+ * @UI\Blueprint(entity=CategoryEntity::class, title="Категории", icon="label_outline")
  */
-class User
+class Category
 {
     /**
      * @var string
      * @UI\PrimaryKey
      */
     protected $id;
-
+    
     /**
      * @var string
-     * @UI\Image(title="Аватар", width=32, height=32)
+     * @UI\Text(title="Название", sortable=true)
      */
-    protected $avatar;
+    protected $title;
 
     /**
      * @var string
-     * @UI\Text(title="Имя", sortable=true, width=250)
+     * @UI\Text(title="Описание", sortable=true)
      */
-    protected $name;
-
+    protected $description;
+    
     /**
      * @var string
-     * @UI\Text(title="Email", sortable=true)
-     */
-    protected $email;
-
-    /**
-     * @var string
-     * @UI\DateTime(title="Создан", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Создана", readDecorator="dateFormat", sortable=true, width=150)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлён", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Обновлена", readDecorator="dateFormat", sortable=true, width=150)
      */
     protected $updated_at;
 
-    /**
-     * @var string
-     * @UI\HasOne(title="Группа", field="title", width=120, route="group")
-     */
-    protected $group;
 
     /**
      * @param string $date

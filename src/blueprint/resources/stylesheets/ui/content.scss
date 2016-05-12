@@ -49,9 +49,12 @@ $ui-content-padding-v: 10px;
             color: #e74c3c;
           }
 
-          .fa {
+          .icon {
             @include ui-size(18px);
-            float: right;
+            font-size: 20px;
+            top: 0;
+            float: left;
+            margin-right: 6px;
           }
         }
 

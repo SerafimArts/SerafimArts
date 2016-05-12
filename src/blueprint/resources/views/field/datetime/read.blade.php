@@ -1,1 +1,1 @@
-<span class="fa fa-clock-o"></span>&nbsp;&nbsp;{{ str_replace(' ', '&nbsp;', $value) }}
+<span class="material-icons">access_time</span>&nbsp;&nbsp;{{ str_replace(' ', '&nbsp;', $value) }}

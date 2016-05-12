@@ -13,6 +13,7 @@ namespace Serafim\Blueprint;
 use Doctrine\Common\Annotations\Reader;
 use Illuminate\Support\Str;
 use Serafim\Blueprint\Mapping\Blueprint;
+use Serafim\Blueprint\Mapping\PrimaryKey;
 use Serafim\Blueprint\Mapping\Property;
 use Serafim\Blueprint\Mapping\Relation;
 use Serafim\Properties\Getters;
@@ -55,6 +56,11 @@ class Metadata
     private $propertiesMetadata = null;
 
     /**
+     * @var PrimaryKey
+     */
+    private $primaryKey = null;
+
+    /**
      * Metadata constructor.
      * @param Reader $reader
      * @param string $class
@@ -67,14 +73,10 @@ class Metadata
         $this->reflection = new \ReflectionClass($class);
         $this->classMetadata = $this->getClassMetadata();
         $this->propertiesMetadata = $this->getPropertiesMetadata();
-    }
 
-    /**
-     * @return string
-     */
-    public function getBlueprint()
-    {
-        return $this->className;
+        if ($this->primaryKey === null) {
+            throw new \LogicException('Blueprint must contains a PrimaryKey annotation');
+        }
     }
 
     /**
@@ -117,12 +119,20 @@ class Metadata
 
         /** @var \ReflectionProperty $property */
         foreach ($properties as $property) {
+            /** @var PrimaryKey $pk */
+            $pk = $this->reader->getPropertyAnnotation($property, PrimaryKey::class);
+            if ($pk) {
+                $this->primaryKey = $pk;
+                $pk->name = $property->name;
+            }
+
             /** @var Property $meta */
             $meta = $this->reader->getPropertyAnnotation($property, Property::class);
 
             if (!$meta) {
                 continue;
             }
+
 
             if ($meta->title === null) {
                 $meta->title = ucfirst((string)$property->name);
@@ -135,14 +145,28 @@ class Metadata
                 $meta->value = $property->getValue($instance);
             }
 
-            if ($meta->name === null) {
-                $meta->name = $property->name;
-            }
+            $meta->name = $property->name;
 
             $result[$property->name] = $meta;
         }
 
         return $result;
+    }
+
+    /**
+     * @return PrimaryKey
+     */
+    public function getPrimaryKey()
+    {
+        return $this->primaryKey;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBlueprint()
+    {
+        return $this->className;
     }
 
     /**
@@ -163,7 +187,10 @@ class Metadata
      */
     public function getPropertyAnnotation($name)
     {
-        return $this->propertiesMetadata[$name];
+        if ($this->hasPropertyAnnotation($name)) {
+            return $this->propertiesMetadata[$name];
+        }
+        return null;
     }
 
     /**
@@ -174,7 +201,7 @@ class Metadata
     {
         return isset($this->propertiesMetadata[$name]);
     }
-    
+
     /**
      * @param $name
      * @return array|Blueprint|Property[]

@@ -10,12 +10,14 @@
  */
 namespace Serafim\Blueprint\Presenter;
 
+use Serafim\Blueprint\Mapping\PrimaryKey;
 use Serafim\Blueprint\Metadata;
 use Serafim\Properties\Getters;
 
 /**
  * Class Record
  * @package Serafim\Blueprint\Presenter
+ * @property-read PrimaryKey $primary_key
  * @property-read array|Property[] $properties
  * @property-read array|Property[] $writable_properties
  * @property-read array|Property[] $readable_properties
@@ -50,24 +52,48 @@ class Record
      */
     public function getProperties()
     {
-        $reflection = new \ReflectionObject($this->blueprint);
-        $properties = $reflection->getProperties();
+        $properties = $this->metadata->properties;
 
-        foreach ($properties as $property) {
-            if (!$property->isPublic()) {
-                $property->setAccessible(true);
-            }
-
-            $value = $property->isStatic()
-                ? $property->getValue()
-                : $property->getValue($this->blueprint);
+        foreach ($properties as $meta) {
+            $value = $this->getValue($this->blueprint, $meta->name);
 
             yield new Property(
                 $this->blueprint,
-                $this->metadata->getPropertyAnnotation($property->name),
+                $this->metadata->getPropertyAnnotation($meta->name),
                 $value
             );
         }
+    }
+
+    /**
+     * @param object $blueprint
+     * @param string $field
+     * @return mixed
+     */
+    private function getValue($blueprint, $field)
+    {
+        $property = new \ReflectionProperty($blueprint, $field);
+
+        if (!$property->isPublic()) {
+            $property->setAccessible(true);
+        }
+
+        return $property->isStatic()
+            ? $property->getValue()
+            : $property->getValue($this->blueprint);
+    }
+
+    /**
+     * @return PrimaryKeyProperty
+     */
+    public function getPrimaryKey()
+    {
+        $meta = $this->metadata->getPrimaryKey();
+
+        return new PrimaryKeyProperty(
+            $meta,
+            $this->getValue($this->blueprint, $meta->name)
+        );
     }
 
     /**

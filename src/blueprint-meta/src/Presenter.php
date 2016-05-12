@@ -10,10 +10,7 @@
  */
 namespace Serafim\Blueprint;
 
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Contracts\Pagination\Paginator;
-use Serafim\Blueprint\Metadata;
-use Serafim\Blueprint\Mapping\Blueprint;
 use Serafim\Blueprint\Presenter\ClassInformation;
 use Serafim\Blueprint\Presenter\Record;
 use Serafim\Properties\Getters;
@@ -30,6 +27,11 @@ class Presenter
     use Getters;
 
     /**
+     * @var ClassInformation
+     */
+    protected $class = null;
+
+    /**
      * @var Metadata
      */
     private $meta;
@@ -40,21 +42,16 @@ class Presenter
     private $items;
 
     /**
-     * @var ClassInformation
-     */
-    protected $class = null;
-
-    /**
      * Presenter constructor.
      * @param Metadata $metadata
-     * @param Paginator$items
+     * @param Paginator $items
      * @throws \LogicException
      */
     public function __construct(Metadata $metadata, Paginator $items)
     {
-        $this->meta     = $metadata;
-        $this->items    = $items;
-        $this->class    = new ClassInformation($this->meta);
+        $this->meta = $metadata;
+        $this->items = $items;
+        $this->class = new ClassInformation($this->meta);
     }
 
     /**

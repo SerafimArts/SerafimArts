@@ -55,7 +55,10 @@ return [
     */
     'blueprints' => [
         'items' => [
-            Blueprints\User::class
+            Blueprints\User::class,
+            Blueprints\Group::class,
+            Blueprints\Article::class,
+            Blueprints\Category::class,
         ]
     ],
 ];

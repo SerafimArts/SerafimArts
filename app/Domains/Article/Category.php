@@ -14,21 +14,13 @@ use Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class Article
+ * Class Category
  * @package Domains\Article
  */
-class Article extends Model
+class Category extends Model
 {
     /**
      * @var string
      */
-    protected $table = 'articles';
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function user()
-    {
-        return $this->belongsTo(User::class, 'user_id', 'id');
-    }
+    protected $table = 'categories';
 }

@@ -4,3 +4,5 @@ Fixtures\Entity:
     id: <uuid()>
     title: <word()>
     description: <words(3, true)>
+    created_at: <dateTimeThisYear()>
+    updated_at: <dateTimeThisYear()>

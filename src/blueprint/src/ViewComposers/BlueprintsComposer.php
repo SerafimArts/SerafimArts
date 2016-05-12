@@ -11,6 +11,7 @@
 namespace Serafim\Blueprint\ViewComposers;
 
 use Illuminate\Contracts\Container\Container;
+use Illuminate\Routing\Route;
 use Illuminate\View\View;
 use Serafim\Blueprint\MetadataManager;
 
@@ -25,12 +26,16 @@ class BlueprintsComposer
      */
     private $app;
 
+    private $route;
+
     /**
      * BlueprintsComposer constructor.
      * @param Container $container
+     * @param Route $route
      */
-    public function __construct(Container $container)
+    public function __construct(Container $container, Route $route)
     {
+        $this->route = $route;
         $this->app = $container;
     }
 
@@ -42,5 +47,6 @@ class BlueprintsComposer
         $repo = $this->app->make(MetadataManager::class);
 
         $view->with('bp', $repo);
+        $view->with('route', $this->route->getName());
     }
 }
