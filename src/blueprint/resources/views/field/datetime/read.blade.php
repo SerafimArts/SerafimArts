@@ -1,1 +1,0 @@
-<span class="material-icons">access_time</span>&nbsp;&nbsp;{{ str_replace(' ', '&nbsp;', $value) }}
