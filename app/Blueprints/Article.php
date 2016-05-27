@@ -10,12 +10,10 @@
  */
 namespace Blueprints;
 
-use Carbon\Carbon;
 use Serafim\Blueprint\Mapping as UI;
-use Domains\Article\Article as ArticleEntity;
 
 /**
- * @UI\Blueprint(entity=ArticleEntity::class, title="Записи", icon="description")
+ * @UI\Blueprint(title="Записи", icon="description")
  */
 class Article
 {
@@ -39,7 +37,7 @@ class Article
 
     /**
      * @var string
-     * @UI\Text(title="Адрес", readDecorator="urlDecorator", sortable=true)
+     * @UI\Text(title="Адрес", sortable=true)
      */
     protected $url;
 
@@ -51,7 +49,7 @@ class Article
 
     /**
      * @var string
-     * @UI\Text(title="Краткое содержание", maxSize=50)
+     * @UI\Text(title="Краткое содержание", length=50)
      */
     protected $preview;
 
@@ -63,46 +61,19 @@ class Article
 
     /**
      * @var string
-     * @UI\DateTime(title="Публикация", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Публикация", sortable=true)
      */
     protected $publish_at;
     
     /**
      * @var string
-     * @UI\DateTime(title="Создано", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Создано", sortable=true)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлено", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Обновлено", sortable=true)
      */
     protected $updated_at;
-
-
-    /**
-     * @param string $url
-     * @return string
-     */
-    protected function urlDecorator($url)
-    {
-        return '/' . $url;
-    }
-
-    /**
-     * @param string $date
-     * @return string
-     */
-    private function dateFormat($date)
-    {
-        $locale = Carbon::getLocale();
-
-        Carbon::setLocale(app('config')->get('app.locale'));
-
-        $result = (new Carbon($date))->diffForHumans();
-
-        Carbon::setLocale($locale);
-
-        return $result;
-    }
 }

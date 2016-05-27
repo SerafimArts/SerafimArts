@@ -142,8 +142,7 @@ return [
          */
         TwigBridge\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
-        Serafim\Annotations\LaravelServiceProvider::class,
-        Serafim\Blueprint\LaravelServiceProvider::class,
+        Serafim\BlueprintAdmin\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...

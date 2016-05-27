@@ -10,12 +10,10 @@
  */
 namespace Blueprints;
 
-use Carbon\Carbon;
 use Serafim\Blueprint\Mapping as UI;
-use Domains\User\Group as GroupEntity;
 
 /**
- * @UI\Blueprint(entity=GroupEntity::class, title="Группы пользователей", icon="lock")
+ * @UI\Blueprint(title="Группы пользователей", icon="lock")
  */
 class Group
 {

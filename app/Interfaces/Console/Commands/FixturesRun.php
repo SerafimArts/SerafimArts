@@ -63,6 +63,9 @@ class FixturesRun extends Command
         $finder = (new Finder())
             ->files()
             ->in($paths)
+            ->sort(function(SplFileInfo $a, SplFileInfo $b) {
+                return substr($a->getFilename(), 0, 1) <=> substr($b->getFilename(), 0, 1);
+            })
             ->name('*.yml');
 
         /** @var SplFileInfo $file */

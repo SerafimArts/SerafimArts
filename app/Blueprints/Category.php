@@ -10,12 +10,10 @@
  */
 namespace Blueprints;
 
-use Carbon\Carbon;
 use Serafim\Blueprint\Mapping as UI;
-use Domains\Article\Category as CategoryEntity;
 
 /**
- * @UI\Blueprint(entity=CategoryEntity::class, title="Категории", icon="label_outline")
+ * @UI\Blueprint(title="Категории", icon="label_outline")
  */
 class Category
 {
@@ -39,31 +37,13 @@ class Category
     
     /**
      * @var string
-     * @UI\DateTime(title="Создана", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Создана", sortable=true)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлена", readDecorator="dateFormat", sortable=true, width=150)
+     * @UI\DateTime(title="Обновлена", sortable=true)
      */
     protected $updated_at;
-
-
-    /**
-     * @param string $date
-     * @return string
-     */
-    private function dateFormat($date)
-    {
-        $locale = Carbon::getLocale();
-
-        Carbon::setLocale(app('config')->get('app.locale'));
-
-        $result = (new Carbon($date))->diffForHumans();
-
-        Carbon::setLocale($locale);
-
-        return $result;
-    }
 }
