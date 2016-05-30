@@ -52,10 +52,4 @@ class User
      * @UI\DateTime(title="Обновлён", sortable=true)
      */
     protected $updated_at;
-
-    /**
-     * @var string
-     * @UI\HasOne(title="Группа", field="title", route="group")
-     */
-    protected $group;
 }

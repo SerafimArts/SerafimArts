@@ -43,12 +43,6 @@ class Article
 
     /**
      * @var string
-     * @UI\HasOne(title="Автор", field="name", route="user")
-     */
-    protected $user;
-
-    /**
-     * @var string
      * @UI\Text(title="Краткое содержание", length=50)
      */
     protected $preview;
