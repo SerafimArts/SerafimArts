@@ -10,40 +10,41 @@
  */
 namespace Blueprints;
 
-use Serafim\Blueprint\Mapping as UI;
+use Serafim\Blueprint\Mapping as Entity;
+use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
- * @UI\Blueprint(title="Категории", icon="label_outline")
+ * @Entity\Blueprint(title="Категории", icon="label_outline")
  */
 class Category
 {
     /**
      * @var string
-     * @UI\PrimaryKey
+     * @Entity\PrimaryKey
      */
     protected $id;
     
     /**
      * @var string
-     * @UI\Text(title="Название", sortable=true)
+     * @Ui\Text(title="Название", sortable=true)
      */
     protected $title;
 
     /**
      * @var string
-     * @UI\Text(title="Описание", sortable=true)
+     * @Ui\Text(title="Описание", sortable=true)
      */
     protected $description;
     
     /**
      * @var string
-     * @UI\DateTime(title="Создана", sortable=true)
+     * @Ui\DateTime(title="Создана", sortable=true)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлена", sortable=true)
+     * @Ui\DateTime(title="Обновлена", sortable=true)
      */
     protected $updated_at;
 }

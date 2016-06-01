@@ -10,46 +10,47 @@
  */
 namespace Blueprints;
 
-use Serafim\Blueprint\Mapping as UI;
+use Serafim\Blueprint\Mapping as Entity;
+use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
- * @UI\Blueprint(title="Пользователи", icon="supervisor_account")
+ * @Entity\Blueprint(title="Пользователи", icon="supervisor_account")
  */
 class User
 {
     /**
      * @var string
-     * @UI\PrimaryKey
+     * @Entity\PrimaryKey
      */
     protected $id;
 
     /**
      * @var string
-     * @UI\Image(title="Аватар", width=32, height=32)
+     * @Ui\Image(title="Аватар", width=32, height=32)
      */
     protected $avatar;
 
     /**
      * @var string
-     * @UI\Text(title="Имя", sortable=true)
+     * @Ui\Text(title="Имя", sortable=true)
      */
     protected $name;
 
     /**
      * @var string
-     * @UI\Text(title="Email", sortable=true)
+     * @Ui\Text(title="Email", sortable=true)
      */
     protected $email;
 
     /**
      * @var string
-     * @UI\DateTime(title="Создан", sortable=true)
+     * @Ui\DateTime(title="Создан", sortable=true)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлён", sortable=true)
+     * @Ui\DateTime(title="Обновлён", sortable=true)
      */
     protected $updated_at;
 }

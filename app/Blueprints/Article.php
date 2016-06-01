@@ -10,64 +10,65 @@
  */
 namespace Blueprints;
 
-use Serafim\Blueprint\Mapping as UI;
+use Serafim\Blueprint\Mapping as Entity;
+use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
- * @UI\Blueprint(title="Записи", icon="description")
+ * @Entity\Blueprint(title="Записи", icon="description")
  */
 class Article
 {
     /**
      * @var string
-     * @UI\PrimaryKey
+     * @Entity\PrimaryKey
      */
     protected $id;
 
     /**
      * @var string
-     * @UI\Text(title="Тип", sortable=true)
+     * @Ui\Text(title="Тип", sortable=true)
      */
     protected $type;
 
     /**
      * @var string
-     * @UI\Text(title="Название", sortable=true)
+     * @Ui\Text(title="Название", sortable=true)
      */
     protected $title;
 
     /**
      * @var string
-     * @UI\Text(title="Адрес", sortable=true)
+     * @Ui\Text(title="Адрес", sortable=true)
      */
     protected $url;
 
     /**
      * @var string
-     * @UI\Text(title="Краткое содержание", length=50)
+     * @Ui\Text(title="Краткое содержание", length=50)
      */
     protected $preview;
 
     /**
      * @var string
-     * @UI\Boolean(title="Публикуется", sortable=true, inverse=true)
+     * @Ui\Boolean(title="Публикуется", sortable=true, inverse=true)
      */
     protected $is_draft;
 
     /**
      * @var string
-     * @UI\DateTime(title="Публикация", sortable=true)
+     * @Ui\DateTime(title="Публикация", sortable=true)
      */
     protected $publish_at;
     
     /**
      * @var string
-     * @UI\DateTime(title="Создано", sortable=true)
+     * @Ui\DateTime(title="Создано", sortable=true)
      */
     protected $created_at;
 
     /**
      * @var string
-     * @UI\DateTime(title="Обновлено", sortable=true)
+     * @Ui\DateTime(title="Обновлено", sortable=true)
      */
     protected $updated_at;
 }

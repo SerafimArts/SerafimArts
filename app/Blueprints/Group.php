@@ -10,23 +10,24 @@
  */
 namespace Blueprints;
 
-use Serafim\Blueprint\Mapping as UI;
+use Serafim\Blueprint\Mapping as Entity;
+use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
- * @UI\Blueprint(title="Группы пользователей", icon="lock")
+ * @Entity\Blueprint(title="Группы пользователей", icon="lock")
  */
 class Group
 {
     /**
      * @var string
-     * @UI\Text(sortable=true, write=false)
-     * @UI\PrimaryKey
+     * @Ui\Text(sortable=true, write=false)
+     * @Entity\PrimaryKey
      */
     protected $id;
 
     /**
      * @var string
-     * @UI\Text(title="Название группы", sortable=true)
+     * @Ui\Text(title="Название группы", sortable=true)
      */
     protected $title;
 }

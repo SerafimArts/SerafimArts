@@ -1,9 +1,11 @@
-/vendor
+/.idea/*
+/.git/*
+/vendor/*
+/*.iml
+/composer.phar
 /node_modules
 Homestead.yaml
 Homestead.json
 .env
-/.idea
-/public/.well-known
-/src/blueprint/node_modules
 /src/
+/public/.well-known
