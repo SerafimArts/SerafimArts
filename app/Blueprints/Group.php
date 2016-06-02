@@ -21,7 +21,6 @@ class Group
     /**
      * @var string
      * @Ui\Text(sortable=true, write=false)
-     * @Entity\PrimaryKey
      */
     protected $id;
 

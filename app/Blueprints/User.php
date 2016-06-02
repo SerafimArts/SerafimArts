@@ -10,23 +10,19 @@
  */
 namespace Blueprints;
 
+use Illuminate\Database\Eloquent\Model;
 use Serafim\Blueprint\Mapping as Entity;
 use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
+ * @Entity\PrimaryKey(name="id")
  * @Entity\Blueprint(title="Пользователи", icon="supervisor_account")
  */
-class User
+class User extends Model
 {
     /**
      * @var string
-     * @Entity\PrimaryKey
-     */
-    protected $id;
-
-    /**
-     * @var string
-     * @Ui\Image(title="Аватар", width=32, height=32)
+     * @Ui\Image(title="Аватар", width=32, height=32, uploadPath="/img/uploads")
      */
     protected $avatar;
 

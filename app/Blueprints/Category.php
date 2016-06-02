@@ -10,20 +10,15 @@
  */
 namespace Blueprints;
 
+use Illuminate\Database\Eloquent\Model;
 use Serafim\Blueprint\Mapping as Entity;
 use Serafim\BlueprintAdmin\Mapping as Ui;
 
 /**
  * @Entity\Blueprint(title="Категории", icon="label_outline")
  */
-class Category
+class Category extends Model
 {
-    /**
-     * @var string
-     * @Entity\PrimaryKey
-     */
-    protected $id;
-    
     /**
      * @var string
      * @Ui\Text(title="Название", sortable=true)
