@@ -10,12 +10,20 @@
  */
 namespace Domains\Article;
 
-use Domains\User\User;
+
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * Class Category
  * @package Domains\Article
+ *
+ * @property-read string $id
+ * @property-read string $title
+ * @property-read string $description
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
  */
 class Category extends Model
 {
@@ -23,4 +31,17 @@ class Category extends Model
      * @var string
      */
     protected $table = 'categories';
+
+    /**
+     * @var bool
+     */
+    public $incrementing = false;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Relation
+     */
+    public function articles() : Relation
+    {
+        return $this->hasMany(Category::class, 'id', 'category_id');
+    }
 }

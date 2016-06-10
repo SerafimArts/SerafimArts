@@ -14,8 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Foundation\Auth\Access\Authorizable;
-use Serafim\BlueprintAdmin\Authorization\AdminAuthorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
@@ -47,9 +47,14 @@ class User extends Model implements
     protected $table = 'users';
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @var bool
      */
-    public function group()
+    public $incrementing = false;
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Relation
+     */
+    public function group() : Relation
     {
         return $this->belongsTo(Group::class, 'group_id', 'id');
     }
@@ -57,7 +62,7 @@ class User extends Model implements
     /**
      * @return bool
      */
-    public function isAdmin()
+    public function isAdmin() : bool
     {
         return $this->group->id === Group::GROUP_ADMIN;
     }

@@ -21,8 +21,6 @@ class CreateArticlesTable extends Migration
             $t->uuid('user_id')->index();
             $t->uuid('category_id')->index()->nullable();
 
-            $t->text('images')->nullable();
-            
             $t->text('preview')->nullable();
             $t->text('preview_rendered')->nullable();
             $t->longText('content')->nullable();
