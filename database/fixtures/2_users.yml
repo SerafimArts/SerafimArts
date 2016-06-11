@@ -5,7 +5,7 @@ Fixtures\Entity:
     group_id: '@group_admin'
     name: 'Serafim'
     email: 'nesk@xakep.ru'
-    password: '$2y$10$b6gsWFB8ikiwu0SJ8yPSquPnMhBYHWZc9W0hPAmTuC5UVkYfn.pyu'
+    password: '$2y$10$AHh2eOj9tDgRAQnfbJ6l6.4b1nuGZlMIAVyzdu87j38U0H7TPF/C.'
     created_at: <dateTimeThisYear()>
     updated_at: <dateTimeThisYear()>
 

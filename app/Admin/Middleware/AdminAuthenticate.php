@@ -48,6 +48,6 @@ class AdminAuthenticate
             }
         }
 
-        return response('Access denied', Response::HTTP_FORBIDDEN);
+        return redirect()->route('login');
     }
 }

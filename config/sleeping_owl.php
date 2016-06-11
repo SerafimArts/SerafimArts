@@ -44,7 +44,7 @@ return [
     */
 
     'middleware' => [
-        //'auth.admin'
+        'auth.admin'
     ],
 
     /*

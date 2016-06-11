@@ -1,0 +1,12 @@
+{% extends "layout/master.twig" %}
+
+{% block content %}
+    <section style="padding: 300px 0">
+        <form action="{{ route('login.action') }}" method="POST" style="width: 300px; margin: 0 auto">
+            {{ csrf_field() }}
+            <input type="text" name="login" />
+            <input type="password" name="password" />
+            <input type="submit" class="btn" />
+        </form>
+    </section>
+{% endblock %}
