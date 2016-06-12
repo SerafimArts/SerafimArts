@@ -9,7 +9,7 @@ Fixtures\Entity:
     created_at: <dateTimeThisYear()>
     updated_at: <dateTimeThisYear()>
 
-  user_{1..100}:
+  user_{1..5}:
     __construct: ['users']
     id: <uuid()>
     group_id: '@group_user'

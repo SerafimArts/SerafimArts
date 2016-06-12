@@ -42,7 +42,7 @@ class UserPage implements Page
                 return \AdminForm::panel()
                     ->addBody(
                         \AdminFormElement::image('avatar', 'Аватар'),
-                        \AdminFormElement::select('group.id', 'Группа', Group::class)
+                        \AdminFormElement::select('group_id', 'Группа', Group::class)
                             ->setDisplay('title'),
                         \AdminFormElement::text('name', 'Имя'),
                         \AdminFormElement::text('email', 'Почта'),

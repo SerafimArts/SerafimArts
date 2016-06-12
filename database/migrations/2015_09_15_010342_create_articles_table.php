@@ -16,7 +16,10 @@ class CreateArticlesTable extends Migration
             $t->uuid('id')->primaryKey()->unique();
             $t->string('url')->unique()->index();
             $t->string('title', 255);
-            $t->string('type')->index();
+
+            $t->string('image')->nullable();
+            $t->string('video')->nullable();
+            $t->smallInteger('size')->default(1);
 
             $t->uuid('user_id')->index();
             $t->uuid('category_id')->index()->nullable();
@@ -25,7 +28,10 @@ class CreateArticlesTable extends Migration
             $t->text('preview_rendered')->nullable();
             $t->longText('content')->nullable();
             $t->longText('content_rendered')->nullable();
+            $t->string('content_open')->nullable();
+
             $t->boolean('is_draft')->default(true);
+            $t->boolean('is_main')->default(false);
 
             $t->timestamp('publish_at')->nullable();
             $t->timestamps();

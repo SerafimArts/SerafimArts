@@ -23,18 +23,26 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read string $id
  * @property-read string $url
  * @property-read string $title
- * @property-read string $type
+ * @property-read string|null $image
+ * @property-read string|null $video
+ * @property-read int $size
  * @property-read string $user_id
  * @property-read string $category_id
  * @property-read string $preview
  * @property-read string $preview_rendered
  * @property-read string $content
  * @property-read string $content_rendered
+ * @property-read string $content_open
  * @property-read bool $is_draft
+ * @property-read bool $is_main
  * @property-read Carbon $publish_at
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
- * 
+ *
+ * @property-read User $user
+ * @property-read Category $category
+ *
+ * @method onMainPage()
  */
 class Article extends Model
 {
@@ -62,7 +70,7 @@ class Article extends Model
      */
     public function user() : Relation
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     /**
@@ -70,6 +78,15 @@ class Article extends Model
      */
     public function category() : Relation
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->hasOne(Category::class, 'id', 'category_id');
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public static function scopeOnMainPage($query)
+    {
+        return $query->where('is_main', true);
     }
 }

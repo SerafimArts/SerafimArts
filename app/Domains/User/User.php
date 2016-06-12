@@ -56,7 +56,7 @@ class User extends Model implements
      */
     public function group() : Relation
     {
-        return $this->belongsTo(Group::class, 'group_id', 'id');
+        return $this->hasOne(Group::class, 'id', 'group_id');
     }
 
     /**

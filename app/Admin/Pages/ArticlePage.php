@@ -9,6 +9,7 @@ namespace Admin\Pages;
 
 use Carbon\Carbon;
 use Domains\Article\Category;
+use Domains\Article\Enum\EnumArticleType;
 use Domains\User\User;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 
@@ -37,28 +38,38 @@ class ArticlePage implements Page
                     ->with('user', 'category')
                     ->paginate(15);
             })
-            ->onCreateAndEdit(function ($d) {
+            ->onCreateAndEdit(function () {
                 return \AdminForm::panel()
                     ->addHeader(
                         \AdminFormElement::time('publish_at', 'Дата публикации')
-                            ->setDefaultValue(Carbon::now())
-                    )
-                    ->addBody(
-                        \AdminFormElement::select('category.id', 'Категория', Category::class)
-                            ->setDisplay('title')
-                            ->required(),
-                        \AdminFormElement::select('user.id', 'Автор', User::class)
-                            ->setDisplay('name')
-                            ->setDefaultValue(\Auth::user()),
+                            ->setDefaultValue(Carbon::now()),
 
                         \AdminFormElement::checkbox('is_draft', 'Это черновик')
                             ->setDefaultValue(true),
-
+                        \AdminFormElement::checkbox('is_main', 'Публикуется на главной')
+                            ->setDefaultValue(true)
+                    )
+                    ->addBody(
                         \AdminFormElement::text('title', 'Заголовок'),
                         \AdminFormElement::text('url', 'URL Адрес'),
 
+                        \AdminFormElement::text('video', 'Ссылка на видео'),
+                        \AdminFormElement::image('image', 'Изображение'),
+                        \AdminFormElement::text('size', 'Размер')
+                            ->setDefaultValue(1),
+
+                        \AdminFormElement::select('category_id', 'Категория', Category::class)
+                            ->setDisplay('title')
+                            ->required(),
+                        \AdminFormElement::select('user_id', 'Автор', User::class)
+                            ->setDisplay('name')
+                            ->setDefaultValue(\Auth::user()),
+
+
                         \AdminFormElement::textarea('content', 'Содержание'),
                         \AdminFormElement::textarea('preview', 'Краткое описание')->setRows(3),
+                        \AdminFormElement::text('content_open', 'Кнопка "Читать дальше"')
+                            ->setDefaultValue('Читать дальше'),
 
                         \AdminFormElement::time('created_at', 'Дата создания'),
                         \AdminFormElement::time('updated_at', 'Дата обновления')
