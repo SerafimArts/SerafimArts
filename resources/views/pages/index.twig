@@ -7,28 +7,41 @@
 
 {% block content %}
     <section class="section section-dark">
-        <section class="billets-list">
-            <article class="billet billet-gradient">
-                <div class="billet-content">
-                    <p>
-                        У каждого человека есть своя история. Это &mdash; моя.
-                    </p>
-                </div>
-            </article>
 
-            {% for article in articles %}
-                {% if article.video %}
-                    {% include "partials/billets/video.twig" with { 'article': article } %}
-                {% else %}
-                    {% include "partials/billets/text.twig" with { 'article': article } %}
-                {% endif %}
-            {% endfor %}
+        <section class="billets-container" data-vm="Billets">
+            <section class="billets-list">
+                <article class="billet billet-gradient" data-id="billet">
+                    <div class="billet-content">
+                        <p>
+                            У каждого человека есть своя история. Это &mdash; моя.
+                        </p>
+                    </div>
+                </article>
+
+                {% for article in articles %}
+                    {% if article.video %}
+                        {% include "partials/billets/video.twig" with { 'article': article } %}
+                    {% else %}
+                        {% include "partials/billets/text.twig" with { 'article': article } %}
+                    {% endif %}
+                {% endfor %}
+            </section>
+
+            <aside class="billets-nav">
+                <h2>Последнее</h2>
+                <nav>
+                    {% for article in articles %}
+                        <a href="#">{{ article.title }}</a>
+                    {% endfor %}
+                </nav>
+            </aside>
+
         </section>
     </section>
 
-    <section class="section">
-        <div class="content about-me">
 
+    <section class="section about-me">
+        <div class="content">
             <h2><span>Обо</span> мне</h2>
 
             <figure>

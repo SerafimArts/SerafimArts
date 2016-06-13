@@ -19,7 +19,7 @@ export default class Parallax {
     /**
      * @type {Renderer}
      */
-    renderer = PIXI.autoDetectRenderer(this.width, 800);
+    renderer = PIXI.autoDetectRenderer(this.width, 600);
 
     /**
      * @type {Container}
@@ -99,7 +99,7 @@ export default class Parallax {
             sprite.x = Math.random() * screen.width - 128;
             sprite.y = Math.random() * 400 - 150;
             sprite.visible = i < this.lowQualitySmoke;
-            sprite.movementSpeed = (Math.random() + .2);
+            sprite.movementSpeed = (Math.random() * 3 + .1);
 
             this.smoke.addChild(sprite);
         }

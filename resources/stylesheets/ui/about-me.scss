@@ -1,21 +1,41 @@
 .about-me {
-  padding: 0 10px;
-
-  h2 {
-    display: block;
+  padding: 100px 0;
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    @include clear;
+    height: 150px;
+    background: linear-gradient(to bottom, rgba(#fff, 1), rgba(#fff, 0));
   }
 
+  &:after {
+    top: auto;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(#fff, 1), rgba(#fff, 0));
+  }
 
-  figure {
-    display: block;
-    margin: 20px 50px 20px 0;
-    box-shadow: 0 1px 2px rgba(#000, .05);
-    float: left;
-    img {
-      margin: 0;
+  .content {
+    padding: 0 10px;
+
+    h2 {
       display: block;
+      width: 100%;
+      @include clear;
+    }
+
+    figure {
+      display: block;
+      margin: 20px 50px 20px 0;
+      box-shadow: 0 0 0 1px rgba(#fff, 1);
+      float: left;
+
+      img {
+        margin: 0;
+        display: block;
+      }
     }
   }
 }
