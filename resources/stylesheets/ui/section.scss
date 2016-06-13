@@ -1,0 +1,41 @@
+.section {
+  width: 100%;
+  padding: 50px 0;
+  z-index: 19;
+  position: relative;
+
+  &.section-dark {
+    background: #f7f6fa;
+  }
+
+  .content {
+    width: $width;
+    margin: 0 auto;
+
+    h2 {
+      font-size: 32px;
+      display: inline-block;
+      line-height: 30px;
+
+      span {
+        display: inline-block;
+        color: #fff;
+        background: #f00;
+        padding: 0 8px 0 125px;
+        position: relative;
+
+        &:before {
+          content: '';
+          width: 2px;
+          height: 28px;
+          background: #fff;
+          display: block;
+          position: absolute;
+          right: 1px;
+          top: 1px;
+          animation: dot 1s ease infinite;
+        }
+      }
+    }
+  }
+}

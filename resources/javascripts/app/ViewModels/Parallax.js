@@ -48,6 +48,16 @@ export default class Parallax {
     mill = 0;
 
     /**
+     * @type {number}
+     */
+    lowQualitySmoke = 15;
+
+    /**
+     * @type {number}
+     */
+    lastTime = 0;
+
+    /**
      * @param context
      */
     constructor(context:HTMLElement) {
@@ -76,7 +86,7 @@ export default class Parallax {
             }
 
             for (i = 0, len = this.smoke.children.length; i < len; i++) {
-                this.smoke.getChildAt(i).visible = (value === this.highQuality || i < 5);
+                this.smoke.getChildAt(i).visible = (value === this.highQuality || i < this.lowQualitySmoke);
             }
         });
 
@@ -88,15 +98,17 @@ export default class Parallax {
             sprite.id = i;
             sprite.x = Math.random() * screen.width - 128;
             sprite.y = Math.random() * 400 - 150;
-            sprite.visible = i < 5;
-            sprite.movementSpeed = (Math.random() + .1);
+            sprite.visible = i < this.lowQualitySmoke;
+            sprite.movementSpeed = (Math.random() + .2);
 
             this.smoke.addChild(sprite);
         }
 
-        this.smoke.alpha = .7;
+        this.smoke.alpha = 1;
         this.smoke.depth = .6;
         this.smoke.shift = {x: 0, y: 0};
+
+        this.lastTime = (new Date()).getMilliseconds();
 
         this._render();
     }
@@ -121,9 +133,11 @@ export default class Parallax {
      * @private
      */
     _render() {
+        var delta = (new Date()).getMilliseconds() - this.lastTime;
+        if (delta < 0) { delta = 0; }
+
         var i = 0, len = 0;
 
-        requestAnimationFrame(::this._render);
 
         this.renderer.resize(
             document.body.getBoundingClientRect().width,
@@ -131,18 +145,21 @@ export default class Parallax {
         );
 
         for (i = 0, len = this.stage.children.length; i < len; i++) {
-            this._updatePosition(this.stage.getChildAt(i));
-
+            this._updatePosition(delta, this.stage.getChildAt(i));
         }
 
         this.renderer.render(this.stage);
+
+        this.lastTime = (new Date()).getMilliseconds();
+        requestAnimationFrame(::this._render);
     }
 
     /**
+     * @param deltaTime
      * @param sprite
      * @private
      */
-    _updatePosition(sprite:Sprite) {
+    _updatePosition(deltaTime, sprite:Sprite) {
         sprite.y = sprite.shift.y + this._scrollY * (sprite.depth - 1) * -1;
 
         if (sprite.blurFilter) {
@@ -159,14 +176,14 @@ export default class Parallax {
 
             if (sprite.rotatable) {
                 sprite.anchor.set(.5, .5);
-                sprite.rotation += .001;
+                sprite.rotation += (.005 * deltaTime / 30);
             }
         }
 
         if (sprite instanceof Container) {
             for (var i = 0, len = sprite.children.length; i < len; i++) {
                 var smoke = sprite.getChildAt(i);
-                smoke.x += smoke.movementSpeed;
+                smoke.x += (smoke.movementSpeed * deltaTime / 30);
 
                 if (smoke.movementSpeed > 0 && smoke.x > this.renderer.width) {
                     smoke.x = -smoke.width;
@@ -199,7 +216,7 @@ export default class Parallax {
 
             container.addChild(data.item);
 
-            this._updatePosition(data.item);
+            this._updatePosition(0, data.item);
         }
     }
 
