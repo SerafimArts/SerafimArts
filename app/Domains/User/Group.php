@@ -41,20 +41,6 @@ class Group extends Model
     public $timestamps = false;
 
     /**
-     * Group constructor.
-     * @param array $attributes
-     */
-    public function __construct(array $attributes = [])
-    {
-        if (!isset($attributes['id'])) {
-            static::unguard();
-            $attributes['id'] = Uuid::uuid4()->toString();
-        }
-
-        parent::__construct($attributes);
-    }
-
-    /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Relation
      */
     public function users() : Relation

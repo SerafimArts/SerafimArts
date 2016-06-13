@@ -7,88 +7,23 @@
 
 {% block content %}
     <section class="section section-dark">
-        <div class="content">
+        <section class="billets-list">
+            <article class="billet billet-gradient">
+                <div class="billet-content">
+                    <p>
+                        У каждого человека есть своя история. Это &mdash; моя.
+                    </p>
+                </div>
+            </article>
 
-            <section class="billets-list">
-                <article class="billet billet-gradient">
-                    <div class="billet-content">
-                        <p>
-                            У каждого человека есть своя история. Это &mdash; моя.
-                        </p>
-                    </div>
-                </article>
-
-                {% include "partials/billets/video.twig" with {
-                    'src': '08npAJCqecU',
-                    'description': 'У меня было несколько часов после работы, а так же ящик ошибок, пинта чистого энтузиазма и безрезультатные усилия.
-                    Не то что бы это был необходимый запас для написания композиции. Но если начал писать проект, становится трудно остановиться.'
-                } %}
-
-                <article class="billet">
-                    <div class="billet-content">
-                        <figure class="billet-image">
-                            <img src="/img/uploads/2cca7c11a1515763825fac2bdf6f19c0.png" />
-                        </figure>
-
-                        <div class="billet-description">
-                            <p>
-                                Пытаемся осилить этого зверя.
-                                Для самых маленьких с крепкой психикой.
-                            </p>
-
-                            <a href="http://www.youtube.com/playlist?list=PLDI5V3o4oKBV2l8DeIYVpke6Ygwgp7JIL"
-                               target="_blank" class="button">Вычислить по IP</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="billet billet-2">
-                    <div class="billet-content">
-                        <figure class="billet-image">
-                            <img src="/img/uploads/2fbd5bc12bde0b71f2522810970282ce.png" />
-                        </figure>
-
-                        <div class="billet-description">
-                            <p>
-                                К вам подбегает очумевший учёный и кричит:
-                                «Я всажу свой квантовый гармонизатор в вашу фотонно-резонаторную камеру!» Ваши действия?
-                            </p>
-
-
-                            <ul>
-                                <li>Добавить кармы</li>
-                                <li>Добавить ачивку</li>
-                                <li>Сломаться</li>
-                            </ul>
-
-
-                            <a href="https://github.com/LaravelRUS/GitterBot" target="_blank"
-                               class="button">Спасибо бот, что живой!</a>
-                        </div>
-                    </div>
-                </article>
-
-                <article class="billet">
-                    <div class="billet-content">
-                        <figure class="billet-image">
-                            <img src="/img/uploads/3a1d490fa122ecc0d449f91e7907d02e.png" />
-                        </figure>
-
-                        <div class="billet-description">
-                            <p>
-                                Стильно, модно, молодёжно. Ну наверное. В любом случае можно
-                                подписаться :3
-                            </p>
-
-                            <a href="http://new.vk.com/serafim_arts" target="_blank" class="button">Допустим</a>
-                        </div>
-                    </div>
-                </article>
-
-
-            </section>
-
-        </div>
+            {% for article in articles %}
+                {% if article.video %}
+                    {% include "partials/billets/video.twig" with { 'article': article } %}
+                {% else %}
+                    {% include "partials/billets/text.twig" with { 'article': article } %}
+                {% endif %}
+            {% endfor %}
+        </section>
     </section>
 
     <section class="section">

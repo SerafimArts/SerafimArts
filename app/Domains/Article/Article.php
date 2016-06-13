@@ -12,6 +12,7 @@ namespace Domains\Article;
 
 use Carbon\Carbon;
 use Domains\User\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Domains\Article\Enum\EnumArticleType;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -43,6 +44,8 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read Category $category
  *
  * @method onMainPage()
+ * @method published()
+ *
  */
 class Article extends Model
 {
@@ -83,10 +86,20 @@ class Article extends Model
 
     /**
      * @param $query
-     * @return mixed
+     * @return Builder|Article
      */
-    public static function scopeOnMainPage($query)
+    public static function scopeOnMainPage(Builder $query) : Builder
     {
         return $query->where('is_main', true);
+    }
+
+    /**
+     * @param Builder $query
+     * @return Builder|Article
+     */
+    public static function scopePublished(Builder $query) : Builder
+    {
+        return $query->where('publish_at', '<=', Carbon::now())
+            ->orderBy('publish_at', 'desc');
     }
 }

@@ -10,7 +10,13 @@
  */
 namespace Providers;
 
+use Domains\Article\Article;
+use Domains\Article\Category;
+use Domains\User\Group;
+use Domains\User\User;
 use Illuminate\Support\ServiceProvider;
+use Observers\ContentRenderObserver;
+use Observers\IdObserver;
 
 /**
  * Class AppServiceProvider
@@ -25,7 +31,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        User::observe(IdObserver::class);
+        Group::observe(IdObserver::class);
+        Article::observe(IdObserver::class);
+        Category::observe(IdObserver::class);
+
+        Article::observe(ContentRenderObserver::class);
     }
 
     /**

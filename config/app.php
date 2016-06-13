@@ -143,6 +143,7 @@ return [
         TwigBridge\ServiceProvider::class,
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
+        Barryvdh\Debugbar\ServiceProvider::class,
 
         /*
          * Application Service Providers...

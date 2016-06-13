@@ -16,7 +16,9 @@ class HomeController extends Controller
     {
         return view('pages.index', [
             'articles' => Article::with('user')
-                ->onMainPage()->take(10)->get()
+                ->published()
+                ->onMainPage()
+                ->take(10)->get()
         ]);
     }
 }
