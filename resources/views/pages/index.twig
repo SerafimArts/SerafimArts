@@ -31,7 +31,7 @@
                 <h2>Последнее</h2>
                 <nav>
                     {% for article in articles %}
-                        <a href="#">{{ article.title }}</a>
+                        <a href="{{ route('article', {'url': article.url}) }}">{{ article.title }}</a>
                     {% endfor %}
                 </nav>
             </aside>
