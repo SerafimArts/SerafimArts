@@ -34,7 +34,7 @@ class CategoryPage implements Page
                     ->paginate(15)
                 ;
             })
-            ->onCreateAndEdit(function ($d) {
+            ->onCreateAndEdit(function () {
                 return \AdminForm::panel()
                     ->addBody(
                         \AdminFormElement::text('title', 'Заголовок'),
