@@ -1,0 +1,17 @@
+{% extends "layout/master.twig" %}
+
+{% block header %}
+    {% include "partials/header.twig" %}
+{% endblock %}
+
+{% block content %}
+    <section class="section section-dark">
+        <article class="content article">
+            <h2>{{ article.title }}</h2>
+
+            <div class="article-content">
+                {{ article.content_rendered | raw }}
+            </div>
+        </article>
+    </section>
+{% endblock %}

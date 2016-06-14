@@ -11,9 +11,9 @@
 |
 */
 
-Route::get('/', 'HomeController@index');
+Route::get('/', 'HomeController@index')->name('home');
 
-
+Route::get('/article/{url}', 'ArticleController@show')->name('article');
 
 //
 Route::group(['prefix' => '/auth'], function () {

@@ -7,7 +7,7 @@
         <div class="billet-description">
             {{ article.preview_rendered | raw }}
 
-            <a href="#" class="button">
+            <a href="{{ route('article', {'url': article.url}) }}" class="button">
                 {{ article.content_open | default('В оригинале')  }}
             </a>
         </div>
