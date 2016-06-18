@@ -11,15 +11,14 @@
 namespace Domains\Article\Repository;
 
 use Domains\Article\Article;
-use Domains\Article\MainPageArticle;
-use Illuminate\Database\Connection;
 use Illuminate\Support\Collection;
+use Domains\Article\MainPageArticle;
 
 /**
- * Class EloquentRepository
+ * Class EloquentArticleRepository
  * @package Domains\Article\Repository
  */
-class EloquentRepository implements ArticleRepository
+class EloquentArticleRepository implements ArticleRepository
 {
     /**
      * @param int|null $count

@@ -14,9 +14,13 @@ use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
 use Domains\Article\Repository\ArticleRepository;
-use Domains\Article\Repository\EloquentRepository;
+use Domains\Article\Repository\EloquentArticleRepository;
 use Domains\User\Group;
+use Domains\User\Repository\EloquentUserRepository;
+use Domains\User\Repository\UserRepository;
 use Domains\User\User;
+use Illuminate\Contracts\Auth\Guard;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 use Observers\ContentRenderObserver;
 use Observers\IdObserver;
@@ -33,7 +37,11 @@ class OrmServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(ArticleRepository::class, function() {
-            return new EloquentRepository();
+            return new EloquentArticleRepository();
+        });
+
+        $this->app->singleton(UserRepository::class, function(Application $app) {
+            return new EloquentUserRepository($app->make(Guard::class));
         });
     }
 

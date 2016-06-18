@@ -7,6 +7,7 @@
  */
 namespace Interfaces\Http\Controllers;
 
+use Domains\User\Repository\UserRepository;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -21,31 +22,15 @@ class AuthController extends Controller
     }
 
     /**
-     * @param Guard $guard
+     * @param UserRepository $repository
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function login(Guard $guard, Request $request)
+    public function login(UserRepository $repository, Request $request)
     {
-        list($login, $password) = [
-            $request->get('login'),
-            $request->get('password'),
-        ];
+        $this->validate($request, ['login' => 'required', 'password' => 'required']);
 
-        $auth = $guard->attempt([
-            'name'     => $login,
-            'password' => $password,
-        ]);
-
-        if ($auth) {
-            return redirect()->route('admin.dashboard');
-        }
-
-
-        $auth = $guard->attempt([
-            'email'    => $login,
-            'password' => $password,
-        ]);
+        $auth = $repository->authByLoginPassword($request->get('login'), $request->get('password'), true);
 
         if ($auth) {
             return redirect()->route('admin.dashboard');
