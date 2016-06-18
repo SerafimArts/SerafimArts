@@ -1,7 +1,9 @@
 <?php
 namespace Interfaces\Http\Controllers;
 
+
 use Domains\Article\Article;
+use Domains\Article\MainPageArticle;
 
 /**
  * Class HomeController
@@ -15,10 +17,8 @@ class HomeController extends Controller
     public function index()
     {
         return view('pages.index', [
-            'articles' => Article::with('user')
-                ->published()
-                ->onMainPage()
-                ->take(10)->get()
+            'previews' => MainPageArticle::orderBy('order_id', 'asc')->get(),
+            'articles' => (new Article)->published()->get()
         ]);
     }
 }

@@ -3,6 +3,7 @@ use Domains\User\User;
 use Domains\User\Group;
 use Domains\Article\Article;
 use Domains\Article\Category;
+use Domains\Article\MainPageArticle;
 use SleepingOwl\Admin\Navigation\Page;
 
 
@@ -17,6 +18,10 @@ return [
         'title' => 'Новости',
         'icon'  => 'fa fa-newspaper-o',
         'pages' => [
+            (new Page(MainPageArticle::class))
+                ->setTitle('Главная страница')
+                ->setIcon('fa fa-file-text-o'),
+
             (new Page(Article::class))
                 ->setTitle('Новости')
                 ->setIcon('fa fa-file-text'),

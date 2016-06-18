@@ -1,0 +1,21 @@
+<article class="billet billet-{{ article.size }}" data-id="billet">
+    <div class="billet-content">
+        <figure class="billet-image">
+            <img src="{{ article.image }}" />
+        </figure>
+
+        <div class="billet-description">
+            {% if article.type == 'Text' %}
+                <p>{{ article.content }}</p>
+            {% else %}
+                {{ article.content | raw }}
+            {% endif %}
+
+            {% if article.related_article %}
+                <a href="{{ route('article', {'url': article.relation.url}) }}" class="button">
+                    {{ article.button_description | default('В оригинале')  }}
+                </a>
+            {% endif %}
+        </div>
+    </div>
+</article>

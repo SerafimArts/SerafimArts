@@ -12,9 +12,8 @@ namespace Domains\Article;
 
 use Carbon\Carbon;
 use Domains\User\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
-use Domains\Article\Enum\EnumArticleType;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
@@ -24,18 +23,13 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read string $id
  * @property-read string $url
  * @property-read string $title
- * @property-read string|null $image
- * @property-read string|null $video
- * @property-read int $size
  * @property-read string $user_id
  * @property-read string $category_id
  * @property-read string $preview
  * @property-read string $preview_rendered
  * @property-read string $content
  * @property-read string $content_rendered
- * @property-read string $content_open
  * @property-read bool $is_draft
- * @property-read bool $is_main
  * @property-read Carbon $publish_at
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
@@ -43,8 +37,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read User $user
  * @property-read Category $category
  *
- * @method onMainPage()
- * @method published()
+ * @method Article|Builder published()
  *
  */
 class Article extends Model
@@ -85,15 +78,6 @@ class Article extends Model
     }
 
     /**
-     * @param $query
-     * @return Builder|Article
-     */
-    public static function scopeOnMainPage(Builder $query) : Builder
-    {
-        return $query->where('is_main', true);
-    }
-
-    /**
      * @param Builder $query
      * @return Builder|Article
      */
@@ -105,9 +89,9 @@ class Article extends Model
 
     /**
      * @param $value
-     * @return static
+     * @return Carbon
      */
-    public function getPublishAtAttribute($value)
+    public function getPublishAtAttribute($value) : Carbon
     {
         return Carbon::parse($value);
     }

@@ -11,9 +11,12 @@
 namespace Providers;
 
 use Domains\Article\Article;
+use Domains\Article\Category;
+use Domains\Article\MainPageArticle;
 use Domains\User\Group;
 use Domains\User\User;
 use Illuminate\Support\ServiceProvider;
+use Observers\ContentRenderObserver;
 use Observers\IdObserver;
 
 /**
@@ -23,13 +26,25 @@ use Observers\IdObserver;
 class OrmServiceProvider extends ServiceProvider
 {
     /**
-     * @throws \InvalidArgumentException
      * @return void
      */
     public function register()
     {
-        User::observe(new IdObserver);
-        Group::observe(new IdObserver);
-        Article::observe(new IdObserver);
+
+    }
+
+    /**
+     * @throws \InvalidArgumentException
+     * @return void
+     */
+    public function boot()
+    {
+        User::observe(IdObserver::class);
+        Group::observe(IdObserver::class);
+        Article::observe(IdObserver::class);
+        Category::observe(IdObserver::class);
+        MainPageArticle::observe(IdObserver::class);
+
+        Article::observe(ContentRenderObserver::class);
     }
 }

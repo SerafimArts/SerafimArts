@@ -5,10 +5,10 @@
                 frameborder="0" allowfullscreen></iframe>
 
         <div class="billet-description">
-            {{ article.preview_rendered | raw }}
+            {{ article.content | raw }}
 
             <a href="https://www.youtube.com/watch?v={{ article.video }}" class="button">
-                {{ article.content_open | default('В оригинале') }}
+                {{ article.button_description | default('В оригинале') }}
             </a>
         </div>
     </div>
