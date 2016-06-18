@@ -21,9 +21,14 @@ gulp.task('js', function () {
         .withCommonJs()
         .withPolyfill()
         .withSourceMaps()
-
         .then.js(require.resolve('knockout/build/output/knockout-latest'))
+        .then.js('resources/javascripts/vendor/highlight-9.4.0.js')
         .then.js('resources/javascripts/vendor/pixi-3.0.10.js')
+        .then.es7(function (compiler) {
+            compiler
+                .path('resources/javascripts/ko/')
+                .namespace('Ko');
+        })
         .then.es7(function (compiler) {
             compiler
                 .plugin('syntax-flow')

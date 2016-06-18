@@ -1,7 +1,10 @@
 import View from "View/View";
+import InView from "Ko/Inview";
 
 export default class Application {
     constructor() {
+        ko.bindingHandlers.inview = InView(ko);
+
         this._boot();
     }
 

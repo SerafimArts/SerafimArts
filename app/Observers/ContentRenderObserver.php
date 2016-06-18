@@ -60,7 +60,7 @@ class ContentRenderObserver
             return '<iframe src="' . $link . '" frameborder="0" allowfullscreen></iframe>';
         }, $content);
     }
-
+    
     /**
      * @param Article $article
      */

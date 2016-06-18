@@ -38,7 +38,7 @@
                 {{ article.publish_at.format('d-m-Y') }}
             </time>
 
-            <div class="article-content">
+            <div class="article-content" data-vm="Article">
                 {{ article.content_rendered | raw }}
             </div>
         </article>
