@@ -11,13 +11,16 @@
 @keyframes lines {
   0% {
     opacity: 0;
+    -webkit-filter: blur(3px);
     transform: translateX(0) translateY(0);
   }
   50% {
+    -webkit-filter: blur(0);
     opacity: .7;
   }
   100% {
     opacity: 0;
+    -webkit-filter: blur(3px);
     transform: translateX(300px) translateY(-300px);
   }
 }
@@ -33,6 +36,7 @@
     top: 100px;
     z-index: 1;
     overflow: hidden;
+    pointer-events: none;
 
     .line {
       z-index: 1;
@@ -47,9 +51,9 @@
 
     @for $i from 1 through 20 {
       .line:nth-child(#{$i}) {
-        &:after { height: random(50) + 50px; }
+        &:after { height: random(100) + 50px; }
         left: random(800) + px;
-        animation: lines (2s + .7s * $i) ease infinite;
+        animation: lines (1s + .5s * $i) linear infinite;
         animation-delay: (200ms * $i);
       }
     }
@@ -96,7 +100,8 @@
       font-size: 32px;
     }
 
-    & > p:first-child:first-letter {
+    & > blockquote:nth-child(1) + p:first-letter,
+    & > p:nth-child(1):first-letter {
       font-size: 52px;
       font-weight: 700;
       display: block;
@@ -117,6 +122,7 @@
       color: #FBF9F8;
       font-weight: 300;
       margin-right: -350px;
+      font-style: italic;
 
       &:after {
         content: '';
@@ -132,7 +138,9 @@
         margin: 0 0 12px 0;
         padding: 0 0 10px 0;
         box-shadow: 0 1px 0 #8C837F;
-        font-weight: 500;
+        font-weight: 300;
+        font-style: normal;
+        font-family: inherit !important;
       }
 
       p {
