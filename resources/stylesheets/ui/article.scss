@@ -100,6 +100,15 @@
       font-size: 32px;
     }
 
+    code {
+      background: rgba(#100, .1);
+      border-radius: 2px;
+      display: inline-block;
+      padding: 0 8px;
+      font-size: .9em;
+      line-height: 19px;
+    }
+
     & > blockquote:nth-child(1) + p:first-letter,
     & > p:nth-child(1):first-letter {
       font-size: 52px;
@@ -118,11 +127,36 @@
       width: 300px;
       padding: 20px;
       font-size: 13px;
-      line-height: 18px;
+      line-height: 17px;
       color: #FBF9F8;
       font-weight: 300;
       margin-right: -350px;
       font-style: italic;
+
+      hr {
+        display: block;
+        border: none;
+        height: 1px;
+        background: #8C837F;
+        margin: 12px 0;
+      }
+
+      code {
+        padding: 0 3px;
+        font-style: normal;
+        line-height: inherit !important;
+      }
+
+      b, strong {
+        font-style: normal;
+      }
+
+      a {
+        color: #fdd;
+        &:hover {
+          color: #f00;
+        }
+      }
 
       &:after {
         content: '';

@@ -83,7 +83,9 @@ class Article extends Model
      */
     public static function scopePublished(Builder $query) : Builder
     {
-        return $query->where('publish_at', '<=', Carbon::now())
+        return $query
+            ->where('is_draft', false)
+            ->where('publish_at', '<=', Carbon::now())
             ->orderBy('publish_at', 'desc');
     }
 
