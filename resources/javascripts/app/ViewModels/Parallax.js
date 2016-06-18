@@ -169,7 +169,7 @@ export default class Parallax {
             var delta = Math.abs(this._scrollY * (1 - sprite.depth) / 40);
 
             if (this.quality() > this.lowQuality && this._scrollY < this.renderer.height) {
-                sprite.blurFilter.blur = delta + sprite.depth * 3;
+                sprite.blurFilter.blur = sprite.depth * 8;
             } else if (this.quality() === this.lowQuality) {
                 sprite.blurFilter.blur = 0;
             }
