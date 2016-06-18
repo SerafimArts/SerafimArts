@@ -101,12 +101,15 @@
 
     &.billet-gradient {
       .billet-content {
-        padding: 70px 30px;
+        display: table;
+        padding: 5px 30px;
         font-size: 24px;
         background: linear-gradient(50deg, #d75383, #f78369);
         color: #fff;
 
         p {
+          display: table-cell;
+          vertical-align: middle;
           line-height: 26px;
           text-align: center;
 
