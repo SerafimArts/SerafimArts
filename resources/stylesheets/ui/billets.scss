@@ -229,8 +229,9 @@
     margin: 3px 0;
 
     &:hover {
-      background: #fff;
-      color: #270000;
+      background: #f00;
+      color: #fff;
+      text-decoration: none;
     }
   }
 }
