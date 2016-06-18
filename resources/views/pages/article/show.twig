@@ -4,10 +4,39 @@
     {% include "partials/header.twig" %}
 {% endblock %}
 
+{% block title %}
+    &mdash; {{ article.title }}
+{% endblock %}
+
 {% block content %}
     <section class="section section-dark">
         <article class="content article">
-            <h2>{{ article.title }}</h2>
+            <div class="lines">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <h1>{{ article.title }}</h1>
+            <time datetime="{{ article.publish_at.toIso8601String() }}">
+                {{ article.publish_at.format('d-m-Y') }}
+            </time>
 
             <div class="article-content">
                 {{ article.content_rendered | raw }}

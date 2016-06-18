@@ -1,0 +1,149 @@
+@mixin line {
+  content: '';
+  box-shadow: 1px 0 0 #43372f;
+  width: 1px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+@keyframes lines {
+  0% {
+    opacity: 0;
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    opacity: .7;
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(300px) translateY(-300px);
+  }
+}
+
+.article {
+  padding: 100px 0;
+  position: relative;
+
+  .lines {
+    width: 100%;
+    height: 300px;
+    position: absolute;
+    top: 100px;
+    z-index: 1;
+    overflow: hidden;
+
+    .line {
+      z-index: 1;
+      position: absolute;
+      bottom: -50px;
+      opacity: 0;
+      &:after {
+        @include line;
+      }
+    }
+
+
+    @for $i from 1 through 20 {
+      .line:nth-child(#{$i}) {
+        &:after { height: random(50) + 50px; }
+        left: random(800) + px;
+        animation: lines (2s + .7s * $i) ease infinite;
+        animation-delay: (200ms * $i);
+      }
+    }
+  }
+
+  h1 {
+    font-family: "Lora", serif;
+    font-size: 120px;
+    width: 600px;
+    margin: 10px auto 60px auto;
+    display: block;
+    z-index: 2;
+    position: relative;
+    text-align: center;
+  }
+
+  time {
+    font-size: 24px;
+    width: 120px;
+    margin: -30px auto 40px auto;
+    text-align: center;
+    display: block;
+    font-weight: 300;
+    z-index: 2;
+    position: relative;
+
+    &:after {
+      @include line;
+      height: 40px;
+      top: 14px;
+    }
+  }
+
+  .article-content {
+    font-size: 16px;
+    line-height: 26px;
+    padding-right: 350px;
+
+    h1, h2 {
+      font-family: "Lora", serif;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    & > p:first-child:first-letter {
+      font-size: 52px;
+      font-weight: 700;
+      display: block;
+      float: left;
+      line-height: 51px;
+      margin-right: 6px;
+      color: #f00;
+    }
+
+    blockquote {
+      float: right;
+      box-sizing: border-box;
+      background: #756C66;
+      width: 300px;
+      padding: 20px;
+      font-size: 13px;
+      line-height: 18px;
+      color: #FBF9F8;
+      font-weight: 300;
+      margin-right: -350px;
+
+      &:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 1px;
+        margin: 0 0 12px 0;
+        padding: 0 0 10px 0;
+        box-shadow: 0 1px 0 #8C837F;
+      }
+
+      h1, h2, h3, h4, h5, h6 {
+        margin: 0 0 12px 0;
+        padding: 0 0 10px 0;
+        box-shadow: 0 1px 0 #8C837F;
+        font-weight: 500;
+      }
+
+      p {
+        margin: 0;
+        padding: 0;
+      }
+    }
+
+    iframe {
+      width: 750px;
+      height: 375px;
+    }
+  }
+}

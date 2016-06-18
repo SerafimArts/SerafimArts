@@ -37,9 +37,28 @@ class ContentRenderObserver
      * @param string $content
      * @return string
      */
-    private function parse(string $content)
+    private function parse(string $content) : string
     {
-        return $this->md->parse($content);
+        $result = $this->md->parse($content);
+
+        $result = $this->replaceYoutube($result);
+
+        return $result;
+    }
+
+    /**
+     * @param string $content
+     * @return string
+     */
+    private function replaceYoutube(string $content) : string
+    {
+        return preg_replace_callback('/\[\[([a-zA-Z0-9\-]+)\]\]/isu', function($matches) {
+            $link = sprintf(
+                'https://www.youtube.com/embed/%s?color=white&enablejsapi=1&iv_load_policy=3&rel=0&showinfo=0',
+                $matches[1]
+            );
+            return '<iframe src="' . $link . '" frameborder="0" allowfullscreen></iframe>';
+        }, $content);
     }
 
     /**

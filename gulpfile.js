@@ -6,7 +6,11 @@ gulp.task('css', function () {
         .withMinify()
         //.withGzip()
         .withSourceMaps()
-        .scss('resources/stylesheets/layout.scss')
+        .then.scss(function(compiler) {
+            compiler
+                .file('resources/stylesheets/layout.scss')
+                .autoPrefix();
+        })
         .build('./public/assets/app.css')
 });
 

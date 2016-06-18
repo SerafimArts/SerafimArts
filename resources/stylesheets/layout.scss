@@ -16,8 +16,8 @@ $width: 1100px;
 
 html,
 body {
-  font-family: "Open Sans", Helvetica, Tahoma, sans-serif;
-  color: #71808a;
+  font-family: "Fira Sans", Helvetica, Tahoma, sans-serif;
+  color: #43372f;
   font-size: 16px;
 
   a {
@@ -74,28 +74,5 @@ body {
 @import "ui/section";
 @import "ui/billets";
 @import "ui/about-me";
-
-
-.article {
-  padding: 100px 0;
-
-  h2 {
-    font-size: 64px;
-  }
-
-  .article-content {
-    font-size: 16px;
-    line-height: 26px;
-
-    & > p:first-child:first-letter {
-      font-size: 52px;
-      font-weight: 700;
-      display: block;
-      float: left;
-      line-height: 51px;
-      margin-right: 6px;
-      color: #f00;
-    }
-  }
-}
+@import "ui/article";
 

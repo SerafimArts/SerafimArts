@@ -65,7 +65,7 @@ class Article extends Model
     public $timestamps = [
         'created_at',
         'updated_at',
-        'published_at'
+        'publish_at'
     ];
 
     /**
@@ -101,5 +101,14 @@ class Article extends Model
     {
         return $query->where('publish_at', '<=', Carbon::now())
             ->orderBy('publish_at', 'desc');
+    }
+
+    /**
+     * @param $value
+     * @return static
+     */
+    public function getPublishAtAttribute($value)
+    {
+        return Carbon::parse($value);
     }
 }
