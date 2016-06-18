@@ -109,6 +109,20 @@
       line-height: 19px;
     }
 
+    pre {
+      display: block;
+      width: 100%;
+      background: #fff;
+
+      code {
+        background: none;
+        display: block;
+        border-radius: 0;
+        padding: 10px 15px;
+        box-shadow: inset 2px 0 #f00;
+      }
+    }
+
     & > blockquote:nth-child(1) + p:first-letter,
     & > p:nth-child(1):first-letter {
       font-size: 52px;
