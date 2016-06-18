@@ -7,20 +7,32 @@ header {
   margin-top: 43px;
   top: -43px;
 
-  nav {
+  .content {
     width: $width;
     margin: 0 auto;
+  }
+
+  .home {
+    display: block;
+    text-decoration: none;
+    width: 120px;
+    height: 100px;
+    float: left;
+    margin: 0 0 0 20px;
+    transition: margin .3s ease, width .3s ease;
+  }
+
+  nav {
+    float: left;
     box-sizing: border-box;
-    padding-left: 120px;
-    transition: padding .3s ease;
     height: 30px;
     line-height: 30px;
+    color: #999;
 
     a {
       display: block;
       float: left;
       margin: 0 15px;
-      transition: margin .3s ease;
       text-decoration: none;
       color: #999;
 
@@ -38,8 +50,13 @@ header {
     background-position: center bottom;
     position: fixed;
 
+    .home {
+      width: 58px;
+      margin: 0;
+      height: 42px;
+    }
+
     nav {
-      padding-left: 60px;
       a {
         margin: 0 20px;
       }

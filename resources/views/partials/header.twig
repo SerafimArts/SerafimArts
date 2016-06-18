@@ -1,13 +1,16 @@
 <header data-vm="Header" data-bind="attr: {class: fixed() ? 'fixed' : ''}">
-    <nav>
-        {#
-        <a href="#">Ссылка</a>
-        <a href="#">Ссылка</a>
-        <a href="#">Ссылка</a>
-        <a href="#">Ссылка</a>
-        <a href="#">Ссылка</a>
-        <a href="#">Ссылка</a>
-        #}
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;// тут будет менюшка
-    </nav>
+    <section class="content">
+        <a href="{{ route('home') }}" class="home"></a>
+        <nav>
+            {#
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            <a href="#">Ссылка</a>
+            #}
+            // тут будет менюшка
+        </nav>
+    </section>
 </header>
