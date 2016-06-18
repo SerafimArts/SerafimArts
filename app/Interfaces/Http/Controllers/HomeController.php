@@ -4,6 +4,7 @@ namespace Interfaces\Http\Controllers;
 
 use Domains\Article\Article;
 use Domains\Article\MainPageArticle;
+use Domains\Article\Repository\ArticleRepository;
 
 /**
  * Class HomeController
@@ -12,13 +13,14 @@ use Domains\Article\MainPageArticle;
 class HomeController extends Controller
 {
     /**
+     * @param ArticleRepository $repository
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function index()
+    public function index(ArticleRepository $repository)
     {
         return view('pages.index', [
-            'previews' => MainPageArticle::orderBy('order_id', 'asc')->get(),
-            'articles' => (new Article)->published()->get()
+            'previews' => $repository->getPreviews(),
+            'articles' => $repository->getPublished(15)
         ]);
     }
 }

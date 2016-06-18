@@ -13,6 +13,8 @@ namespace Providers;
 use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
+use Domains\Article\Repository\ArticleRepository;
+use Domains\Article\Repository\EloquentRepository;
 use Domains\User\Group;
 use Domains\User\User;
 use Illuminate\Support\ServiceProvider;
@@ -30,7 +32,9 @@ class OrmServiceProvider extends ServiceProvider
      */
     public function register()
     {
-
+        $this->app->singleton(ArticleRepository::class, function() {
+            return new EloquentRepository();
+        });
     }
 
     /**

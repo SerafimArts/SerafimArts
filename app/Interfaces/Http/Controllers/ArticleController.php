@@ -8,6 +8,7 @@
 namespace Interfaces\Http\Controllers;
 
 use Domains\Article\Article;
+use Domains\Article\Repository\ArticleRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -17,18 +18,19 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ArticleController extends Controller
 {
     /**
+     * @param ArticleRepository $repository
      * @param $url
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws NotFoundHttpException
      */
-    public function show($url)
+    public function show(ArticleRepository $repository, $url)
     {
-        $article = Article::where('url', $url)->first();
+        $article = $repository->getByUrl($url);
 
-        if (!$article) {
-            throw new NotFoundHttpException;
+        if ($article) {
+            return view('pages.article.show', ['article' => $article]);
         }
 
-        return view('pages.article.show', ['article' => $article]);
+        throw new NotFoundHttpException;
     }
 }

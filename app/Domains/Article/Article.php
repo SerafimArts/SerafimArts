@@ -15,6 +15,7 @@ use Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Database\Query\Builder as QueryBuilder;
 
 /**
  * Class Article
@@ -37,7 +38,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read User $user
  * @property-read Category $category
  *
- * @method Article|Builder published()
+ * @method Article|Builder|QueryBuilder published()
  *
  */
 class Article extends Model
