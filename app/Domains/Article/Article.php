@@ -12,6 +12,7 @@ namespace Domains\Article;
 
 use Carbon\Carbon;
 use Domains\User\User;
+use PhpDeal\Annotation as Contract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -40,6 +41,9 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
  *
  * @method Article|Builder|QueryBuilder published()
  *
+ * @Contract\Invariant("is_uuid($this->id)")
+ * @Contract\Invariant("$this->user_id")
+ * @Contract\Invariant("$this->category_id")
  */
 class Article extends Model
 {
@@ -84,15 +88,19 @@ class Article extends Model
      */
     public static function scopePublished(Builder $query) : Builder
     {
-        return $query
+        $query = $query
             ->where('is_draft', false)
-            ->where('publish_at', '<=', Carbon::now())
-            ->orderBy('publish_at', 'desc');
+            ->where('publish_at', '<=', Carbon::now());
+
+        /** @var Builder|\Illuminate\Database\Query\Builder $query */
+        return $query->orderBy('publish_at', 'desc');
     }
 
     /**
      * @param $value
      * @return Carbon
+     *
+     * @Contract\Verify("is_string($value) || $value instanceof \DateTime")
      */
     public function getPublishAtAttribute($value) : Carbon
     {

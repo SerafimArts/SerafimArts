@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => env('APP_URL', 'http://localhost'),
 
     /*
     |--------------------------------------------------------------------------
@@ -149,11 +149,11 @@ return [
          * Application Service Providers...
          */
         Providers\AppServiceProvider::class,
+        Providers\DbcServiceProvider::class,
         Providers\OrmServiceProvider::class,
         Providers\AuthServiceProvider::class,
         Providers\EventServiceProvider::class,
         Providers\RouteServiceProvider::class,
-
     ],
 
     /*

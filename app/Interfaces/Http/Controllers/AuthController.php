@@ -7,10 +7,14 @@
  */
 namespace Interfaces\Http\Controllers;
 
-use Domains\User\Repository\UserRepository;
 use Illuminate\Auth\Guard;
 use Illuminate\Http\Request;
+use Domains\User\Repository\UserRepository;
 
+/**
+ * Class AuthController
+ * @package Interfaces\Http\Controllers
+ */
 class AuthController extends Controller
 {
     /**

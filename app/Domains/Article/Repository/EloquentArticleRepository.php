@@ -11,7 +11,9 @@
 namespace Domains\Article\Repository;
 
 use Domains\Article\Article;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Collection;
+use PhpDeal\Annotation as Contract;
 use Domains\Article\MainPageArticle;
 
 /**
@@ -23,6 +25,8 @@ class EloquentArticleRepository implements ArticleRepository
     /**
      * @param int|null $count
      * @return Collection|Article[]
+     * 
+     * @Contract\Verify("$count === null || $count > 0")
      */
     public function getPublished(int $count = null) : Collection
     {
@@ -30,6 +34,7 @@ class EloquentArticleRepository implements ArticleRepository
         if ($count) {
             $query = $query->take($count);
         }
+        /** @var Builder $query */
         return $query->get();
     }
 
@@ -40,13 +45,16 @@ class EloquentArticleRepository implements ArticleRepository
     {
         /** @var MainPageArticle $query */
         $query = MainPageArticle::query();
-
+        
+        /** @var Builder|\Illuminate\Database\Query\Builder $query */
         return $query->orderBy('order_id', 'asc')->get();
     }
 
     /**
      * @param string $url
      * @return Article|null
+     *
+     * @Contract\Verify("strlen($url) > 0 && strlen($url) <= 255")
      */
     public function getByUrl(string $url)
     {

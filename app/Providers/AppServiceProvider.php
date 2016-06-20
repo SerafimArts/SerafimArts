@@ -36,6 +36,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $patches = [
+            \Patches\AbstractContractAspect::class => '\\PhpDeal\\Aspect\\AbstractContractAspect'
+        ];
+
+        foreach ($patches as $class => $patchAlias) {
+            class_alias($class, $patchAlias);
+        }
     }
 }

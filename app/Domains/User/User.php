@@ -11,6 +11,7 @@
 namespace Domains\User;
 
 use Carbon\Carbon;
+use PhpDeal\Annotation as Contract;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
@@ -35,6 +36,8 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
  * @property-read Carbon $updated_at
  *
  * @property-read Group $group
+ *
+ * @Contract\Invariant("is_uuid($this->id)")
  */
 class User extends Model implements
     AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, AdminAuthorizable

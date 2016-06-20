@@ -10,15 +10,17 @@
  */
 namespace Domains\User;
 
+use PhpDeal\Annotation as Contract;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Ramsey\Uuid\Uuid;
 
 /**
  * Class Group
  * @package Domains\User
  * @property-read string $id
  * @property-read string $title
+ * 
+ * @Contract\Invariant("is_uuid($this->id)")
  */
 class Group extends Model
 {

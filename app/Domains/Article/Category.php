@@ -10,9 +10,10 @@
  */
 namespace Domains\Article;
 
-
 use Carbon\Carbon;
+use PhpDeal\Annotation as Contract;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
@@ -24,6 +25,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property-read string $description
  * @property-read Carbon $created_at
  * @property-read Carbon $updated_at
+ *
+ * @property-read Category[]|Collection $articles
+ *
+ * @Contract\Invariant("is_uuid($this->id)")
  */
 class Category extends Model
 {

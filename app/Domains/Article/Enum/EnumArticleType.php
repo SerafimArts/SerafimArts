@@ -7,7 +7,6 @@
  */
 namespace Domains\Article\Enum;
 
-use Doctrine\Common\Annotations\Annotation\Enum;
 use MyCLabs\Enum\Enum as BaseEnum;
 
 /**
@@ -15,7 +14,6 @@ use MyCLabs\Enum\Enum as BaseEnum;
  * @package Domains\Article\Enum
  * 
  * @Annotation
- * @Enum({"Video", "Text", "Html", "Plank"})
  */
 final class EnumArticleType extends BaseEnum
 {

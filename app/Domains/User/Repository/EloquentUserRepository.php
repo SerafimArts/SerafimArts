@@ -11,6 +11,7 @@
 namespace Domains\User\Repository;
 
 use Domains\User\User;
+use PhpDeal\Annotation as Contract;
 use Illuminate\Contracts\Auth\Guard;
 
 /**
@@ -38,6 +39,9 @@ class EloquentUserRepository implements UserRepository
      * @param string $password
      * @param bool $remember
      * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     *
+     * @Contract\Verify("strlen($login) > 0 && strlen($login) <= 255")
+     * @Contract\Verify("strlen($password) > 0 && strlen($password) <= 255")
      */
     public function authByLoginPassword(string $login, string $password, bool $remember = false)
     {

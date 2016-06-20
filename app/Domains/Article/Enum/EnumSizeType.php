@@ -10,7 +10,6 @@
  */
 namespace Domains\Article\Enum;
 
-use Doctrine\Common\Annotations\Annotation\Enum;
 use MyCLabs\Enum\Enum as BaseEnum;
 
 /**
@@ -18,7 +17,6 @@ use MyCLabs\Enum\Enum as BaseEnum;
  * @package Domains\Article\Enum
  * 
  * @Annotation
- * @Enum({"1", "2", "3"})
  */
 class EnumSizeType extends BaseEnum
 {

@@ -11,8 +11,6 @@ Fixtures\Entity:
     content: <sentences(45, true)>
     content_rendered: <sentences(45, true)>
     is_draft: false
-    is_main: true
-    size: <numberBetween(1, 3)>
     publish_at: <dateTimeThisYear()>
     created_at: <dateTimeThisYear()>
     updated_at: <dateTimeThisYear()>
