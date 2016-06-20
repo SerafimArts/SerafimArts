@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "ba638726bad1bc9b8893b60df64ab109",
-    "content-hash": "c596afeb40393446f53a137aaedcc59b",
+    "hash": "9c951439d484dd0c160f37f1026af660",
+    "content-hash": "a29befe78f5f1ea337c46e72facee314",
     "packages": [
         {
             "name": "barryvdh/laravel-debugbar",
@@ -126,16 +126,16 @@
         },
         {
             "name": "beberlei/assert",
-            "version": "v2.5",
+            "version": "v2.5.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beberlei/assert.git",
-                "reference": "91e2690c4ecc8a4e3e2d333430069f6a0c694a7a"
+                "reference": "8a9ad22f1220e47a6d174843e8abef08f5eac441"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beberlei/assert/zipball/91e2690c4ecc8a4e3e2d333430069f6a0c694a7a",
-                "reference": "91e2690c4ecc8a4e3e2d333430069f6a0c694a7a",
+                "url": "https://api.github.com/repos/beberlei/assert/zipball/8a9ad22f1220e47a6d174843e8abef08f5eac441",
+                "reference": "8a9ad22f1220e47a6d174843e8abef08f5eac441",
                 "shasum": ""
             },
             "require": {
@@ -175,7 +175,7 @@
                 "assertion",
                 "validation"
             ],
-            "time": "2016-03-22 14:34:51"
+            "time": "2016-06-20 12:01:28"
         },
         {
             "name": "cebe/markdown",
