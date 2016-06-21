@@ -7,5 +7,6 @@ return [
         app_path('Admin'),
         app_path('Common/Exceptions'),
         app_path('Common/Providers'),
+        app_path('Domains/Base')
     ],
 ];
