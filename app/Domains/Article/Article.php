@@ -42,8 +42,8 @@ use Illuminate\Database\Query\Builder as QueryBuilder;
  * @method Article|Builder|QueryBuilder published()
  *
  * @Contract\Invariant("is_uuid($this->id)")
- * @Contract\Invariant("$this->user_id")
- * @Contract\Invariant("$this->category_id")
+ * @Contract\Invariant("is_uuid($this->user_id)")
+ * @Contract\Invariant("is_uuid($this->category_id)")
  */
 class Article extends Model
 {
