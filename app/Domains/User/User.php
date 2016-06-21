@@ -23,44 +23,12 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 
 /**
- * Class User
- * @package Domains\User
- *
- * @property-read string $id
- * @property-read string $name
- * @property-read string $email
- * @property-read string $password
- * @property-read string $avatar
- * @property-read string $remember_token
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
- *
- * @property-read Group $group
- *
  * @Contract\Invariant("is_uuid($this->id)")
  */
 class User extends Model implements
     AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, AdminAuthorizable
 {
     use Authenticatable, Authorizable, CanResetPassword;
-
-    /**
-     * @var string
-     */
-    protected $table = 'users';
-
-    /**
-     * @var bool
-     */
-    public $incrementing = false;
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo|Relation
-     */
-    public function group() : Relation
-    {
-        return $this->hasOne(Group::class, 'id', 'group_id');
-    }
 
     /**
      * @return bool
