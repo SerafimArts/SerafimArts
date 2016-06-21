@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<model table="articles" model="Article">
+    <column type="string">id</column>
+    <column type="string">url</column>
+    <column type="string">title</column>
+    <column type="string">user_id</column>
+    <column type="string">category_id</column>
+    <column type="string">preview</column>
+    <column type="string">preview_rendered</column>
+    <column type="string">content</column>
+    <column type="string">content_rendered</column>
+    <column type="bool">is_draft</column>
+    <column type="Carbon">publish_at</column>
+    <column type="Carbon">created_at</column>
+    <column type="Carbon">updated_at</column>
+
+    <relations>
+        <belongs-to model="Domains\User\User" local="id" foreign="user_id" />
+        <belongs-to model="Domains\Article\Category" local="id" foreign="category_id" />
+    </relations>
+</model>

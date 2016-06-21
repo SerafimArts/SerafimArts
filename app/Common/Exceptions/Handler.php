@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Exceptions;
+namespace Common\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
@@ -22,7 +22,7 @@ use Whoops\Run as Whoops;
 
 /**
  * Class Handler
- * @package Exceptions
+ * @package Common\Exceptions
  */
 class Handler extends ExceptionHandler
 {

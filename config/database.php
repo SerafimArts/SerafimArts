@@ -80,6 +80,36 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Fixtures Path
+    |--------------------------------------------------------------------------
+    |
+    */
+    'fixtures'   => [
+        'paths'      => [
+            base_path('database/fixtures'),
+        ],
+        'extensions' => [
+            \Common\Fixtures\AdditionalFunctions::class,
+        ],
+    ],
+
+    'generator' => [
+        'schema' => [
+            'output' => base_path('database/schema'),
+            'skip'   => [
+                'migrations',
+                'sqlite_sequence',
+            ],
+        ],
+        'model'  => [
+            'output'    => app_path('Domains/Base'),
+            'prefix'    => 'Base',
+            'namespace' => 'Domains\\Base',
+        ],
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
     | Redis Databases
     |--------------------------------------------------------------------------
     |

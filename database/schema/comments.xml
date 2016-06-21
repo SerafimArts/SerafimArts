@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<model table="comments" model="Comment">
+    <column type="string">id</column>
+    <column type="string">user_id</column>
+    <column type="string">article_id</column>
+    <column type="string">content</column>
+    <column type="string">content_rendered</column>
+    <column type="bool">approved</column>
+    <column type="Carbon">created_at</column>
+    <column type="Carbon">updated_at</column>
+</model>

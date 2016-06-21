@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Fixtures;
+namespace Common\Fixtures;
 
 use Illuminate\Contracts\Support\Arrayable;
 use Illuminate\Support\Str;
 
 /**
  * Class Entity
- * @package Fixtures
+ * @package Common\Fixtures
  */
 class Entity implements Arrayable
 {

@@ -5,7 +5,7 @@ return [
     'cacheDir'     => storage_path('dbc'),
     'excludePaths' => [
         app_path('Admin'),
-        app_path('Exceptions'),
-        app_path('Providers'),
+        app_path('Common/Exceptions'),
+        app_path('Common/Providers'),
     ],
 ];

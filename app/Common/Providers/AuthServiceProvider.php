@@ -8,18 +8,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Providers;
+namespace Common\Providers;
 
-use Domains\User\Group;
-use Domains\User\User;
 use Illuminate\Config\Repository;
 use Illuminate\Contracts\Auth\Access\Gate as GateContract;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Policies\UserPolicy;
 
 /**
  * Class AuthServiceProvider
- * @package Providers
+ * @package Common\Providers
  */
 class AuthServiceProvider extends ServiceProvider
 {
@@ -29,7 +26,6 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        User::class => UserPolicy::class
     ];
 
     /**

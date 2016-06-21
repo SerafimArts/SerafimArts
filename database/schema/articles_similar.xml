@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<model table="articles_similar" model="ArticlesSimilar">
+    <column type="string">id</column>
+    <column type="string">article_id</column>
+    <column type="string">related_article_id</column>
+    <column type="int">weight</column>
+</model>

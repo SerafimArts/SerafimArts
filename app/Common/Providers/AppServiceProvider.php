@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Providers;
+namespace Common\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
 
 /**
  * Class AppServiceProvider
- * @package Providers
+ * @package Common\Providers
  */
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $patches = [
-            \Patches\AbstractContractAspect::class => '\\PhpDeal\\Aspect\\AbstractContractAspect'
+            \Common\Patches\AbstractContractAspect::class => '\\PhpDeal\\Aspect\\AbstractContractAspect'
         ];
 
         foreach ($patches as $class => $patchAlias) {

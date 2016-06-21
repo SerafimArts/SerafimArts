@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Fixtures;
+namespace Common\Fixtures;
 
 use Illuminate\Database\Connection;
 use Illuminate\Database\DatabaseManager;
@@ -16,7 +16,7 @@ use Nelmio\Alice\PersisterInterface;
 
 /**
  * Class Persister
- * @package Fixtures
+ * @package Common\Fixtures
  */
 class Persister implements PersisterInterface
 {

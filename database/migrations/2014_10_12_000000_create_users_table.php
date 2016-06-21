@@ -12,10 +12,10 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('_seq', function(Blueprint $t) {
-            $t->increments('id');
-        });
+        // Sqlite bugfix
+        Schema::create('_seq', function(Blueprint $t) { $t->increments('id'); });
         Schema::drop('_seq');
+
         
         Schema::create('users', function (Blueprint $t) {
             $t->uuid('id')->primaryKey()->unique();
