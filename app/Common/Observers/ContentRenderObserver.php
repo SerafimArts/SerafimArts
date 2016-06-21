@@ -8,14 +8,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Observers;
+namespace Common\Observers;
 
 use cebe\markdown\GithubMarkdown;
 use Domains\Article\Article;
 
 /**
  * Class ContentRenderObserver
- * @package Observers
+ * @package Common\Observers
  */
 class ContentRenderObserver
 {

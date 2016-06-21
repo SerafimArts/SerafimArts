@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Providers;
+namespace Common\Providers;
 
 use PhpDeal\ContractApplication;
 use Illuminate\Config\Repository;
@@ -13,7 +13,7 @@ use Illuminate\Support\ServiceProvider;
 
 /**
  * Class DbcServiceProvider
- * @package Providers
+ * @package Common\Providers
  */
 class DbcServiceProvider extends ServiceProvider
 {

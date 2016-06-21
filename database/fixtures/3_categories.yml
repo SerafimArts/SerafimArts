@@ -1,4 +1,4 @@
-Fixtures\Entity:
+Common\Fixtures\Entity:
   category_{1..5}:
     __construct: ['categories']
     id: <uuid()>

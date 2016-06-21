@@ -8,7 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Providers;
+namespace Common\Providers;
 
 use Domains\Article\Article;
 use Domains\Article\Category;
@@ -22,12 +22,12 @@ use Domains\User\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Observers\ContentRenderObserver;
-use Observers\IdObserver;
+use Common\Observers\ContentRenderObserver;
+use Common\Observers\IdObserver;
 
 /**
  * Class OrmServiceProvider
- * @package Providers
+ * @package Common\Providers
  */
 class OrmServiceProvider extends ServiceProvider
 {
@@ -36,11 +36,11 @@ class OrmServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ArticleRepository::class, function() {
+        $this->app->singleton(ArticleRepository::class, function () {
             return new EloquentArticleRepository();
         });
 
-        $this->app->singleton(UserRepository::class, function(Application $app) {
+        $this->app->singleton(UserRepository::class, function (Application $app) {
             return new EloquentUserRepository($app->make(Guard::class));
         });
     }

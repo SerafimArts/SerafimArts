@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<model table="categories" model="Category">
+    <column type="string">id</column>
+    <column type="string">title</column>
+    <column type="string">description</column>
+    <column type="Carbon">created_at</column>
+    <column type="Carbon">updated_at</column>
+
+    <relations>
+        <has-many model="Domains\Article\Article" local="id" foreign="category_id" />
+    </relations>
+</model>

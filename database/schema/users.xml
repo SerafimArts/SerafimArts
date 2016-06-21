@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<model table="users" model="User">
+    <column type="string">id</column>
+    <column type="string">group_id</column>
+    <column type="string">name</column>
+    <column type="string">email</column>
+    <column type="string">password</column>
+    <column type="string">avatar</column>
+    <column type="string">remember_token</column>
+    <column type="Carbon">created_at</column>
+    <column type="Carbon">updated_at</column>
+
+    <relations>
+        <has-one model="Domains\User\Group" local="id" foreign="group_id" />
+        <has-many model="Domains\Article\Article" local="id" foreign="user_id" />
+    </relations>
+</model>

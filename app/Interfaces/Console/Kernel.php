@@ -1,10 +1,19 @@
 <?php
-
+/**
+ * This file is part of SerafimArts package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Interfaces\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ * @package Interfaces\Console
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -13,7 +22,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        \Interfaces\Console\Commands\FixturesRun::class
+        \Interfaces\Console\Commands\FixturesRun::class,
+        \Interfaces\Console\Commands\DbSchemaGenerate::class,
+        \Interfaces\Console\Commands\DbModelsGenerate::class,
     ];
 
     /**

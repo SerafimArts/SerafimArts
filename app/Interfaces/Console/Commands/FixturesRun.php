@@ -10,11 +10,10 @@
  */
 namespace Interfaces\Console\Commands;
 
+use Common\Fixtures\Persister;
 use Illuminate\Config\Repository;
 use Illuminate\Console\Command;
 use Nelmio\Alice\Fixtures;
-use Fixtures\AdditionalFunctions;
-use Fixtures\Persister;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\Finder\SplFileInfo;
 
@@ -35,21 +34,21 @@ class FixturesRun extends Command
     protected $description = 'Run database fixtures';
 
     /**
+     * @param Repository $config
      * @throws \InvalidArgumentException
      */
-    public function handle()
+    public function handle(Repository $config)
     {
-        $paths = [
-            base_path('database/fixtures')
-        ];
+        $paths = $config->get('database.fixtures.paths');
 
         $files = iterator_to_array($this->find($paths));
 
         $fixtures = new Fixtures(app(Persister::class), [
-            'providers' => [
-                new AdditionalFunctions()
-            ]
+            'providers' => array_map(function (string $class) {
+                return app($class);
+            }, $config->get('database.fixtures.extensions')),
         ]);
+
         $fixtures->loadFiles($files);
     }
 
@@ -63,10 +62,11 @@ class FixturesRun extends Command
         $finder = (new Finder())
             ->files()
             ->in($paths)
-            ->sort(function(SplFileInfo $a, SplFileInfo $b) {
+            ->sort(function (SplFileInfo $a, SplFileInfo $b) {
                 return substr($a->getFilename(), 0, 1) <=> substr($b->getFilename(), 0, 1);
             })
-            ->name('*.yml');
+            ->name('*.yml')
+        ;
 
         /** @var SplFileInfo $file */
         foreach ($finder as $file) {

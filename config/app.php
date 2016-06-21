@@ -148,12 +148,12 @@ return [
         /*
          * Application Service Providers...
          */
-        Providers\AppServiceProvider::class,
-        Providers\DbcServiceProvider::class,
-        Providers\OrmServiceProvider::class,
-        Providers\AuthServiceProvider::class,
-        Providers\EventServiceProvider::class,
-        Providers\RouteServiceProvider::class,
+        Common\Providers\AppServiceProvider::class,
+        Common\Providers\DbcServiceProvider::class,
+        Common\Providers\OrmServiceProvider::class,
+        Common\Providers\AuthServiceProvider::class,
+        Common\Providers\EventServiceProvider::class,
+        Common\Providers\RouteServiceProvider::class,
     ],
 
     /*

@@ -7,7 +7,7 @@
  * This source file is subject to the license that is bundled
  * with this source code in the file LICENSE.
  */
-namespace Patches;
+namespace Common\Patches;
 
 use Doctrine\Common\Annotations\Annotation;
 use Doctrine\Common\Annotations\Reader;
@@ -15,10 +15,7 @@ use DomainException;
 use Go\Aop\Intercept\MethodInvocation;
 use PhpDeal\Exception\ContractViolation;
 
-/**
- * Class AbstractContractAspect
- * @package PhpDeal\Aspect
- */
+
 abstract class AbstractContractAspect
 {
     /**
@@ -52,7 +49,7 @@ abstract class AbstractContractAspect
         $argumentValues = $invocation->getArguments();
 
         foreach ($argumentNames as $i => $name) {
-            $parameters[$name] = isset($argumentValues[$i]) 
+            $parameters[$name] = isset($argumentValues[$i])
                 ? $argumentValues[$i]
                 : null;
         }

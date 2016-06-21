@@ -1,4 +1,4 @@
-Fixtures\Entity:
+Common\Fixtures\Entity:
   group_admin:
     __construct: ['user_groups']
     id: '4a1f7e61-3b32-4c23-8a80-bbb3272a7f12'
