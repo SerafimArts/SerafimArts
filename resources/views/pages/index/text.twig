@@ -11,7 +11,7 @@
                 {{ article.content | raw }}
             {% endif %}
 
-            {% if article.related_article %}
+            {% if article.relation %}
                 <a href="{{ route('article', {'url': article.relation.url}) }}" class="button">
                     {{ article.button_description | default('В оригинале')  }}
                 </a>

@@ -1,4 +1,4 @@
-Fixtures\Entity:
+Common\Fixtures\Entity:
   preview_{1..8}:
     __construct: ['article_previews']
     id: <uuid()>
@@ -6,4 +6,4 @@ Fixtures\Entity:
     type: 'Text'
     content: <sentences(5, true)>
     order_id: <current()>
-    related_article: '@article_<numberBetween(1, 5)>'
+    relation_id: '@article_<numberBetween(1, 5)>'

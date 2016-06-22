@@ -7,10 +7,10 @@
     <column type="string">image</column>
     <column type="string">video</column>
     <column type="int">order_id</column>
-    <column type="string">related_article</column>
+    <column type="string">relation_id</column>
     <column type="string">button_description</column>
 
     <relations>
-        <has-one model="Domains\Article\Article" local="related_article" foreign="id" />
+        <has-one model="Domains\Article\Article" local="relation_id" foreign="id" />
     </relations>
 </model>

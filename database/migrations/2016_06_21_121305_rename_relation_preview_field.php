@@ -12,7 +12,9 @@ class RenameRelationPreviewField extends Migration
      */
     public function up()
     {
-        Schema
+        Schema::table('article_previews', function(Blueprint $t) {
+            $t->renameColumn('related_article', 'relation_id');
+        });
     }
 
     /**
@@ -22,6 +24,8 @@ class RenameRelationPreviewField extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('article_previews', function(Blueprint $t) {
+            $t->renameColumn('relation_id', 'related_article');
+        });
     }
 }

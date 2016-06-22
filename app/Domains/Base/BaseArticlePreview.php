@@ -21,7 +21,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property string $image
  * @property string $video
  * @property int $order_id
- * @property string $related_article
+ * @property string $relation_id
  * @property string $button_description
  *
  * @property-read Article $article
@@ -53,7 +53,7 @@ abstract class BaseArticlePreview extends Model
      */
     public function article()
     {
-        return $this->hasOne(Article::class, 'id', 'related_article');
+        return $this->hasOne(Article::class, 'id', 'relation_id');
     }
 
 }

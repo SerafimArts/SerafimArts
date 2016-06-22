@@ -164,6 +164,8 @@ class DbModelsGenerate extends Command
             $sources .= str_replace("\t", '    ', (string)$code);
 
             file_put_contents($path, $sources);
+            
+            $this->info('Model generated to ' . realpath($path));
         }
     }
 
