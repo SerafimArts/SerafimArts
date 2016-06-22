@@ -1,7 +1,7 @@
 <?php
 namespace Domains\Base;
 
-use ;
+use Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -12,15 +12,13 @@ use Illuminate\Support\Collection;
  *   This is generated class. Do not touch it.
  * =============================================
  *
- * Generated at: 21.06.2016 21:55:25
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
  * @property string $id
  * @property string $title
  *
- * @property-read []|Collection $s
+ * @property-read User[]|Collection $users
  *
  */
 abstract class BaseUserGroup extends Model
@@ -47,9 +45,9 @@ abstract class BaseUserGroup extends Model
     /**
      * @return HasMany|Relation
      */
-    public function s()
+    public function users()
     {
-        return $this->hasMany(::class, 'group_id', 'id');
+        return $this->hasMany(User::class, 'group_id', 'id');
     }
 
 }
