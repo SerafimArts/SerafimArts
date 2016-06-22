@@ -19,6 +19,7 @@ use Illuminate\Support\Collection;
  * @property string $id
  * @property string $title
  * @property string $description
+ * @property string $parent_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
