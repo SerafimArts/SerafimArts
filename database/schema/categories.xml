@@ -3,6 +3,7 @@
     <column type="string">id</column>
     <column type="string">title</column>
     <column type="string">description</column>
+    <column type="string">parent_id</column>
     <column type="Carbon">created_at</column>
     <column type="Carbon">updated_at</column>
 
