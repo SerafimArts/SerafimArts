@@ -15,8 +15,6 @@ use Illuminate\Support\Collection;
  *   This is generated class. Do not touch it.
  * =============================================
  *
- * @date 21.06.2016 21:08:35
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
@@ -60,7 +58,7 @@ abstract class BaseUser extends Model
      */
     public function group()
     {
-        return $this->hasOne(Group::class, 'group_id', 'id');
+        return $this->hasOne(Group::class, 'id', 'group_id');
     }
 
 

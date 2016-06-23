@@ -11,8 +11,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  *   This is generated class. Do not touch it.
  * =============================================
  *
- * @date 21.06.2016 21:08:35
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
@@ -23,10 +21,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property string $image
  * @property string $video
  * @property int $order_id
- * @property string $related_article
+ * @property string $relation_id
  * @property string $button_description
  *
- * @property-read Article $article
+ * @property-read Article $relation
  *
  */
 abstract class BaseArticlePreview extends Model
@@ -53,9 +51,9 @@ abstract class BaseArticlePreview extends Model
     /**
      * @return HasOne|Relation
      */
-    public function article()
+    public function relation()
     {
-        return $this->hasOne(Article::class, 'id', 'related_article');
+        return $this->hasOne(Article::class, 'id', 'relation_id');
     }
 
 }

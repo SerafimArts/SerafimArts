@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of SerafimArts package.
+ * This file is part of serafimarts.ru package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -9,6 +9,7 @@ namespace Admin\Pages;
 
 use AdminDisplay;
 use AdminColumn;
+use Domains\Article\Category;
 use SleepingOwl\Admin\Model\ModelConfiguration;
 
 /**
@@ -37,6 +38,8 @@ class CategoryPage implements Page
             ->onCreateAndEdit(function () {
                 return \AdminForm::panel()
                     ->addBody(
+                        \AdminFormElement::select('parent_id', 'Родитель', Category::class)
+                            ->setDisplay('title'),
                         \AdminFormElement::text('title', 'Заголовок'),
                         \AdminFormElement::text('description', 'Описание'),
                         \AdminFormElement::time('created_at', 'Дата создани'),

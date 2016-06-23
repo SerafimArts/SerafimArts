@@ -2,9 +2,6 @@
 /**
  * This file is part of serafimarts.ru package.
  *
- * @author Serafim <nesk@xakep.ru>
- * @date 18.06.2016 12:17
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
@@ -44,7 +41,7 @@ class EloquentArticleRepository implements ArticleRepository
     public function getPreviews() : Collection
     {
         /** @var MainPageArticle $query */
-        $query = MainPageArticle::query();
+        $query = MainPageArticle::with('relation');
         
         /** @var Builder|\Illuminate\Database\Query\Builder $query */
         return $query->orderBy('order_id', 'asc')->get();

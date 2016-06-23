@@ -3,10 +3,12 @@
     <column type="string">id</column>
     <column type="string">title</column>
     <column type="string">description</column>
+    <column type="string">parent_id</column>
     <column type="Carbon">created_at</column>
     <column type="Carbon">updated_at</column>
 
     <relations>
         <has-many model="Domains\Article\Article" local="id" foreign="category_id" />
+        <has-one model="Domains\Article\Category" name="parent" local="parent_id" foreign="id" />
     </relations>
 </model>

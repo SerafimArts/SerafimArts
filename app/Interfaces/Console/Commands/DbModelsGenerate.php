@@ -1,6 +1,6 @@
 <?php
 /**
- * This file is part of SerafimArts package.
+ * This file is part of serafimarts.ru package.
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -61,8 +61,6 @@ class DbModelsGenerate extends Command
                 '=============================================',
                 '  This is generated class. Do not touch it.',
                 '=============================================',
-                '',
-                '@date ' . date('d.m.Y H:i:s'),
                 '',
                 'For the full copyright and license information, please view the LICENSE',
                 'file that was distributed with this source code.',
@@ -131,7 +129,11 @@ class DbModelsGenerate extends Command
                 $relationModelName = Arr::last(explode('\\', $relationClassPath),
                     function() { return true; }
                 );
-                $relationMethodName = Str::camel($relationModelName) . ($isMany ? 's' : '');
+
+                $relationMethodName = $this->attribute($relation, '@name');
+                if (!$relationMethodName) {
+                    $relationMethodName = Str::camel($relationModelName) . ($isMany ? 's' : '');
+                }
 
                 $class
                     ->addMethod($relationMethodName)
@@ -143,6 +145,7 @@ class DbModelsGenerate extends Command
                             '\'' . $this->attribute($relation, '@local')   . '\''   .
                         ');'
                     );
+
 
                 if ($isMany) {
                     $code->addUse(Collection::class);
@@ -165,6 +168,8 @@ class DbModelsGenerate extends Command
             $sources .= str_replace("\t", '    ', (string)$code);
 
             file_put_contents($path, $sources);
+            
+            $this->info('Model generated to ' . realpath($path));
         }
     }
 

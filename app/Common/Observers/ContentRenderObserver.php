@@ -2,9 +2,6 @@
 /**
  * This file is part of serafimarts.ru package.
  *
- * @author Serafim <nesk@xakep.ru>
- * @date 13.06.2016 03:46
- *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */

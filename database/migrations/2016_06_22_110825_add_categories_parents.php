@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RenameRelationPreviewField extends Migration
+class AddCategoriesParents extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +12,8 @@ class RenameRelationPreviewField extends Migration
      */
     public function up()
     {
-        Schema::table('article_previews', function(Blueprint $t) {
-            $t->renameColumn('related_article', 'relation_id');
+        Schema::table('categories', function (Blueprint $t) {
+            $t->uuid('parent_id')->index()->nullable();
         });
     }
 
@@ -24,8 +24,8 @@ class RenameRelationPreviewField extends Migration
      */
     public function down()
     {
-        Schema::table('article_previews', function(Blueprint $t) {
-            $t->renameColumn('relation_id', 'related_article');
+        Schema::table('categories', function (Blueprint $t) {
+            $t->dropColumn('parent_id');
         });
     }
 }
