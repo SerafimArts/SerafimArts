@@ -35,7 +35,7 @@ class MainPageArticle extends BaseArticlePreview
      */
     public function setTypeAttribute($type)
     {
-        $this->attributes['type'] = EnumArticleType::get($type);
+        $this->attributes['type'] = EnumArticleType::get($type)->getValue();
     }
 
     /**
@@ -43,6 +43,6 @@ class MainPageArticle extends BaseArticlePreview
      */
     public function setSizeAttribute($size)
     {
-        $this->attributes['type'] = EnumSizeType::get($size);
+        $this->attributes['size'] = EnumSizeType::get($size)->getValue();
     }
 }
