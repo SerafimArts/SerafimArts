@@ -54,7 +54,7 @@ class MainArticlePage implements Page
                         \AdminFormElement::text('video', 'Ссылка на Youtube'),
                         \AdminFormElement::textarea('content', 'Содержание'),
                         \AdminFormElement::text('button_description', 'Кнопка "Читать дальше"'),
-                        \AdminFormElement::select('related_article', 'Ссылка на запись', Article::class)
+                        \AdminFormElement::select('relation_id', 'Ссылка на запись', Article::class)
                             ->setDisplay('title')
                     )
                 ;
