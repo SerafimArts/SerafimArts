@@ -12,8 +12,16 @@ class RenameRelationPreviewField extends Migration
      */
     public function up()
     {
-        Schema::table('article_previews', function(Blueprint $t) {
-            $t->renameColumn('related_article', 'relation_id');
+        DB::transaction(function() {
+            Schema::table('article_previews', function(Blueprint $t) {
+                $t->uuid('relation_id')->index();
+            });
+            foreach (\Domains\Article\MainPageArticle::all() as $p) {
+                $p->relation_id = $p->related_article;
+            }
+            Schema::table('article_previews', function(Blueprint $t) {
+                $t->dropColumn('related_article');
+            });
         });
     }
 
@@ -24,8 +32,16 @@ class RenameRelationPreviewField extends Migration
      */
     public function down()
     {
-        Schema::table('article_previews', function(Blueprint $t) {
-            $t->renameColumn('relation_id', 'related_article');
+        DB::transaction(function() {
+            Schema::table('article_previews', function(Blueprint $t) {
+                $t->uuid('related_article')->index();
+            });
+            foreach (\Domains\Article\MainPageArticle::all() as $p) {
+                $p->related_article = $p->relation_id;
+            }
+            Schema::table('article_previews', function(Blueprint $t) {
+                $t->dropColumn('relation_id');
+            });
         });
     }
 }
