@@ -3,8 +3,10 @@ namespace Domains\Base;
 
 use Carbon\Carbon;
 use Domains\Article\Article;
+use Domains\Article\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
 
@@ -24,6 +26,7 @@ use Illuminate\Support\Collection;
  * @property Carbon $updated_at
  *
  * @property-read Article[]|Collection $articles
+ * @property-read Category $parent
  *
  */
 abstract class BaseCategory extends Model
@@ -53,6 +56,15 @@ abstract class BaseCategory extends Model
     public function articles()
     {
         return $this->hasMany(Article::class, 'category_id', 'id');
+    }
+
+
+    /**
+     * @return HasOne|Relation
+     */
+    public function parent()
+    {
+        return $this->hasOne(Category::class, 'id', 'parent_id');
     }
 
 }

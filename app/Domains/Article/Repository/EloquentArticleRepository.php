@@ -41,7 +41,7 @@ class EloquentArticleRepository implements ArticleRepository
     public function getPreviews() : Collection
     {
         /** @var MainPageArticle $query */
-        $query = MainPageArticle::query();
+        $query = MainPageArticle::with('relation');
         
         /** @var Builder|\Illuminate\Database\Query\Builder $query */
         return $query->orderBy('order_id', 'asc')->get();

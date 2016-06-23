@@ -24,7 +24,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property string $relation_id
  * @property string $button_description
  *
- * @property-read Article $article
+ * @property-read Article $relation
  *
  */
 abstract class BaseArticlePreview extends Model
@@ -51,7 +51,7 @@ abstract class BaseArticlePreview extends Model
     /**
      * @return HasOne|Relation
      */
-    public function article()
+    public function relation()
     {
         return $this->hasOne(Article::class, 'id', 'relation_id');
     }

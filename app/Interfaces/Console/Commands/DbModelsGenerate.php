@@ -129,7 +129,11 @@ class DbModelsGenerate extends Command
                 $relationModelName = Arr::last(explode('\\', $relationClassPath),
                     function() { return true; }
                 );
-                $relationMethodName = Str::camel($relationModelName) . ($isMany ? 's' : '');
+
+                $relationMethodName = $this->attribute($relation, '@name');
+                if (!$relationMethodName) {
+                    $relationMethodName = Str::camel($relationModelName) . ($isMany ? 's' : '');
+                }
 
                 $class
                     ->addMethod($relationMethodName)

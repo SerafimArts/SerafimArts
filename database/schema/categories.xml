@@ -9,5 +9,6 @@
 
     <relations>
         <has-many model="Domains\Article\Article" local="id" foreign="category_id" />
+        <has-one model="Domains\Article\Category" name="parent" local="parent_id" foreign="id" />
     </relations>
 </model>

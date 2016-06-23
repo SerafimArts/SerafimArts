@@ -11,7 +11,7 @@
     <column type="Carbon">updated_at</column>
 
     <relations>
-        <has-one model="Domains\User\Group" local="id" foreign="group_id" />
+        <has-one model="Domains\User\Group" local="group_id" foreign="id" />
         <has-many model="Domains\Article\Article" local="id" foreign="user_id" />
     </relations>
 </model>

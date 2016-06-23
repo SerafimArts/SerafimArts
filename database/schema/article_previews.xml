@@ -11,6 +11,6 @@
     <column type="string">button_description</column>
 
     <relations>
-        <has-one model="Domains\Article\Article" local="relation_id" foreign="id" />
+        <has-one model="Domains\Article\Article" name="relation" local="relation_id" foreign="id" />
     </relations>
 </model>

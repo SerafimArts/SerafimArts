@@ -28,12 +28,4 @@ class MainPageArticle extends BaseArticlePreview
     {
         return 'order_id';
     }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function relation() : Relation
-    {
-        return $this->article();
-    }
 }
