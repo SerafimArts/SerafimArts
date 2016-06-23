@@ -15,6 +15,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Ramsey\Uuid\Uuid;
 
 
 /**
@@ -24,6 +25,21 @@ class User extends BaseUser implements
     AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, AdminAuthorizable
 {
     use Authenticatable, Authorizable, CanResetPassword;
+
+    /**
+     * @var array
+     */
+    protected $fillable = ['id'];
+
+    /**
+     * User constructor.
+     * @param array $attributes
+     */
+    public function __construct(array $attributes = [])
+    {
+        $attributes['id'] = $attributes['id'] ?? Uuid::uuid4()->toString();
+        parent::__construct($attributes);
+    }
 
     /**
      * @return bool
