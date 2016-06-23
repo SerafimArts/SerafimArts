@@ -7,7 +7,7 @@
  */
 namespace Interfaces\Http\Controllers;
 
-use PhpDeal\Annotation\Verify;
+use PhpDeal\Annotation as Contract;
 use Domains\Article\Repository\ArticleRepository;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -23,7 +23,7 @@ class ArticleController extends Controller
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      * @throws NotFoundHttpException
      *
-     * @Verify("is_string($url) && strlen($url) > 0")
+     * @Contract\Verify("is_string($url) && strlen($url) > 0")
      */
     public function show(ArticleRepository $repository, $url)
     {

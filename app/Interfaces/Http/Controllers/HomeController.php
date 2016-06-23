@@ -1,9 +1,6 @@
 <?php
 namespace Interfaces\Http\Controllers;
 
-
-use Domains\Article\Article;
-use Domains\Article\MainPageArticle;
 use Domains\Article\Repository\ArticleRepository;
 
 /**

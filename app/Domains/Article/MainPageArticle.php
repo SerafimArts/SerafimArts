@@ -9,8 +9,9 @@ namespace Domains\Article;
 
 use PhpDeal\Annotation as Contract;
 use Domains\Base\BaseArticlePreview;
+use Domains\Article\Enum\EnumSizeType;
+use Domains\Article\Enum\EnumArticleType;
 use SleepingOwl\Admin\Traits\OrderableModel;
-use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
  * @Contract\Invariant("is_uuid($this->id)")
@@ -27,5 +28,21 @@ class MainPageArticle extends BaseArticlePreview
     public function getOrderField() : string
     {
         return 'order_id';
+    }
+
+    /**
+     * @param EnumArticleType|string $type
+     */
+    public function setTypeAttribute($type)
+    {
+        $this->attributes['type'] = EnumArticleType::get($type);
+    }
+
+    /**
+     * @param EnumSizeType|string $size
+     */
+    public function setSizeAttribute($size)
+    {
+        $this->attributes['type'] = EnumSizeType::get($size);
     }
 }
