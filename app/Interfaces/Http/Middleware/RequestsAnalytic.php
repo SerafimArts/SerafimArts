@@ -32,8 +32,7 @@ class RequestsAnalytic
     {
         if (!$request->hasCookie(static::ANALYTIC_COOKIE_ID)) {
             $hashId = Hash::make(random_int(0, 9999) . microtime());
-            $identity = new Cookie(static::ANALYTIC_COOKIE_ID, $hashId, Carbon::now()->addYear());
-            $request->cookies->set(static::ANALYTIC_COOKIE_ID, $identity);
+            $request->cookies->set(static::ANALYTIC_COOKIE_ID, $hashId);
         }
 
         // TODO Move to deferred job
@@ -48,7 +47,8 @@ class RequestsAnalytic
         /** @var Response $response */
         $response = $next($request);
 
-        $response->withCookie($request->cookies->get(static::ANALYTIC_COOKIE_ID));
+        $identity = $request->cookies->get(static::ANALYTIC_COOKIE_ID);
+        $response->withCookie(new Cookie(static::ANALYTIC_COOKIE_ID, $identity, Carbon::now()->addYear()));
 
         return $response;
     }
