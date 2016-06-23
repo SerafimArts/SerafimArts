@@ -7,6 +7,7 @@
  */
 namespace Common\Providers;
 
+use Domains\Analytic\Analytic;
 use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
@@ -51,6 +52,7 @@ class OrmServiceProvider extends ServiceProvider
         User::observe(IdObserver::class);
         Group::observe(IdObserver::class);
         Article::observe(IdObserver::class);
+        Analytic::observe(IdObserver::class);
         Category::observe(IdObserver::class);
         MainPageArticle::observe(IdObserver::class);
 
