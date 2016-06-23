@@ -7,7 +7,7 @@
  */
 namespace Domains\Article\Enum;
 
-use MyCLabs\Enum\Enum as BaseEnum;
+use MabeEnum\Enum as BaseEnum;
 
 /**
  * Class EnumArticleType
@@ -17,8 +17,8 @@ use MyCLabs\Enum\Enum as BaseEnum;
  */
 final class EnumArticleType extends BaseEnum
 {
-    const Video  = 'Video';
-    const Text   = 'Text';
-    const Html   = 'Html';
-    const Plank  = 'Plank';
+    const VIDEO  = 'Video';
+    const TEXT   = 'Text';
+    const HTML   = 'Html';
+    const PLANK  = 'Plank';
 }

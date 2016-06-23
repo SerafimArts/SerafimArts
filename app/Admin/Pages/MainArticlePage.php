@@ -44,10 +44,10 @@ class MainArticlePage implements Page
             ->onCreateAndEdit(function () {
                 return \AdminForm::panel()
                     ->addHeader(
-                        \AdminFormElement::select('size', 'Размер', array_flip(EnumSizeType::toArray()))
-                            ->setDefaultValue(EnumSizeType::Narrow),
-                        \AdminFormElement::select('type', 'Тип', array_flip(EnumArticleType::toArray()))
-                            ->setDefaultValue(EnumArticleType::Text)
+                        \AdminFormElement::select('size', 'Размер', array_flip(EnumSizeType::getConstants()))
+                            ->setDefaultValue(EnumSizeType::NARROW),
+                        \AdminFormElement::select('type', 'Тип', array_flip(EnumArticleType::getConstants()))
+                            ->setDefaultValue(EnumArticleType::TEXT)
                     )
                     ->addBody(
                         \AdminFormElement::image('image', 'Изображение'),

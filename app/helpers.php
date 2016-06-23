@@ -18,10 +18,12 @@ if (!function_exists('is_uuid')) {
 if (!function_exists('enum_of')) {
     /**
      * @param mixed $value
-     * @param string|\MyCLabs\Enum\Enum $enum
+     * @param string|\MabeEnum\Enum $enum
      * @return bool
      */
     function enum_of($value, string $enum) {
-        return is_subclass_of($enum, \MyCLabs\Enum\Enum::class) && $enum::isValid($value);
+        return
+            is_subclass_of($enum, \MabeEnum\Enum::class) &&
+            $enum::has($value);
     }
 }

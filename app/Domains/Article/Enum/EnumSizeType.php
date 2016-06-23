@@ -10,7 +10,7 @@
  */
 namespace Domains\Article\Enum;
 
-use MyCLabs\Enum\Enum as BaseEnum;
+use MabeEnum\Enum as BaseEnum;
 
 /**
  * Class EnumSizeType
@@ -20,7 +20,7 @@ use MyCLabs\Enum\Enum as BaseEnum;
  */
 class EnumSizeType extends BaseEnum
 {
-    const Narrow    = '1';
-    const Normal    = '2';
-    const Wide      = '3';
+    const NARROW    = '1';
+    const NORMAL    = '2';
+    const WIDE      = '3';
 }

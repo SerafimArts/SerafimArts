@@ -18,7 +18,7 @@
         "rcrowe/twigbridge": "~0.9",
         "ramsey/uuid": "~3.4",
         "nelmio/alice": "~2.1",
-        "myclabs/php-enum": "~1.4",
+        "marc-mabe/php-enum": "~2.2",
         "cebe/markdown": "1.*",
         "lisachenko/php-deal": "~0.4",
         "nette/php-generator": "~2.4",
