@@ -14,7 +14,7 @@ class RenameRelationPreviewField extends Migration
     {
         DB::transaction(function() {
             Schema::table('article_previews', function(Blueprint $t) {
-                $t->uuid('relation_id')->index();
+                $t->uuid('relation_id')->nullable()->index();
             });
             foreach (\Domains\Article\MainPageArticle::all() as $p) {
                 $p->relation_id = $p->related_article;
@@ -34,7 +34,7 @@ class RenameRelationPreviewField extends Migration
     {
         DB::transaction(function() {
             Schema::table('article_previews', function(Blueprint $t) {
-                $t->uuid('related_article')->index();
+                $t->uuid('related_article')->nullable()->index();
             });
             foreach (\Domains\Article\MainPageArticle::all() as $p) {
                 $p->related_article = $p->relation_id;
