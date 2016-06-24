@@ -34,13 +34,9 @@ class OrmServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(ArticleRepository::class, function () {
-            return new EloquentArticleRepository();
-        });
+        $this->app->singleton(ArticleRepository::class, EloquentArticleRepository::class);
 
-        $this->app->singleton(UserRepository::class, function (Application $app) {
-            return new EloquentUserRepository($app->make(Guard::class));
-        });
+        $this->app->singleton(UserRepository::class, EloquentUserRepository::class);
     }
 
     /**
