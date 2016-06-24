@@ -10,6 +10,7 @@ namespace Interfaces\Http\Middleware;
 use Carbon\Carbon;
 use Illuminate\Cache\Repository;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 /**
  * Class CachedMiddleware
@@ -38,8 +39,12 @@ class CachedMiddleware
      */
     public function handle(Request $request, \Closure $next)
     {
-        return $this->cache->remember($request->getPathInfo(), Carbon::now()->addHour(), function() use ($request, $next) {
-            return $next($request);
+        $content = $this->cache->remember($request->getPathInfo(), Carbon::now()->addHour(), function() use ($request, $next) {
+            /** @var Response $response */
+            $response = $next($request);
+            return $response->getContent();
         });
+
+        return response($content);
     }
 }
