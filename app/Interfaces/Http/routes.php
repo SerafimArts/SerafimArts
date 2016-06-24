@@ -1,9 +1,11 @@
 <?php
 Route::group(['middleware' => ['analityc']], function() {
 
-    Route::get('/', 'HomeController@index')->name('home');
+    Route::group(['middleware' => ['cached']], function() {
+        Route::get('/', 'HomeController@index')->name('home');
 
-    Route::get('/article/{url}', 'ArticleController@show')->name('article');
+        Route::get('/article/{url}', 'ArticleController@show')->name('article');
+    });
     
 });
 
