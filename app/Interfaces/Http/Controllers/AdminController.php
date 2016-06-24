@@ -7,6 +7,8 @@
  */
 namespace Interfaces\Http\Controllers;
 
+use Carbon\Carbon;
+use Domains\Analytic\Repository\AnalyticRepository;
 use Illuminate\View\View;
 
 /**
@@ -18,10 +20,22 @@ class AdminController extends Controller
     /**
      * @return View
      */
-    public function dashboard()
+    public function dashboard(AnalyticRepository $repository)
     {
         $view = view('admin.dashboard', [
-            
+            'unique' => (object)[
+                'day'   => $repository->getUniqueUsersPerPeriod(Carbon::now()->subDay()),
+                'month' => $repository->getUniqueUsersPerPeriod(Carbon::now()->subMonth())
+            ],
+            'visits' => (object)[
+                'day'   => $repository->getUsersPerPeriod(Carbon::now()->subDay()),
+                'month' => $repository->getUsersPerPeriod(Carbon::now()->subMonth())
+            ],
+            'stats' => (object)[
+                'month' => $repository
+                    ->getUserDailyStatsPerPeriod(Carbon::now()->subMonth())
+                    ->toArray()
+            ]
         ]);
 
         return \AdminSection::view($view, 'Dashboard');

@@ -7,7 +7,11 @@
  */
 namespace Common\Providers;
 
+use Common\Observers\ContentRenderObserver;
+use Common\Observers\IdObserver;
 use Domains\Analytic\Analytic;
+use Domains\Analytic\Repository\AnalyticRepository;
+use Domains\Analytic\Repository\EloquentAnalyticRepository;
 use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
@@ -17,11 +21,7 @@ use Domains\User\Group;
 use Domains\User\Repository\EloquentUserRepository;
 use Domains\User\Repository\UserRepository;
 use Domains\User\User;
-use Illuminate\Contracts\Auth\Guard;
-use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Common\Observers\ContentRenderObserver;
-use Common\Observers\IdObserver;
 
 /**
  * Class OrmServiceProvider
@@ -35,8 +35,8 @@ class OrmServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->singleton(ArticleRepository::class, EloquentArticleRepository::class);
-
         $this->app->singleton(UserRepository::class, EloquentUserRepository::class);
+        $this->app->singleton(AnalyticRepository::class, EloquentAnalyticRepository::class);
     }
 
     /**
