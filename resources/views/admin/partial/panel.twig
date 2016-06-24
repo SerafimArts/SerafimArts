@@ -1,0 +1,21 @@
+
+<div class="info-box">
+    <span class="info-box-icon bg-{{ color | default('aqua') }}">
+        <i class="{{ icon }}"></i>
+    </span>
+
+    <div class="info-box-content">
+        <span class="info-box-text">
+            {{ title }}
+        </span>
+        <span class="info-box-number">
+            {{ value }}
+        </span>
+
+        {% if description %}
+        <span class="progress-description">
+            {{ description | raw }}
+        </span>
+        {% endif %}
+    </div>
+</div>

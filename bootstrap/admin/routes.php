@@ -1,7 +1,6 @@
 <?php
 
-Route::get('/', ['as' => 'admin.dashboard', function () {
-
-    return AdminSection::view('asd', 'Dashboard');
-
-}]);
+Route::get('/', [
+    'as'   => 'admin.dashboard',
+    'uses' => 'Interfaces\Http\Controllers\AdminController@dashboard',
+]);
