@@ -35,15 +35,6 @@ class RequestsAnalytic
             $request->cookies->set(static::ANALYTIC_COOKIE_ID, $hashId);
         }
 
-        // TODO Move to deferred job
-        Analytic::unguarded(function () use ($request) {
-            Analytic::create([
-                'identity' => $request->cookie(static::ANALYTIC_COOKIE_ID),
-                'uri'      => $request->getUri(),
-                'referrer' => $request->server('HTTP_REFERER', Analytic::DIRECT_REQUEST),
-            ]);
-        });
-
         /** @var Response $response */
         $response = $next($request);
 
@@ -51,5 +42,20 @@ class RequestsAnalytic
         $response->withCookie(new Cookie(static::ANALYTIC_COOKIE_ID, $identity, Carbon::now()->addYear()));
 
         return $response;
+    }
+
+    /**
+     * @param Request $request
+     * @param Response $response
+     */
+    public function terminate(Request $request, Response $response)
+    {
+        Analytic::unguarded(function () use ($request) {
+            Analytic::create([
+                'identity' => $request->cookie(static::ANALYTIC_COOKIE_ID),
+                'uri'      => $request->getUri(),
+                'referrer' => $request->server('HTTP_REFERER', Analytic::DIRECT_REQUEST),
+            ]);
+        });
     }
 }
