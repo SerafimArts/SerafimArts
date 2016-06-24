@@ -41,6 +41,8 @@
             <div class="article-content" data-vm="Article">
                 {{ article.content_rendered | raw }}
             </div>
+
+            {% include "pages/article/parital/buttons.twig" %}
         </article>
     </section>
 {% endblock %}
