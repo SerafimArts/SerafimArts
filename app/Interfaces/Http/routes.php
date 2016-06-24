@@ -1,11 +1,10 @@
 <?php
 Route::group(['middleware' => ['analityc']], function() {
 
-    Route::group(['middleware' => ['cached']], function() {
         Route::get('/', 'HomeController@index')->name('home');
 
         Route::get('/article/{url}', 'ArticleController@show')->name('article');
-    });
+ 
     
 });
 
