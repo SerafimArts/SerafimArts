@@ -53,10 +53,11 @@ class EloquentAnalyticRepository implements AnalyticRepository
 
     /**
      * @param Carbon $from
+     * @param \Closure $step
      * @param Carbon|null $to
      * @return Collection
      */
-    public function getUserDailyStatsPerPeriod(Carbon $from, Carbon $to = null) : Collection
+    public function getUserStatsPerPeriod(Carbon $from, \Closure $step, Carbon $to = null) : Collection
     {
         $to = $to ?: Carbon::now();
         $result = new Collection();
@@ -66,15 +67,17 @@ class EloquentAnalyticRepository implements AnalyticRepository
         }
 
         $i = 0;
-        while (($current = $from->addDay()) < $to && ++$i) {
-            $fromCurrentTo = Carbon::parse($current)->addDay();
+        while (($current = $step($from)) < $to && ++$i) {
+            /** @var Carbon $fromCurrentTo */
+            $fromCurrentTo = $step(Carbon::parse($current));
 
             $result->push([
-                'x' => $fromCurrentTo->toDateString(),
+                'x' => $fromCurrentTo,
                 'y' => $this->getUsersPerPeriod($current, $fromCurrentTo)->count()
             ]);
         }
 
         return $result;
     }
+
 }

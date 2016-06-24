@@ -1,3 +1,4 @@
+{% set hash = 'chart-' ~ random() %}
 <div class="box box-primary">
     <div class="box-header with-border">
         <h3 class="box-title">
@@ -16,9 +17,7 @@
     </div>
 
     <div class="box-body chart-responsive">
-        <div class="chart" id="revenue-chart" style="height: 300px;">
-
-        </div>
+        <div class="chart" id="{{ hash }}" style="height: 300px;"></div>
     </div>
 
     {% verbatim %}
@@ -27,12 +26,12 @@
     <script>
         $(function () {
             new Morris.Area({
-                element: 'revenue-chart',
+                element: '{% endverbatim %}{{ hash }}{% verbatim %}',
                 resize: true,
                 data: {% endverbatim %} {{ data | json_encode() | default('[]') | raw }} {% verbatim %},
                 xkey: 'x',
                 ykeys: ['y'],
-                labels: ['Item 1'],
+                labels: ['{% endverbatim %}{{ title }}{% verbatim %}'],
                 lineColors: ['#3c8dbc'],
                 hideHover: 'auto'
             });

@@ -32,8 +32,9 @@ interface AnalyticRepository
 
     /**
      * @param Carbon $from
+     * @param \Closure $step
      * @param Carbon|null $to
      * @return Collection
      */
-    public function getUserDailyStatsPerPeriod(Carbon $from, Carbon $to = null) : Collection;
+    public function getUserStatsPerPeriod(Carbon $from, \Closure $step, Carbon $to = null) : Collection;
 }

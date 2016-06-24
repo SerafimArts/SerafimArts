@@ -33,7 +33,23 @@ class AdminController extends Controller
             ],
             'stats' => (object)[
                 'month' => $repository
-                    ->getUserDailyStatsPerPeriod(Carbon::now()->subMonth())
+                    ->getUserStatsPerPeriod(Carbon::now()->subMonth(), function(Carbon $time) {
+                        return $time->addDay();
+                    })
+                    ->map(function(array $data) {
+                        $data['x'] = $data['x']->toDateString();
+                        return $data;
+                    })
+                    ->toArray(),
+                
+                'day' => $repository
+                    ->getUserStatsPerPeriod(Carbon::now()->subDay(), function(Carbon $time) {
+                        return $time->addHour();
+                    })
+                    ->map(function(array $data) {
+                        $data['x'] = $data['x']->toDateTimeString();
+                        return $data;
+                    })
                     ->toArray()
             ]
         ]);
