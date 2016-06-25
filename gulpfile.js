@@ -23,7 +23,6 @@ gulp.task('js', function () {
         .withSourceMaps()
         .then.js(require.resolve('knockout/build/output/knockout-latest'))
         .then.js('resources/javascripts/vendor/highlight-9.4.0.js')
-        .then.js('resources/javascripts/vendor/pixi-3.0.10.js')
         .then.es7(function (compiler) {
             compiler
                 .path('resources/javascripts/ko/')

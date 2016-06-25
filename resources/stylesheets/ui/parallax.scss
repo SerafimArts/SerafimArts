@@ -1,52 +1,109 @@
+@mixin line {
+  content: '';
+  box-shadow: 1px 0 0 #43372f;
+  width: 1px;
+  margin: 0 auto;
+  display: block;
+  position: relative;
+  transform: rotate(45deg);
+}
+
+@keyframes lines {
+  0% {
+    opacity: 0;
+    -webkit-filter: blur(3px);
+    transform: translateX(0) translateY(0);
+  }
+  50% {
+    -webkit-filter: blur(0);
+    opacity: .7;
+  }
+  100% {
+    opacity: 0;
+    -webkit-filter: blur(3px);
+    transform: translateX(300px) translateY(-300px);
+  }
+}
+
+
 .parallax {
-  $height: 600px;
+  $height: 800px;
   width: 100%;
   height: $height;
   position: relative;
   overflow: hidden;
-  background: #7f776b;
+  background: #fff url(/img/parallax/triangles-white.png) fixed;
 
-  .controls {
+
+  .parallax-section {
+    position: relative;
+    width: $width;
+    height: 400px;
+    margin: 0 auto;
+  }
+
+  .lines {
+    width: 100%;
+    margin-top: 150px;
+    height: 400px;
     position: absolute;
-    z-index: 999;
-    bottom: 50px;
-    right: 20px;
-    background: rgba(#fff, .2);
-    @include clear;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    pointer-events: none;
 
-    .button {
-      height: 18px;
-      line-height: 18px;
-      font-size: 12px;
-      display: block;
-      float: left;
-
-      &:hover {
-        background: #fff;
-        box-shadow: 0 0 0 1px #fff;
-      }
-
-      &.active {
-        background: #f00;
-        color: #fff;
-        box-shadow: 0 0 0 1px #f00;
+    .line {
+      z-index: 1;
+      position: absolute;
+      bottom: -50px;
+      opacity: 0;
+      &:after {
+        @include line;
       }
     }
+
+
+    @for $i from 1 through 20 {
+      .line:nth-child(#{$i}) {
+        &:after { height: random(100) + 50px; }
+        left: random(800) + px;
+        animation: lines (1s + .5s * $i) linear infinite;
+        animation-delay: (200ms * $i);
+      }
+    }
+  }
+
+  img {
+    position: absolute;
+    top: 0;
+    z-index: 2;
+    right: 0;
+  }
+
+  h1 {
+    display: block;
+    background: #f00;
+    padding: 0;
+    top: 0;
+    left: 10px;
+    margin: 370px 0 0 0;
+    position: absolute;
+    font-size: 58px;
+    height: 52px;
+    line-height: 52px;
+    color: #fff;
+    z-index: 3;
   }
 
   & + .section {
     &:after {
       content: '';
       width: 100%;
-      background: url(/img/header/bottom.png) 0 center repeat-x;
+      background: url(/img/header/bottom.png) bottom center repeat-x;
       height: 40px;
       position: absolute;
       top: -40px;
       left: 0;
-    }
-
-    &.section-dark:after {
-      background-position: bottom center;
     }
   }
 }

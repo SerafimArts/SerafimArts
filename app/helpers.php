@@ -6,6 +6,15 @@ if (!function_exists('resource_path')) {
     }
 }
 
+if (!function_exists('asset_ts')) {
+    function asset_ts($path = '')
+    {
+        $link = '/assets/' . $path;
+        return $link . '?' . filemtime(public_path($link));
+    }
+}
+
+
 if (!function_exists('is_uuid')) {
     function is_uuid($value)
     {

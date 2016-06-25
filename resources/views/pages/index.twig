@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-    <section class="section section-dark">
+    <section class="section">
 
         <section class="billets-container" data-vm="Billets">
             <section class="billets-list">
@@ -41,22 +41,25 @@
             <h2 class="header-highlight"><span>Обо</span> мне</h2>
 
             <figure>
-                <img src="/img/me/animation.gif" alt="Me =)" />
+                <video autoplay="autoplay" loop="loop">
+                    <source src="/img/me/me.webm" type='video/webm; codecs="vp8, vorbis"' />
+                    <source src="/img/me/me.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+                    <source src="/img/me/me.ogv" type='video/ogg; codecs="theora, vorbis"' />
+                </video>
             </figure>
 
             <h3>Привет ребята!</h3>
 
             <p>
                 Меня зовут Кирилл, мне 24 и я <s>алкоголик</s>, <s>тунеяндец</s>, программист.
-                Ещё немного рисую и музыку сочиняю.
             </p>
 
             <p>
-                Давным давно, когда небо было голубым, ещё голубее, нежели сейчас, трава зеленее и
+                Давным давно, когда небо было голубым, трава зеленее и
                 по Земле бродили динозавры... Нет, забудьте про динозавров. Ну, в общем, когда-то тогда
                 я и начал свой длинный и тернистый путь в дебри познания высшей магии и волшебства программирования.
 
-                Сейчас я уже постарел, поумнел, исходники аж сыпятся и стараюсь свободное время посвещать
+                Сейчас я уже постарел, поумнел и стараюсь свободное время посвещать
                 распространением крупиц познания среди стремящейся молодёжи.
             </p>
 

@@ -1,12 +1,11 @@
 <section class="parallax" data-vm="Parallax">
-    <nav class="controls">
-        <a href="#" class="button"
-            data-bind="click: setLowQuality, attr: {
-                class: 'button ' + (quality() == lowQuality ? 'active' : '')
-            }">Low</a>
-        <a href="#" class="button"
-           data-bind="click: setHighQuality, attr: {
-                class: 'button ' + (quality() == highQuality ? 'active' : '')
-            }">High</a>
-    </nav>
+    <article class="parallax-section">
+        <h1 data-depth=".2" data-bind="text: text"></h1>
+
+        <div class="lines" data-depth=".5" data-bind="foreach: lines">
+            <div class="line"></div>
+        </div>
+    </article>
+
+    <img src="/img/parallax/photo.png" data-depth=".7" alt="Me" />
 </section>

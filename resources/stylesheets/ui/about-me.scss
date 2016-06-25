@@ -1,5 +1,7 @@
 .about-me {
-  padding: 100px 0;
+  padding: 150px 0;
+  background: #fff url(/img/parallax/triangles-white.png) fixed;
+
   &:before,
   &:after {
     content: '';
@@ -26,15 +28,22 @@
       @include clear;
     }
 
+    h3 {
+      margin: 13px 0 4px 0;
+    }
+
     figure {
       display: block;
       margin: 20px 50px 20px 0;
-      box-shadow: 0 0 0 1px rgba(#fff, 1);
       float: left;
 
-      img {
+      video {
         margin: 0;
         display: block;
+        border-radius: 4px;
+        background: #141414;
+        width: 400px;
+        height: 224px;
       }
     }
   }

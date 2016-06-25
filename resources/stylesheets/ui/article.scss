@@ -1,63 +1,6 @@
-@mixin line {
-  content: '';
-  box-shadow: 1px 0 0 #43372f;
-  width: 1px;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  transform: rotate(45deg);
-}
-
-@keyframes lines {
-  0% {
-    opacity: 0;
-    -webkit-filter: blur(3px);
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    -webkit-filter: blur(0);
-    opacity: .7;
-  }
-  100% {
-    opacity: 0;
-    -webkit-filter: blur(3px);
-    transform: translateX(300px) translateY(-300px);
-  }
-}
-
 .article {
   padding: 100px 0;
   position: relative;
-
-  .lines {
-    width: 100%;
-    height: 300px;
-    position: absolute;
-    top: 100px;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
-
-    .line {
-      z-index: 1;
-      position: absolute;
-      bottom: -50px;
-      opacity: 0;
-      &:after {
-        @include line;
-      }
-    }
-
-
-    @for $i from 1 through 20 {
-      .line:nth-child(#{$i}) {
-        &:after { height: random(100) + 50px; }
-        left: random(800) + px;
-        animation: lines (1s + .5s * $i) linear infinite;
-        animation-delay: (200ms * $i);
-      }
-    }
-  }
 
   h1 {
     font-family: "Lora", serif;

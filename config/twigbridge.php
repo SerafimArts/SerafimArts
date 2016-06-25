@@ -178,6 +178,7 @@ return [
             'elixir',
             'head',
             'last',
+            'asset_ts'
         ],
 
         /*

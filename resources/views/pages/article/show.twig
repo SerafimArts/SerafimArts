@@ -9,30 +9,8 @@
 {% endblock %}
 
 {% block content %}
-    <section class="section section-dark">
+    <section class="section">
         <article class="content article">
-            <div class="lines">
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-                <div class="line"></div>
-            </div>
             <h1>{{ article.title }}</h1>
             <time datetime="{{ article.publish_at.toIso8601String() }}">
                 {{ article.publish_at.format('d-m-Y') }}
