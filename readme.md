@@ -17,7 +17,7 @@ My Personal Blog %)
 
 ## Клиент
 
-- WebGL (OpenGL ES 2.0)
+- ~~WebGL (OpenGL ES 2.0)~~ Убрано к чертям, я рукожоп и не умею его оптимизить
 - MVVM паттерн поверх KnockoutJS
 - Babel EcmaScript 2016 (ES7)
 - Sass и всякие плюшки оного
