@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<model table="analytic" model="Analytic">
-    <column type="string">id</column>
-    <column type="string">identity</column>
-    <column type="string">uri</column>
-    <column type="string">referrer</column>
-    <column type="Carbon">created_at</column>
-    <column type="Carbon">updated_at</column>
-</model>

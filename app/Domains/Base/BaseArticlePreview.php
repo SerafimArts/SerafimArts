@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is part of serafimarts.ru package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Domains\Base;
 
 use Domains\Article\Article;
@@ -7,13 +13,6 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
 
 /**
- * =============================================
- *   This is generated class. Do not touch it.
- * =============================================
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
  * @property string $id
  * @property string $size
  * @property string $type
@@ -25,7 +24,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  * @property string $button_description
  *
  * @property-read Article $relation
- *
  */
 abstract class BaseArticlePreview extends Model
 {
@@ -39,21 +37,34 @@ abstract class BaseArticlePreview extends Model
      * Disable auto increment primary key
      * @var bool
      */
-    public $incrementing = FALSE;
+    public $incrementing = false;
 
     /**
      * Additional timestamps
      * @var array|bool
      */
-    public $timestamps = FALSE;
+    public $timestamps = false;
 
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'id'                 => 'string',
+        'size'               => 'string',
+        'type'               => 'string',
+        'content'            => 'string',
+        'image'              => 'string',
+        'video'              => 'string',
+        'order_id'           => 'integer',
+        'relation_id'        => 'string',
+        'button_description' => 'string',
+    ];
 
     /**
      * @return HasOne|Relation
      */
-    public function relation()
+    public function relation() : HasOne
     {
         return $this->hasOne(Article::class, 'id', 'relation_id');
     }
-
 }

@@ -2,15 +2,20 @@
   padding: 100px 0;
   position: relative;
 
-  h1 {
+  & > h1,
+  & > h2 {
     font-family: "Lora", serif;
-    font-size: 120px;
+    font-size: 100px;
     width: 600px;
     margin: 10px auto 60px auto;
     display: block;
     z-index: 2;
     position: relative;
     text-align: center;
+  }
+
+  & > h2 {
+    font-size: 32px;
   }
 
   time {
@@ -33,7 +38,7 @@
   .article-content {
     font-size: 16px;
     line-height: 26px;
-    padding-right: 350px;
+    padding-right: 50px;
 
     h1, h2 {
       font-family: "Lora", serif;
@@ -41,6 +46,10 @@
 
     h2 {
       font-size: 32px;
+    }
+
+    p {
+      text-align: justify;
     }
 
     code {
@@ -87,7 +96,7 @@
       line-height: 17px;
       color: #FBF9F8;
       font-weight: 300;
-      margin-right: -350px;
+      margin-right: -50px;
       font-style: italic;
 
       hr {
@@ -140,9 +149,73 @@
       }
     }
 
+    .article-contents {
+      float: left;
+      box-sizing: border-box;
+      width: 300px;
+      margin: 0 20px 15px 0;
+      padding: 5px 20px;
+      font-size: 16px;
+      font-weight: 300;
+      box-shadow: inset 3px 0 0 #f00;
+
+      h3, h4 {
+        text-align: right;
+        margin: 0 0 2px 0;
+        padding: 0;
+        line-height: 20px;
+        font-size: 20px;
+        font-weight: 700;
+        font-style: normal;
+        font-family: inherit !important;
+      }
+
+      h4 {
+        font-size: 16px;
+        font-weight: 300;
+        font-style: italic;
+        color: #999;
+      }
+
+      ul, li {
+        list-style: none;
+        padding: 0;
+      }
+
+      ul {
+        display: block;
+        line-height: 30px;
+        box-sizing: border-box;
+      }
+
+      li {
+        list-style: square;
+        margin-left: 40px;
+      }
+    }
+
     iframe {
       width: 750px;
       height: 375px;
+    }
+
+    .article-footer {
+      display: block;
+      box-sizing: border-box;
+      text-align: center;
+      padding: 50px 100px;
+      height: 28px;
+
+      span.button {
+        color: #ccc;
+        box-shadow: 0 0 0 1px #ccc;
+      }
+
+      .article-footer-prev,
+      .article-footer-next {
+        display: inline-block;
+        margin: 0 10px;
+      }
     }
   }
 }

@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<model table="user_groups" model="UserGroup">
-    <column type="string">id</column>
-    <column type="string">title</column>
-
-    <relations>
-        <has-many model="Domains\User\User" local="id" foreign="group_id" />
-    </relations>
-</model>

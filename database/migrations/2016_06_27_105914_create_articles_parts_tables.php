@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddArticlesPartField extends Migration
+class CreateArticlesPartsTables extends Migration
 {
     /**
      * Run the migrations.
@@ -12,11 +12,17 @@ class AddArticlesPartField extends Migration
      */
     public function up()
     {
-        Schema::create('article_parts', function(Blueprint $t) {
+        Schema::create('part_series', function(Blueprint $t) {
             $t->uuid('id')->index();
+            $t->string('title')->nullable();
+            $t->timestamps();
+        });
+
+        Schema::create('parts', function(Blueprint $t) {
+            $t->uuid('id')->index();
+            $t->uuid('series_id')->index();
             $t->integer('part');
             $t->uuid('article_id')->index();
-            $t->timestamps();
         });
     }
 
@@ -27,6 +33,7 @@ class AddArticlesPartField extends Migration
      */
     public function down()
     {
-        Schema::drop('article_parts');
+        Schema::drop('part_series');
+        Schema::drop('parts');
     }
 }

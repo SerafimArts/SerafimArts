@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-<model table="likes" model="Like">
-    <column type="string">id</column>
-    <column type="string">user_id</column>
-    <column type="string">article_id</column>
-    <column type="int">rate</column>
-    <column type="Carbon">created_at</column>
-    <column type="Carbon">updated_at</column>
-</model>

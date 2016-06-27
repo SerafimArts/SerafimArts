@@ -7,6 +7,8 @@
  */
 namespace Common\Providers;
 
+use Illuminate\Contracts\Config\Repository;
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
 
 
@@ -23,7 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
     }
 
     /**
@@ -33,6 +34,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        $isDebug = $this->app->make(Repository::class)->get('app.debug', false);
+        if ($isDebug) {
+            \DB::connection()->enableQueryLog();
+        }
+        
+
         $patches = [
             \Common\Patches\AbstractContractAspect::class => '\\PhpDeal\\Aspect\\AbstractContractAspect'
         ];

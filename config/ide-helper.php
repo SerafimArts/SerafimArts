@@ -11,7 +11,7 @@ return [
     |
     */
 
-    'filename' => '_ide_helper',
+    'filename' => '_ide_helper.php',
     'format'   => 'php',
 
     /*

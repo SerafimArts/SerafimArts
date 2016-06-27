@@ -8,35 +8,32 @@
 namespace Domains\Base;
 
 use Carbon\Carbon;
+use Domains\Article\Part;
 use Domains\Article\Article;
-use Domains\User\Group;
+use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Support\Collection;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 /**
+ * Class BasePartSeries
+ * @package Domains\Base
+ * 
  * @property string $id
- * @property string $group_id
- * @property string $name
- * @property string $email
- * @property string $password
- * @property string $avatar
- * @property string $remember_token
+ * @property string $title
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
- * @property-read Group $group
  * @property-read Article[]|Collection $articles
+ * @property-read Part[]|Collection $parts
  */
-abstract class BaseUser extends Model
+abstract class BasePartSeries extends Model
 {
     /**
-     * Model table name
      * @var string
      */
-    protected $table = 'users';
+    protected $table = 'part_series';
 
     /**
      * Disable auto increment primary key
@@ -57,30 +54,27 @@ abstract class BaseUser extends Model
      * @var array
      */
     protected $casts = [
-        'id'             => 'string',
-        'group_id'       => 'string',
-        'name'           => 'string',
-        'email'          => 'string',
-        'password'       => 'string',
-        'avatar'         => 'string',
-        'remember_token' => 'string',
-        'created_at'     => 'datetime',
-        'updated_at'     => 'datetime',
+        'id'         => 'string',
+        'title'      => 'string',
+        'created_at' => 'datetime',
+        'updated_at' => 'datetime',
     ];
 
     /**
-     * @return HasOne|Relation
+     * @return BelongsToMany|Relation
      */
-    public function group() : HasOne
+    public function articles() : BelongsToMany
     {
-        return $this->hasOne(Group::class, 'id', 'group_id');
+        return $this
+            ->belongsToMany(Article::class, 'article_parts', 'series_id', 'article_id')
+            ->withPivot('part');
     }
 
     /**
      * @return HasMany|Relation
      */
-    public function articles() : HasMany
+    public function parts()
     {
-        return $this->hasMany(Article::class, 'user_id', 'id');
+        return $this->hasMany(Part::class, 'series_id', 'id');
     }
 }

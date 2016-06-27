@@ -23,8 +23,6 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         \Interfaces\Console\Commands\FixturesRun::class,
-        \Interfaces\Console\Commands\DbSchemaGenerate::class,
-        \Interfaces\Console\Commands\DbModelsGenerate::class,
     ];
 
     /**

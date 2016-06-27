@@ -12,7 +12,6 @@ use Domains\Base\BaseArticle;
 use Domains\User\User;
 use PhpDeal\Annotation as Contract;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Query\Builder as QueryBuilder;
 
 /**

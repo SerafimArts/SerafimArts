@@ -55,7 +55,9 @@ class EloquentArticleRepository implements ArticleRepository
      */
     public function getByUrl(string $url)
     {
-        return (new Article)->published()
+        return (new Article)
+            ->with('category', 'part')
+            ->published()
             ->where('url', 'LIKE', $url)->first();
     }
 }

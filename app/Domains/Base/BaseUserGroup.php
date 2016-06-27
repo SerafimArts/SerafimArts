@@ -1,4 +1,10 @@
 <?php
+/**
+ * This file is part of serafimarts.ru package.
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
 namespace Domains\Base;
 
 use Domains\User\User;
@@ -8,18 +14,10 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Collection;
 
 /**
- * =============================================
- *   This is generated class. Do not touch it.
- * =============================================
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
  * @property string $id
  * @property string $title
  *
  * @property-read User[]|Collection $users
- *
  */
 abstract class BaseUserGroup extends Model
 {
@@ -33,21 +31,27 @@ abstract class BaseUserGroup extends Model
      * Disable auto increment primary key
      * @var bool
      */
-    public $incrementing = FALSE;
+    public $incrementing = false;
 
     /**
      * Additional timestamps
      * @var array|bool
      */
-    public $timestamps = FALSE;
+    public $timestamps = false;
 
+    /**
+     * @var array
+     */
+    protected $casts = [
+        'id'    => 'string',
+        'title' => 'string',
+    ];
 
     /**
      * @return HasMany|Relation
      */
-    public function users()
+    public function users() : HasMany
     {
         return $this->hasMany(User::class, 'group_id', 'id');
     }
-
 }

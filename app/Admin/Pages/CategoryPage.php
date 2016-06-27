@@ -41,9 +41,7 @@ class CategoryPage implements Page
                         \AdminFormElement::select('parent_id', 'Родитель', Category::class)
                             ->setDisplay('title'),
                         \AdminFormElement::text('title', 'Заголовок'),
-                        \AdminFormElement::text('description', 'Описание'),
-                        \AdminFormElement::time('created_at', 'Дата создани'),
-                        \AdminFormElement::time('updated_at', 'Дата обновления')
+                        \AdminFormElement::text('description', 'Описание')
                     )
                 ;
             })

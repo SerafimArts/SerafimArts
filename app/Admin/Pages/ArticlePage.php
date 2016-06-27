@@ -29,6 +29,9 @@ class ArticlePage implements Page
             ->setTitle('Записи')
             ->onDisplay(function() {
                 return \AdminDisplay::table()
+                    ->setApply(function ($query) {
+                        $query->orderBy('publish_at', 'asc');
+                    })
                     ->setColumns(
                         \AdminColumn::relatedLink('category.title', 'Категория'),
                         \AdminColumn::text('title', 'Заголовок')->setWidth('200px'),
@@ -57,9 +60,7 @@ class ArticlePage implements Page
                             ->setDisplay('name')
                             ->setDefaultValue(\Auth::user()),
                         \AdminFormElement::textarea('content', 'Содержание'),
-                        \AdminFormElement::textarea('preview', 'Краткое описание')->setRows(3),
-                        \AdminFormElement::time('created_at', 'Дата создания'),
-                        \AdminFormElement::time('updated_at', 'Дата обновления')
+                        \AdminFormElement::textarea('preview', 'Краткое описание')->setRows(3)
                     )
                 ;
             });

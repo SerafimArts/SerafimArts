@@ -1,6 +1,4 @@
-/.idea/*
 /.git/*
-/vendor/*
 /*.iml
 /composer.phar
 /node_modules
@@ -9,3 +7,8 @@ Homestead.json
 .env
 /src/
 /public/.well-known
+.idea/
+.phpstorm.meta.php
+_ide_helper.php
+_ide_helper_models.php
+vendor/
