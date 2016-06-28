@@ -43,6 +43,7 @@ class GroupPage implements Page
                     ->addBody(
                         \AdminFormElement::text('id', 'ID группы'),
                         \AdminFormElement::text('title', 'Название группы')
+                            ->required()
                     );
             })
         ;

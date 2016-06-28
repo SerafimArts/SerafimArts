@@ -40,7 +40,8 @@ class CategoryPage implements Page
                     ->addBody(
                         \AdminFormElement::select('parent_id', 'Родитель', Category::class)
                             ->setDisplay('title'),
-                        \AdminFormElement::text('title', 'Заголовок'),
+                        \AdminFormElement::text('title', 'Заголовок')
+                            ->required(),
                         \AdminFormElement::text('color', 'Цвет категории')
                     )
                 ;

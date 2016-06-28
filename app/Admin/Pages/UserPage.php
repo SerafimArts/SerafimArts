@@ -43,11 +43,11 @@ class UserPage implements Page
                     ->addBody(
                         \AdminFormElement::image('avatar', 'Аватар'),
                         \AdminFormElement::select('group_id', 'Группа', Group::class)
-                            ->setDisplay('title'),
-                        \AdminFormElement::text('name', 'Имя'),
-                        \AdminFormElement::text('email', 'Почта'),
-                        \AdminFormElement::time('created_at', 'Зарегистрирован'),
-                        \AdminFormElement::time('updated_at', 'Активность')
+                            ->setDisplay('title')
+                            ->required(),
+                        \AdminFormElement::text('name', 'Имя')
+                            ->required(),
+                        \AdminFormElement::text('email', 'Почта')
                     );
             })
         ;

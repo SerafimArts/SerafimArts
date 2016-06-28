@@ -50,9 +50,11 @@ class MainArticlePage implements Page
                     ->addBody(
                         \AdminFormElement::image('image', 'Изображение'),
                         \AdminFormElement::text('video', 'Ссылка на Youtube'),
-                        \AdminFormElement::textarea('content', 'Содержание'),
+                        \AdminFormElement::textarea('content', 'Содержание')
+                            ->required(),
                         \AdminFormElement::text('button_description', 'Кнопка "Читать дальше"')
-                            ->setDefaultValue('Читать дальше'),
+                            ->setDefaultValue('Читать дальше')
+                            ->required(),
                         \AdminFormElement::select('relation_id', 'Ссылка на запись', Article::class)
                             ->setDisplay('title')
                     )

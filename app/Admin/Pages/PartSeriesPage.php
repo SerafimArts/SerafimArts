@@ -34,6 +34,7 @@ class PartSeriesPage implements Page
                 return \AdminForm::panel()
                     ->addBody(
                         \AdminFormElement::text('title', 'Заголовок')
+                            ->required()
                     )
                 ;
             });

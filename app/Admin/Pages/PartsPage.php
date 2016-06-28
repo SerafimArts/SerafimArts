@@ -45,6 +45,7 @@ class PartsPage implements Page
                             ->setDisplay('title')
                             ->required(),
                         \AdminFormElement::text('part', 'Глава №')
+                            ->required()
                     )
                 ;
             });

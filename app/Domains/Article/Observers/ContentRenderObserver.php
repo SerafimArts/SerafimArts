@@ -10,9 +10,10 @@ namespace Domains\Article\Observers;
 use cebe\markdown\GithubMarkdown;
 use Domains\Article\Article;
 
+
 /**
  * Class ContentRenderObserver
- * @package Common\Observers
+ * @package Domains\Article\Observers
  */
 class ContentRenderObserver
 {
@@ -63,7 +64,7 @@ class ContentRenderObserver
      */
     public function saving(Article $article)
     {
-        $article->setAttribute('content_rendered', $this->parse((string)$article->content));
-        $article->setAttribute('preview_rendered', $this->parse((string)$article->preview));
+        $article->content_rendered = $this->parse((string)$article->content);
+        $article->preview_rendered = $this->parse((string)$article->preview);
     }
 }

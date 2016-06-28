@@ -52,15 +52,16 @@ class ArticlePage implements Page
                             ->setDefaultValue(true)
                     )
                     ->addBody(
-                        \AdminFormElement::text('title', 'Заголовок'),
-                        \AdminFormElement::text('url', 'URL Адрес'),
+                        \AdminFormElement::text('title', 'Заголовок')
+                            ->required(),
                         \AdminFormElement::select('category_id', 'Категория', Category::class)
                             ->setDisplay('title')
                             ->required(),
                         \AdminFormElement::select('user_id', 'Автор', User::class)
                             ->setDisplay('name')
                             ->setDefaultValue(\Auth::user()),
-                        \AdminFormElement::textarea('content', 'Содержание'),
+                        \AdminFormElement::textarea('content', 'Содержание')
+                            ->required(),
                         \AdminFormElement::textarea('preview', 'Краткое описание')->setRows(3)
                     )
                 ;
