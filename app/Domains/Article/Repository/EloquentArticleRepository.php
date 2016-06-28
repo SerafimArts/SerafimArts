@@ -27,7 +27,7 @@ class EloquentArticleRepository implements ArticleRepository
      */
     public function getPublished(int $count = null) : Collection
     {
-        $query = (new Article)->published();
+        $query = Article::query()->published();
         if ($count) {
             $query = $query->take($count);
         }
@@ -41,7 +41,7 @@ class EloquentArticleRepository implements ArticleRepository
     public function getPreviews() : Collection
     {
         /** @var MainPageArticle $query */
-        $query = MainPageArticle::with('relation');
+        $query = MainPageArticle::with('relation.category');
         
         /** @var Builder|\Illuminate\Database\Query\Builder $query */
         return $query->orderBy('order_id', 'asc')->get();

@@ -44,8 +44,6 @@ class MainArticlePage implements Page
             ->onCreateAndEdit(function () {
                 return \AdminForm::panel()
                     ->addHeader(
-                        \AdminFormElement::select('size', 'Размер', array_flip(EnumSizeType::getConstants()))
-                            ->setDefaultValue(EnumSizeType::NARROW),
                         \AdminFormElement::select('type', 'Тип', array_flip(EnumArticleType::getConstants()))
                             ->setDefaultValue(EnumArticleType::TEXT)
                     )
@@ -53,7 +51,8 @@ class MainArticlePage implements Page
                         \AdminFormElement::image('image', 'Изображение'),
                         \AdminFormElement::text('video', 'Ссылка на Youtube'),
                         \AdminFormElement::textarea('content', 'Содержание'),
-                        \AdminFormElement::text('button_description', 'Кнопка "Читать дальше"'),
+                        \AdminFormElement::text('button_description', 'Кнопка "Читать дальше"')
+                            ->setDefaultValue('Читать дальше'),
                         \AdminFormElement::select('relation_id', 'Ссылка на запись', Article::class)
                             ->setDisplay('title')
                     )

@@ -1,7 +1,26 @@
-<article class="billet billet-{{ article.size }}" data-id="billet">
+<article class="billet" data-id="billet">
     <div class="billet-content">
         <figure class="billet-image">
             <img src="{{ article.image }}" />
+            <span class="billet-info">
+                {% if article.relation.category %}
+                    <span class="billet-category" style="color: {{ '#' ~ article.relation.category.color }}">
+                        {{ article.relation.category.title }}
+                    </span>
+                {% endif %}
+                {% if article.relation.category %}
+                    /
+                {% endif %}
+                {% if article.relation %}
+                    <time class="billet-time" datetime="{{ article.relation.publish_at.toIso8601String() }}">
+                        {{ article.relation.publish_at.diffForHumans() }}
+                    </time>
+                {% endif %}
+            </span>
+
+            {% if article.relation %}
+                <h2>{{ article.relation.title }}</h2>
+            {% endif %}
         </figure>
 
         <div class="billet-description">

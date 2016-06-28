@@ -7,6 +7,7 @@
  */
 namespace Common\Providers;
 
+use Carbon\Carbon;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
@@ -38,7 +39,8 @@ class AppServiceProvider extends ServiceProvider
         if ($isDebug) {
             \DB::connection()->enableQueryLog();
         }
-        
+
+        Carbon::setLocale('ru');
 
         $patches = [
             \Common\Patches\AbstractContractAspect::class => '\\PhpDeal\\Aspect\\AbstractContractAspect'

@@ -38,6 +38,7 @@ body {
     box-sizing: border-box;
     box-shadow: 0 0 0 1px #f00;
     background: none;
+    border-radius: 1px;
 
     &:focus,
     &:active,
@@ -64,8 +65,8 @@ body {
   }
 
   h1, h2 {
-    font-family: "Open Sans Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-weight: 300;
+    font-family: "Lora", serif;
+    font-weight: 700;
   }
   h3 {
     font-family: "Lora", serif;

@@ -83,16 +83,18 @@
   h1 {
     display: block;
     background: #f00;
-    padding: 0;
+    padding: 0 5px;
     top: 0;
     left: 10px;
     margin: 370px 0 0 0;
     position: absolute;
-    font-size: 58px;
-    height: 52px;
-    line-height: 52px;
+    font-size: 53px;
+    height: 53px;
+    line-height: 63px;
     color: #fff;
     z-index: 3;
+    font-weight: 300;
+    font-family: "Fira Sans", Helvetica, Tahoma, sans-serif;
   }
 
   & + .section {

@@ -73,17 +73,3 @@
   font-weight: 700;
   font-style: normal;
 }
-
-/* Open Sans Condensed */
-
-@font-face {
-  font-family: 'Open Sans Condensed';
-  src: 
-    local('Open Sans Cond Light'), 
-    local('OpenSans-CondensedLight'), 
-    url('/fonts/opensanscondlight.woff2') format('woff2'), 
-    url('/fonts/opensanscondlight.woff') format('woff'), 
-    url('/fonts/opensanscondlight.ttf') format('truetype');
-  font-weight: 300;
-  font-style: normal;
-}

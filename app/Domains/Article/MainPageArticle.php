@@ -16,7 +16,6 @@ use SleepingOwl\Admin\Traits\OrderableModel;
 /**
  * @Contract\Invariant("is_uuid($this->id)")
  * @Contract\Invariant("enum_of($this->type, \Domains\Article\Enum\EnumArticleType::class)")
- * @Contract\Invariant("enum_of($this->size, \Domains\Article\Enum\EnumSizeType::class)")
  */
 class MainPageArticle extends BaseArticlePreview
 {
