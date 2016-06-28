@@ -2,5 +2,5 @@
 
 Route::get('/', [
     'as'   => 'admin.dashboard',
-    'uses' => 'Interfaces\Http\Controllers\AdminController@dashboard',
+    'uses' => 'Admin\Controllers\DashboardController@show',
 ]);

@@ -33,7 +33,6 @@ return [
             (new Page(PartSeries::class))
                 ->setTitle('Серии')
                 ->setIcon('fa fa-server'),
-
             (new Page(Part::class))
                 ->setTitle('Главы')
                 ->setIcon('fa fa-paragraph'),
@@ -48,11 +47,9 @@ return [
             (new Page(Article::class))
                 ->setTitle('Статьи')
                 ->setIcon('fa fa-file-text'),
-
             (new Page(Category::class))
                 ->setTitle('Категории')
                 ->setIcon('fa fa-external-link'),
-
         ]
     ],
 
@@ -63,10 +60,10 @@ return [
             (new Page(User::class))
                 ->setTitle('Пользователи')
                 ->setIcon('fa fa-user'),
+
             (new Page(Group::class))
                 ->setTitle('Группы')
                 ->setIcon('fa fa-users'),
-
         ]
     ],
 ];

@@ -5,22 +5,23 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Interfaces\Http\Controllers;
+namespace Admin\Controllers;
 
 use Carbon\Carbon;
 use Domains\Analytic\Repository\AnalyticRepository;
 use Illuminate\View\View;
 
 /**
- * Class AdminController
- * @package Interfaces\Http\Controllers
+ * Class DashboardController
+ * @package Admin\Controllers
  */
-class AdminController extends Controller
+class DashboardController extends Controller
 {
     /**
+     * @param AnalyticRepository $repository
      * @return View
      */
-    public function dashboard(AnalyticRepository $repository)
+    public function show(AnalyticRepository $repository)
     {
         $view = view('admin.dashboard', [
             'unique' => (object)[
