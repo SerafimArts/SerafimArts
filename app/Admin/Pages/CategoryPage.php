@@ -30,7 +30,7 @@ class CategoryPage implements Page
                 return AdminDisplay::table()
                     ->setColumns(
                         AdminColumn::text('title', 'Заголовок')->setWidth('300px'),
-                        AdminColumn::text('description', 'Описание')
+                        AdminColumn::text('color', 'Цвет категории')
                     )
                     ->paginate(15)
                 ;
@@ -41,7 +41,7 @@ class CategoryPage implements Page
                         \AdminFormElement::select('parent_id', 'Родитель', Category::class)
                             ->setDisplay('title'),
                         \AdminFormElement::text('title', 'Заголовок'),
-                        \AdminFormElement::text('description', 'Описание')
+                        \AdminFormElement::text('color', 'Цвет категории')
                     )
                 ;
             })

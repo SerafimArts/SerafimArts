@@ -8,6 +8,7 @@
 namespace Domains\Article;
 
 
+use Common\Generators\ColorGenerator;
 use Domains\Base\BaseCategory;
 use PhpDeal\Annotation as Contract;
 
@@ -16,5 +17,12 @@ use PhpDeal\Annotation as Contract;
  */
 class Category extends BaseCategory
 {
-
+    /**
+     * @return $this
+     */
+    public function changeColor()
+    {
+        $this->color = app(ColorGenerator::class)->make();
+        return $this;
+    }
 }

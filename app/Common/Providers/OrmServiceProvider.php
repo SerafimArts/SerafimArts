@@ -7,7 +7,6 @@
  */
 namespace Common\Providers;
 
-use Common\Observers\ContentRenderObserver;
 use Common\Observers\IdObserver;
 use Domains\Analytic\Analytic;
 use Domains\Analytic\Repository\AnalyticRepository;
@@ -15,6 +14,8 @@ use Domains\Analytic\Repository\EloquentAnalyticRepository;
 use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
+use Domains\Article\Observers\ColorGeneratorObserver;
+use Domains\Article\Observers\ContentRenderObserver;
 use Domains\Article\Part;
 use Domains\Article\PartSeries;
 use Domains\Article\Repository\ArticleRepository;
@@ -55,7 +56,8 @@ class OrmServiceProvider extends ServiceProvider
         Analytic::observe(IdObserver::class);
         PartSeries::observe(IdObserver::class);
         MainPageArticle::observe(IdObserver::class);
-
         Article::observe(ContentRenderObserver::class);
+        Article::observe(ColorGeneratorObserver::class);
+
     }
 }
