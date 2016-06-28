@@ -9,7 +9,7 @@
     <section class="section">
 
         <section class="billets-container" data-vm="Billets">
-            <section class="billets-list">
+            <section class="billets-list" data-id="billets-list">
 
                 {% for article in previews %}
                     {% if article.type == 'Text' or article.type == 'Html' %}
@@ -23,7 +23,7 @@
 
             </section>
 
-            <aside class="billets-nav">
+            <aside class="billets-nav" data-id="billets-nav">
                 <h2>Последнее</h2>
                 <nav>
                     {% for article in articles %}
