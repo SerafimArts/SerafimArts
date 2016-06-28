@@ -1,4 +1,4 @@
-<article class="billet billet-3" data-id="billet">
+<article class="billet billet-3" data-bind="inview: function(state, value) { showBillet(state, value); }">
     <div class="billet-content">
         <iframe
                 src="https://www.youtube.com/embed/{{ article.video }}?color=white&enablejsapi=1&iv_load_policy=3&rel=0&showinfo=0"

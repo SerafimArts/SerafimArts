@@ -26,12 +26,22 @@
     height: $billet-height + 20;
     padding: 10px;
     opacity: 0;
-    transform: translateY(100px) scale(.8);
+    transform: translateY(150px) scale(.2);
+
+    img,
+    iframe {
+      display: none;
+    }
 
     &.visible {
       opacity: 1;
       transform: translateY(0) scale(1);
-      transition: 1s ease;
+      transition: 1s ease .2s;
+
+      img,
+      iframe {
+        display: block;
+      }
     }
 
     .billet-content {

@@ -1,15 +1,14 @@
 
 export default class Billets {
-    constructor(dom) {
-        var nodes = document.querySelectorAll('[data-id=billet]');
-        for (var i = 0; i < nodes.length; i++) {
-            ((i) => {
-                setTimeout(() => {
-                    nodes[i].classList.add('visible');
-                }, i * 300);
-            })(i);
-        }
+    /**
+     * @type {WeakSet}
+     */
+    billetsList = new WeakSet();
 
+    /**
+     * @param dom
+     */
+    constructor(dom) {
         var list = dom.querySelector('[data-id=billets-list]');
         var nav = dom.querySelector('[data-id=billets-nav]');
 
@@ -26,11 +25,34 @@ export default class Billets {
     static checkScroll(list, nav) {
         var scrollY = window.pageYOffset - 300;
 
-        if (scrollY > 0) {
-            if (nav.getBoundingClientRect().height + scrollY < nav.parentElement.getBoundingClientRect().height) {
-                list.style.marginTop = `-${scrollY / 2}px`;
-                nav.style.marginTop = `${scrollY}px`;
-            }
+        if (
+            scrollY > 0 &&
+            nav.getBoundingClientRect().height + scrollY < nav.parentElement.getBoundingClientRect().height
+        ) {
+            list.style.marginTop = `-${scrollY / 2}px`;
+            nav.style.marginTop = `${scrollY}px`;
+        } else if (scrollY <= 0) {
+            list.style.marginTop = `0px`;
+            nav.style.marginTop = `0px`;
         }
+    }
+
+    /**
+     * @param {HTMLElement} node
+     * @param {bool} state
+     */
+    showBillet(node, state) {
+        if (state && !this.billetsList.has(node)) {
+            this.billetsList.add(node);
+            node.classList.add('visible');
+        }
+    }
+
+    /**
+     * @param node
+     * @returns {boolean}
+     */
+    isVisible(node) {
+        return this.billetsList.has(node);
     }
 }

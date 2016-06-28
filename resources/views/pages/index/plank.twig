@@ -1,4 +1,4 @@
-<article class="billet billet-gradient" data-id="billet">
+<article class="billet billet-gradient" data-bind="inview: function(state, value) { showBillet(state, value); }">
     <div class="billet-content">
         <p>{{ article.content | raw }}</p>
     </div>
