@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'production'),
+    'default' => env('DB_CONNECTION', 'sqlite'),
 
     /*
     |--------------------------------------------------------------------------
@@ -46,13 +46,13 @@ return [
 
     'connections' => [
 
-        'local' => [
+        'sqlite' => [
             'driver'   => 'sqlite',
             'database' => database_path('dev.sqlite'),
             'prefix'   => '',
         ],
 
-        'production' => [
+        'mysql' => [
             'driver'    => 'mysql',
             'host'      => env('DB_HOST', 'localhost'),
             'database'  => env('DB_DATABASE', 'forge'),

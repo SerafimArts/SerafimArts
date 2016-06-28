@@ -15,6 +15,8 @@ use Domains\Analytic\Repository\EloquentAnalyticRepository;
 use Domains\Article\Article;
 use Domains\Article\Category;
 use Domains\Article\MainPageArticle;
+use Domains\Article\Part;
+use Domains\Article\PartSeries;
 use Domains\Article\Repository\ArticleRepository;
 use Domains\Article\Repository\EloquentArticleRepository;
 use Domains\User\Group;
@@ -45,11 +47,13 @@ class OrmServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        Part::observe(IdObserver::class);
         User::observe(IdObserver::class);
         Group::observe(IdObserver::class);
         Article::observe(IdObserver::class);
-        Analytic::observe(IdObserver::class);
         Category::observe(IdObserver::class);
+        Analytic::observe(IdObserver::class);
+        PartSeries::observe(IdObserver::class);
         MainPageArticle::observe(IdObserver::class);
 
         Article::observe(ContentRenderObserver::class);

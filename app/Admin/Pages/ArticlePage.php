@@ -26,19 +26,20 @@ class ArticlePage implements Page
     public function __construct(ModelConfiguration $model)
     {
         $model
-            ->setTitle('Записи')
+            ->setTitle('Статьи')
             ->onDisplay(function() {
                 return \AdminDisplay::table()
                     ->setApply(function ($query) {
                         $query->orderBy('publish_at', 'asc');
                     })
                     ->setColumns(
+                        \AdminColumn::relatedLink('part.series.title', 'Серия'),
                         \AdminColumn::relatedLink('category.title', 'Категория'),
                         \AdminColumn::text('title', 'Заголовок')->setWidth('200px'),
                         \AdminColumn::text('preview', 'Краткое описание'),
                         \AdminColumn::relatedLink('user.name', 'Автор')
                     )
-                    ->with('user', 'category')
+                    ->with('user', 'category', 'part.series')
                     ->paginate(15);
             })
             ->onCreateAndEdit(function () {

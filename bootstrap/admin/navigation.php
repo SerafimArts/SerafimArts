@@ -1,8 +1,10 @@
 <?php
 use Domains\User\User;
 use Domains\User\Group;
+use Domains\Article\Part;
 use Domains\Article\Article;
 use Domains\Article\Category;
+use Domains\Article\PartSeries;
 use Domains\Article\MainPageArticle;
 use SleepingOwl\Admin\Navigation\Page;
 
@@ -15,15 +17,36 @@ return [
     ],
 
     [
-        'title' => 'Новости',
-        'icon'  => 'fa fa-newspaper-o',
+        'title' => 'Главная',
+        'icon'  => 'fa fa-home',
         'pages' => [
             (new Page(MainPageArticle::class))
-                ->setTitle('Главная страница')
-                ->setIcon('fa fa-file-text-o'),
+                ->setTitle('Превьюшки')
+                ->setIcon('fa fa-th-large'),
+        ]
+    ],
 
+    [
+        'title' => 'Серии статей',
+        'icon'  => 'fa fa-server',
+        'pages' => [
+            (new Page(PartSeries::class))
+                ->setTitle('Серии')
+                ->setIcon('fa fa-server'),
+
+            (new Page(Part::class))
+                ->setTitle('Главы')
+                ->setIcon('fa fa-paragraph'),
+
+        ]
+    ],
+
+    [
+        'title' => 'Статьи',
+        'icon'  => 'fa fa-newspaper-o',
+        'pages' => [
             (new Page(Article::class))
-                ->setTitle('Новости')
+                ->setTitle('Статьи')
                 ->setIcon('fa fa-file-text'),
 
             (new Page(Category::class))
