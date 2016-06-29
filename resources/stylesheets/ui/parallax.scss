@@ -1,38 +1,10 @@
-@mixin line {
-  content: '';
-  box-shadow: 1px 0 0 #43372f;
-  width: 1px;
-  margin: 0 auto;
-  display: block;
-  position: relative;
-  transform: rotate(45deg);
-}
-
-@keyframes lines {
-  0% {
-    opacity: 0;
-    -webkit-filter: blur(3px);
-    transform: translateX(0) translateY(0);
-  }
-  50% {
-    -webkit-filter: blur(0);
-    opacity: .7;
-  }
-  100% {
-    opacity: 0;
-    -webkit-filter: blur(3px);
-    transform: translateX(300px) translateY(-300px);
-  }
-}
-
-
 .parallax {
   $height: 800px;
   width: 100%;
   height: $height;
   position: relative;
   overflow: hidden;
-  background: #fff url(/img/parallax/triangles-white.png) fixed;
+  background: #fff url(/img/parallax/triangles-white.png);
 
 
   .parallax-section {
@@ -40,37 +12,6 @@
     width: $width;
     height: 400px;
     margin: 0 auto;
-  }
-
-  .lines {
-    width: 100%;
-    margin-top: 150px;
-    height: 400px;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    pointer-events: none;
-
-    .line {
-      z-index: 1;
-      position: absolute;
-      bottom: -50px;
-      opacity: 0;
-      &:after {
-        @include line;
-      }
-    }
-
-
-    @for $i from 1 through 20 {
-      .line:nth-child(#{$i}) {
-        &:after { height: random(100) + 50px; }
-        left: random(800) + px;
-        animation: lines (1s + .5s * $i) linear infinite;
-        animation-delay: (200ms * $i);
-      }
-    }
   }
 
   img {

@@ -1,23 +1,6 @@
 .about-me {
   padding: 150px 0;
-  background: #fff url(/img/parallax/triangles-white.png) fixed;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 150px;
-    background: linear-gradient(to bottom, rgba(#fff, 1), rgba(#fff, 0));
-  }
-
-  &:after {
-    top: auto;
-    bottom: 0;
-    background: linear-gradient(to top, rgba(#fff, 1), rgba(#fff, 0));
-  }
+  background: #fff;
 
   .content {
     padding: 0 10px;

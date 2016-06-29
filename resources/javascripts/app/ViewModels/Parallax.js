@@ -18,11 +18,6 @@ export default class Parallax {
     text = ko.observable('');
 
     /**
-     * @type {Array}
-     */
-    lines = ko.observableArray([]);
-
-    /**
      * @param context
      */
     constructor(context:HTMLElement) {
@@ -36,12 +31,6 @@ export default class Parallax {
             window.requestAnimationFrame(() => this.checkScroll());
         }, true);
         this.checkScroll();
-
-        setTimeout(() => {
-            for (var i = 0; i < 20; i++) {
-                this.lines.push(Math.random());
-            }
-        }, 100);
 
         setTimeout(() => {
             var message  = ' In Laravel we trust ';

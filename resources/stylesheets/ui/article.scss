@@ -29,7 +29,13 @@
     position: relative;
 
     &:after {
-      @include line;
+      content: '';
+      box-shadow: 1px 0 0 #43372f;
+      width: 1px;
+      margin: 0 auto;
+      display: block;
+      position: relative;
+      transform: rotate(45deg);
       height: 40px;
       top: 14px;
     }
