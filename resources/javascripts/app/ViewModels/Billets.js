@@ -13,7 +13,7 @@ export default class Billets {
         var nav = dom.querySelector('[data-id=billets-nav]');
 
         window.addEventListener('scroll', event => {
-            Billets.checkScroll(list, nav);
+            window.requestAnimationFrame(() => Billets.checkScroll(list, nav));
         }, true);
         Billets.checkScroll(list, nav);
     }
@@ -29,7 +29,7 @@ export default class Billets {
             scrollY > 0 &&
             nav.getBoundingClientRect().height + scrollY < nav.parentElement.getBoundingClientRect().height
         ) {
-            list.style.marginTop = `-${scrollY / 2}px`;
+            list.style.marginTop = `-${parseInt(scrollY / 2)}px`;
             nav.style.marginTop = `${scrollY}px`;
         } else if (scrollY <= 0) {
             list.style.marginTop = `0px`;

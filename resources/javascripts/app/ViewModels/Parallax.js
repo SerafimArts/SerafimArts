@@ -33,7 +33,7 @@ export default class Parallax {
         }
 
         window.addEventListener('scroll', event => {
-           this.checkScroll();
+            window.requestAnimationFrame(() => this.checkScroll());
         }, true);
         this.checkScroll();
 
@@ -85,7 +85,22 @@ export default class Parallax {
      */
     setPosition(y) {
         this.nodes.forEach((depth, node) => {
-            node.style.top = `${y * depth}px`;
+            node.setAttribute('style', Parallax.makeTransformsY(y * depth));
         });
+    }
+
+    /**
+     * @param position
+     * @returns {string}
+     */
+    static makeTransformsY(position) {
+        return [
+            `-webkit-transform:translateY(${position}px)`,
+            `-khmlt-transform:translateY(${position}px)`,
+            `-moz-transform:translateY(${position}px)`,
+            `-o-transform:translateY(${position}px)`,
+            `-ms-transform:translateY(${position}px)`,
+            `transform:translateY(${position}px)`
+        ].join(';');
     }
 }
