@@ -18,10 +18,7 @@ use Domains\Article\Observers\ColorGeneratorObserver;
  * @uses IdObserver
  * @uses ColorGeneratorObserver
  *
- * @ORM\Observe({
- *     IdObserver::class,
- *     ColorGeneratorObserver::class
- * })
+ * @ORM\Observe({ IdObserver::class, ColorGeneratorObserver::class })
  *
  * @Contract\Invariant("is_uuid($this->id)")
  */
@@ -32,7 +29,11 @@ class Category extends AbstractCategory
      */
     public function changeColor()
     {
-        $this->color = app(ColorGenerator::class)->make();
+        /** @var ColorGenerator $generator */
+        $generator = app(ColorGenerator::class);
+
+        $this->color = $generator->make();
+        
         return $this;
     }
 }

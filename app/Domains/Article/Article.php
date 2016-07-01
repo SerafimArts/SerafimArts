@@ -8,7 +8,6 @@
 namespace Domains\Article;
 
 use Carbon\Carbon;
-use Domains\User\User;
 use Common\Orm\Mapping as ORM;
 use Common\Observers\IdObserver;
 use PhpDeal\Annotation as Contract;
@@ -25,11 +24,7 @@ use Domains\Article\Repository\EloquentArticleRepository;
  * @uses ContentRenderObserver
  * @uses EloquentArticleRepository
  *
- * @ORM\Observe({
- *     IdObserver::class,
- *     UrlGeneratorObserver::class,
- *     ContentRenderObserver::class
- * })
+ * @ORM\Observe({ IdObserver::class, UrlGeneratorObserver::class, ContentRenderObserver::class })
  * @ORM\Repository(class=EloquentArticleRepository::class)
  *
  * @Contract\Invariant("is_uuid($this->id)")
