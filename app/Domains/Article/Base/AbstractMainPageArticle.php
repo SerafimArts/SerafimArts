@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\Article\Base;
 
 use Domains\Article\Article;
 use Illuminate\Database\Eloquent\Model;
@@ -25,7 +25,7 @@ use Illuminate\Database\Eloquent\Relations\Relation;
  *
  * @property-read Article $relation
  */
-abstract class BaseArticlePreview extends Model
+abstract class AbstractMainPageArticle extends Model
 {
     /**
      * Model table name

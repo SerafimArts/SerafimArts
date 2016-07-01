@@ -7,13 +7,19 @@
  */
 namespace Domains\Analytic;
 
-use Domains\Base\BaseAnalytic;
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
+use Domains\Analytic\Base\AbstractAnalytic;
+use Domains\Analytic\Repository\EloquentAnalyticRepository;
 
 /**
- * Class Analytic
- * @package Domains\Analytic
+ * @uses IdObserver
+ * @uses EloquentAnalyticRepository
+ *
+ * @ORM\Observe(IdObserver::class)
+ * @ORM\Repository(class=EloquentAnalyticRepository::class)
  */
-class Analytic extends BaseAnalytic
+class Analytic extends AbstractAnalytic
 {
     const DIRECT_REQUEST = 'Direct';
 }

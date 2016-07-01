@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\Article\Base;
 
 use Domains\Article\Part;
 use Domains\Article\Article;
@@ -15,9 +15,6 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
- * Class BasePart
- * @package Domains\Base
- * 
  * @property string $id
  * @property string $series_id
  * @property int $part
@@ -28,7 +25,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
  * @property-read Part $next
  * @property-read Part $prev
  */
-abstract class BasePart extends Model
+abstract class AbstractPart extends Model
 {
     /**
      * @var string

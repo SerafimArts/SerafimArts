@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\Analytic\Base;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
@@ -18,7 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
-abstract class BaseAnalytic extends Model
+abstract class AbstractAnalytic extends Model
 {
     /**
      * Model table name

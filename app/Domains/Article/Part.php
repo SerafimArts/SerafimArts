@@ -7,13 +7,15 @@
  */
 namespace Domains\Article;
 
-use Domains\Base\BasePart;
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
+use Domains\Article\Base\AbstractPart;
 
 /**
- * Class Part
- * @package Domains\Article
+ * @uses IdObserver
+ * @ORM\Observe(IdObserver::class)
  */
-class Part extends BasePart
+class Part extends AbstractPart
 {
     
 }

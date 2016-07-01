@@ -7,17 +7,22 @@
  */
 namespace Domains\Article;
 
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
 use PhpDeal\Annotation as Contract;
-use Domains\Base\BaseArticlePreview;
 use Domains\Article\Enum\EnumSizeType;
 use Domains\Article\Enum\EnumArticleType;
 use SleepingOwl\Admin\Traits\OrderableModel;
+use Domains\Article\Base\AbstractMainPageArticle;
 
 /**
+ * @uses IdObserver
+ * @ORM\Observe(IdObserver::class)
+ * 
  * @Contract\Invariant("is_uuid($this->id)")
  * @Contract\Invariant("enum_of($this->type, \Domains\Article\Enum\EnumArticleType::class)")
  */
-class MainPageArticle extends BaseArticlePreview
+class MainPageArticle extends AbstractMainPageArticle
 {
     use OrderableModel;
 

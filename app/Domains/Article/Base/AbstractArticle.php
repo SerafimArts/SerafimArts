@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\Article\Base;
 
 use Carbon\Carbon;
 use Domains\Article\Category;
@@ -37,7 +37,7 @@ use Illuminate\Support\Collection;
  * @property-read Part $part
  * @property-read Part[]|Collection $parts
  */
-abstract class BaseArticle extends Model
+abstract class AbstractArticle extends Model
 {
     /**
      * Model table name

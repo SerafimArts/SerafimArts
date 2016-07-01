@@ -5,35 +5,35 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\Article\Base;
 
 use Carbon\Carbon;
-use Domains\Article\Part;
 use Domains\Article\Article;
-use Illuminate\Support\Collection;
+use Domains\Article\Category;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Collection;
 
 /**
- * Class BasePartSeries
- * @package Domains\Base
- * 
  * @property string $id
  * @property string $title
+ * @property string $color
+ * @property string $parent_id
  * @property Carbon $created_at
  * @property Carbon $updated_at
  *
  * @property-read Article[]|Collection $articles
- * @property-read Part[]|Collection $parts
+ * @property-read Category $parent
  */
-abstract class BasePartSeries extends Model
+abstract class AbstractCategory extends Model
 {
     /**
+     * Model table name
      * @var string
      */
-    protected $table = 'part_series';
+    protected $table = 'categories';
 
     /**
      * Disable auto increment primary key
@@ -54,27 +54,27 @@ abstract class BasePartSeries extends Model
      * @var array
      */
     protected $casts = [
-        'id'         => 'string',
-        'title'      => 'string',
-        'created_at' => 'datetime',
-        'updated_at' => 'datetime',
+        'id'          => 'string',
+        'title'       => 'string',
+        'description' => 'string',
+        'parent_id'   => 'string',
+        'created_at'  => 'datetime',
+        'updated_at'  => 'datetime',
     ];
-
-    /**
-     * @return BelongsToMany|Relation
-     */
-    public function articles() : BelongsToMany
-    {
-        return $this
-            ->belongsToMany(Article::class, 'article_parts', 'series_id', 'article_id')
-            ->withPivot('part');
-    }
-
+    
     /**
      * @return HasMany|Relation
      */
-    public function parts()
+    public function articles() : HasMany
     {
-        return $this->hasMany(Part::class, 'series_id', 'id');
+        return $this->hasMany(Article::class, 'category_id', 'id');
+    }
+
+    /**
+     * @return HasOne|Relation
+     */
+    public function parent() : HasOne
+    {
+        return $this->hasOne(Category::class, 'id', 'parent_id');
     }
 }

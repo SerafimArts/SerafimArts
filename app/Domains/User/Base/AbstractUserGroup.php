@@ -5,7 +5,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-namespace Domains\Base;
+namespace Domains\User\Base;
 
 use Domains\User\User;
 use Illuminate\Database\Eloquent\Model;
@@ -19,7 +19,7 @@ use Illuminate\Support\Collection;
  *
  * @property-read User[]|Collection $users
  */
-abstract class BaseUserGroup extends Model
+abstract class AbstractUserGroup extends Model
 {
     /**
      * Model table name

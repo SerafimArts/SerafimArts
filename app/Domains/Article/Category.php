@@ -7,15 +7,25 @@
  */
 namespace Domains\Article;
 
-
-use Common\Generators\ColorGenerator;
-use Domains\Base\BaseCategory;
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
 use PhpDeal\Annotation as Contract;
+use Common\Generators\ColorGenerator;
+use Domains\Article\Base\AbstractCategory;
+use Domains\Article\Observers\ColorGeneratorObserver;
 
 /**
+ * @uses IdObserver
+ * @uses ColorGeneratorObserver
+ *
+ * @ORM\Observe({
+ *     IdObserver::class,
+ *     ColorGeneratorObserver::class
+ * })
+ *
  * @Contract\Invariant("is_uuid($this->id)")
  */
-class Category extends BaseCategory
+class Category extends AbstractCategory
 {
     /**
      * @return $this

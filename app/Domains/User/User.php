@@ -7,25 +7,24 @@
  */
 namespace Domains\User;
 
-use Domains\Base\BaseUser;
-use PhpDeal\Annotation as Contract;
-use Illuminate\Auth\Authenticatable;
-use Illuminate\Auth\Passwords\CanResetPassword;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
-use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
-use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Ramsey\Uuid\Uuid;
-
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
+use Domains\User\Base\AbstractUser;
+use PhpDeal\Annotation as Contract;
+use Domains\User\Repository\EloquentUserRepository;
 
 /**
+ * @uses IdObserver
+ * @uses EloquentUserRepository
+ *
+ * @ORM\Observe(IdObserver::class)
+ * @ORM\Repository(class=EloquentUserRepository::class)
+ *
  * @Contract\Invariant("is_uuid($this->id)")
  */
-class User extends BaseUser implements
-    AuthenticatableContract, AuthorizableContract, CanResetPasswordContract, AdminAuthorizable
+class User extends AbstractUser implements AdminAuthorizable
 {
-    use Authenticatable, Authorizable, CanResetPassword;
-
     /**
      * @var array
      */
@@ -37,8 +36,11 @@ class User extends BaseUser implements
      */
     public function __construct(array $attributes = [])
     {
-        $attributes['id'] = $attributes['id'] ?? Uuid::uuid4()->toString();
-        parent::__construct($attributes);
+        parent::__construct(
+            array_merge($attributes, [
+                'id' => $attributes['id'] ?? Uuid::uuid4()->toString()
+            ])
+        );
     }
 
     /**

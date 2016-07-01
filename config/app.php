@@ -15,6 +15,22 @@ return [
 
     'debug' => env('APP_DEBUG', false),
 
+    /**
+     * Models
+     */
+    'models' => [
+        \Domains\Analytic\Analytic::class,
+
+        \Domains\Article\Article::class,
+        \Domains\Article\Category::class,
+        \Domains\Article\MainPageArticle::class,
+        \Domains\Article\Part::class,
+        \Domains\Article\PartSeries::class,
+
+        \Domains\User\Group::class,
+        \Domains\User\User::class,
+    ],
+
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -144,13 +160,14 @@ return [
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
         SleepingOwl\Admin\Providers\SleepingOwlServiceProvider::class,
         Barryvdh\Debugbar\ServiceProvider::class,
+        Serafim\Annotations\LaravelServiceProvider::class,
 
         /*
          * Application Service Providers...
          */
         Common\Providers\AppServiceProvider::class,
-        Common\Providers\DbcServiceProvider::class,
         Common\Providers\OrmServiceProvider::class,
+        Common\Providers\DbcServiceProvider::class,
         Common\Providers\AuthServiceProvider::class,
         Common\Providers\EventServiceProvider::class,
         Common\Providers\RouteServiceProvider::class,

@@ -8,20 +8,37 @@
 namespace Domains\Article;
 
 use Carbon\Carbon;
-use Domains\Base\BaseArticle;
 use Domains\User\User;
+use Common\Orm\Mapping as ORM;
+use Common\Observers\IdObserver;
 use PhpDeal\Annotation as Contract;
 use Illuminate\Database\Eloquent\Builder;
+use Domains\Article\Base\AbstractArticle;
+use Domains\Article\Observers\UrlGeneratorObserver;
+use Domains\Article\Observers\ContentRenderObserver;
 use Illuminate\Database\Query\Builder as QueryBuilder;
+use Domains\Article\Repository\EloquentArticleRepository;
 
 /**
- * @method Article|Builder|QueryBuilder published()
+ * @uses IdObserver
+ * @uses UrlGeneratorObserver
+ * @uses ContentRenderObserver
+ * @uses EloquentArticleRepository
+ *
+ * @ORM\Observe({
+ *     IdObserver::class,
+ *     UrlGeneratorObserver::class,
+ *     ContentRenderObserver::class
+ * })
+ * @ORM\Repository(class=EloquentArticleRepository::class)
  *
  * @Contract\Invariant("is_uuid($this->id)")
  * @Contract\Invariant("is_uuid($this->user_id)")
  * @Contract\Invariant("is_uuid($this->category_id)")
+ *
+ * @method Article|Builder|QueryBuilder published()
  */
-class Article extends BaseArticle
+class Article extends AbstractArticle
 {
     /**
      * @param Builder $query
