@@ -36,6 +36,7 @@ class Point {
         this.x = x;
         this.y = y;
         this.movement = movement;
+        this.randomizeMovement();
     }
 
     /**
