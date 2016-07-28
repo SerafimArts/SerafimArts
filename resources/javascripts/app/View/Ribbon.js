@@ -76,7 +76,7 @@ class Vector2 {
     /**
      * @type {number}
      */
-    size = 50;
+    size = 80;
 
     /**
      * @type {Point}
