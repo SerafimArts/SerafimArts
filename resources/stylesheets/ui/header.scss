@@ -1,12 +1,11 @@
 header {
   width: 100%;
-  position: fixed;
-  background: url(/img/header/header.png) center bottom repeat-x;
-  top: -50px;
+  position: absolute;
+  height: 132px;
+  background: url(/img/header/header.png) center top repeat-x;
   z-index: 20;
-  margin-top: 0;
-  height: 43px;
-  transition: top .3s ease;
+  margin-top: 43px;
+  top: -43px;
 
   .content {
     width: $width;
@@ -16,10 +15,10 @@ header {
   .home {
     display: block;
     text-decoration: none;
-    width: 58px;
-    height: 42px;
+    width: 120px;
+    height: 100px;
     float: left;
-    margin: 0;
+    margin: 0 0 0 20px;
     transition: margin .3s ease, width .3s ease;
   }
 
@@ -33,7 +32,7 @@ header {
     a {
       display: block;
       float: left;
-      margin: 0 20px;
+      margin: 0 15px;
       text-decoration: none;
       color: #999;
 
@@ -45,5 +44,22 @@ header {
 
   &.fixed {
     top: 0;
+    margin-top: 0;
+    height: 43px;
+    transition: top .3s ease;
+    background-position: center bottom;
+    position: fixed;
+
+    .home {
+      width: 58px;
+      margin: 0;
+      height: 42px;
+    }
+
+    nav {
+      a {
+        margin: 0 20px;
+      }
+    }
   }
 }
