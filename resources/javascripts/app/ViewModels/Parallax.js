@@ -53,9 +53,6 @@ export default class Parallax {
 
         this.ribbons = [
             new Ribbon(canvas, this.clientWidth, this.clientHeight),
-            new Ribbon(canvas, this.clientWidth, this.clientHeight),
-            new Ribbon(canvas, this.clientWidth, this.clientHeight),
-            new Ribbon(canvas, this.clientWidth, this.clientHeight),
             new Ribbon(canvas, this.clientWidth, this.clientHeight)
         ];
 
