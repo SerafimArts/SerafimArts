@@ -43,7 +43,7 @@ class Point {
      */
     randomizeMovement() {
         if (this.movement) {
-            var movement   = (Math.random() - .5) * 5;
+            var movement   = (Math.random() - .5) * 2;
             this.movementY = movement < 0 ? movement - .1 : movement + .1;
 
             //movement       = (Math.random() - .5) * 5;
