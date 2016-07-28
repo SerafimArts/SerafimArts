@@ -9,8 +9,10 @@ export default class Header {
      * @constructor
      */
     constructor() {
+        var height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+
         window.addEventListener('scroll', event => {
-            this.fixed(window.pageYOffset > 100);
+            this.fixed(window.pageYOffset > (height - 300));
         });
     }
 }

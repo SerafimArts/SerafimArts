@@ -23,7 +23,7 @@ export default class Billets {
      * @param {HTMLElement} nav
      */
     static checkScroll(list, nav) {
-        var scrollY = window.pageYOffset - 300;
+        var scrollY = window.pageYOffset - 50;
 
         if (
             scrollY > 0 &&

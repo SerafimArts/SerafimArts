@@ -1,6 +1,6 @@
 .billets-container {
   width: $width;
-  margin: 0 auto -40px auto;
+  margin: 0 auto;
   $billet: ($width / 4);
   $billet-height: 340px;
   @include clear;
@@ -13,7 +13,6 @@
   .billets-list {
     width: ($width - 275px);
     position: relative;
-    top: -110px;
   }
 
   .billet {
