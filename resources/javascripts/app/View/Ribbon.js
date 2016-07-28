@@ -1,5 +1,5 @@
-const RIBBON_SIZE = 100;
-const RIBBON_COUNT = 6;
+const RIBBON_SIZE = 120;
+const RIBBON_COUNT = 5;
 
 class Point {
     /**
@@ -15,7 +15,7 @@ class Point {
     /**
      * @type {number[]}
      */
-    movementY = 0;
+    movementY = .5;
 
     /**
      * @type {number[]}
@@ -36,7 +36,6 @@ class Point {
         this.x = x;
         this.y = y;
         this.movement = movement;
-        this.randomizeMovement();
     }
 
     /**
@@ -124,11 +123,12 @@ class Vector2 {
             size3 = this.size,
             size4 = this.size;
 
+        var delta = Math.floor((Math.abs(this.point1.y - this.point2.y) / this.percentage) * 100);
+
         if (this.nextRender()) {
-            ctx.fillStyle = '#f00';
+            ctx.fillStyle = `rgb(255, ${delta}, ${delta})`;
         } else {
-            var red = 100 + Math.floor((Math.abs(this.point1.y - this.point2.y) / this.percentage) * 100);
-            ctx.fillStyle = `rgb(${red}, 0, 0)`;
+            ctx.fillStyle = `rgb(${delta + 100}, 0, 0)`;
         }
 
         if (!this.point1.movement) {
@@ -147,9 +147,7 @@ class Vector2 {
         ctx.lineTo(this.point1.x + size1, this.point1.y);
         ctx.lineTo(this.point2.x + size3, this.point2.y);
         ctx.lineTo(this.point2.x - size4, this.point2.y);
-
         ctx.closePath();
-
         ctx.fill();
     }
 }
@@ -170,11 +168,6 @@ export default class Ribbon {
      * @type {number}
      */
     height = 0;
-
-    /**
-     * @type {boolean}
-     */
-    rendered = false;
 
     /**
      * @type {Array|Point[]}
@@ -207,15 +200,12 @@ export default class Ribbon {
      * @param height
      */
     constructor(canvas, width, height) {
-        canvas.setAttribute('width', width);
-        canvas.setAttribute('height', height);
-
         this.ctx = canvas.getContext('2d');
         this.width = width;
         this.height = height;
 
-        this.minTop = height / 3;
-        this.maxTop = this.minTop * 2;
+        this.minTop = height / 2 - (height / 10);
+        this.maxTop = height / 2 + (height / 10);
 
         this.points = this._makePoints();
         this.vectors = this._makeVectors();
@@ -229,14 +219,17 @@ export default class Ribbon {
         var points = [];
         var chunk = (this.width / this.pointsCount);
 
-        points.push(new Point(0, this.height / 2, false));
+        points.push(new Point(-RIBBON_SIZE * 2, this.height / 2, false));
 
         for (var i = 0; i < this.pointsCount; i++) {
-            var point = new Point(Point.rand(chunk * i, chunk * (i + 1)), Point.rand(this.minTop, this.maxTop));
+            var point = new Point(
+                Point.rand(chunk * i, chunk * (i + 1)),
+                Point.rand(this.minTop, this.maxTop)
+            );
             points.push(point);
         }
 
-        points.push(new Point(this.width, this.height / 2, false));
+        points.push(new Point(this.width + RIBBON_SIZE * 2, this.height / 2, false));
 
         return points;
     }
@@ -257,23 +250,10 @@ export default class Ribbon {
     }
 
     /**
-     * @return {Ribbon}
-     */
-    render() {
-        if (this.rendered === false) {
-            this.rendered = true;
-            this._draw();
-        }
-        return this;
-    }
-
-    /**
      * @private
      */
-    _draw() {
+    render() {
         var i = 0;
-        this.ctx.clearRect(0, 0, this.width, this.height);
-
         for (i = 0; i < this.points.length; i++) {
             this.points[i].y += this.points[i].movementY;
             this.points[i].x += this.points[i].movementX;
@@ -296,19 +276,7 @@ export default class Ribbon {
         }
 
         for (i = 0; i < this.vectors.length; i++) {
-            if (!this.vectors[i].nextRender()) {
-                this.vectors[i].render(this.ctx);
-            }
-        }
-
-        for (i = 0; i < this.vectors.length; i++) {
-            if (this.vectors[i].nextRender()) {
-                this.vectors[i].render(this.ctx);
-            }
-        }
-
-        if (this.rendered) {
-            requestAnimationFrame(() => this._draw());
+            this.vectors[i].render(this.ctx);
         }
     }
 }

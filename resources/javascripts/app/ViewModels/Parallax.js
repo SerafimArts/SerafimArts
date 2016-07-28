@@ -35,14 +35,31 @@ export default class Parallax {
     scrollToNode = null;
 
     /**
+     * @type {Array}
+     */
+    ribbons = [];
+
+    /**
      * @constructor
      */
     constructor(dom) {
         this.height(this.clientHeight);
         this.scrollToNode = dom.querySelector('[data-id=scrollTo]');
 
-        var ribbon = new Ribbon(dom.querySelector('[data-id=ribbon]'), this.clientWidth, this.clientHeight);
-        ribbon.render();
+        var canvas = dom.querySelector('[data-id=ribbon]');
+
+        canvas.setAttribute('width', this.clientWidth);
+        canvas.setAttribute('height', this.clientHeight);
+
+        this.ribbons = [
+            new Ribbon(canvas, this.clientWidth, this.clientHeight),
+            new Ribbon(canvas, this.clientWidth, this.clientHeight),
+            new Ribbon(canvas, this.clientWidth, this.clientHeight),
+            new Ribbon(canvas, this.clientWidth, this.clientHeight),
+            new Ribbon(canvas, this.clientWidth, this.clientHeight)
+        ];
+
+        this.render();
 
         setTimeout(i => this.visible(true), 500);
 
@@ -53,6 +70,16 @@ export default class Parallax {
 
             this._checkScroll();
         }, false);
+    }
+
+    render() {
+        this.ribbons[0].ctx.clearRect(0, 0, this.ribbons[0].width, this.ribbons[0].height);
+        this.ribbons[0].ctx.globalAlpha = .9;
+        this.ribbons[0].ctx.globalCompositeOperation = 'lighter';
+        for (var i = 0; i < this.ribbons.length; i++) {
+            this.ribbons[i].render();
+        }
+        requestAnimationFrame(() => this.render());
     }
 
     /**
