@@ -23,16 +23,17 @@ export default class Billets {
      * @param {HTMLElement} nav
      */
     static checkScroll(list, nav) {
-        var scrollY = window.pageYOffset - 50;
+        var padding = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
+        var scrollY = window.pageYOffset - padding;
 
         if (
             scrollY > 0 &&
             nav.getBoundingClientRect().height + scrollY < nav.parentElement.getBoundingClientRect().height
         ) {
-            //list.style.marginTop = `-${parseInt(scrollY / 2)}px`;
+            list.style.marginTop = `-${parseInt(scrollY / 2)}px`;
             nav.style.marginTop = `${scrollY}px`;
         } else if (scrollY <= 0) {
-            //list.style.marginTop = `0px`;
+            list.style.marginTop = `0px`;
             nav.style.marginTop = `0px`;
         }
     }
