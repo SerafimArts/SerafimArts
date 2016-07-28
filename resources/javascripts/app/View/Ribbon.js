@@ -1,3 +1,6 @@
+const RIBBON_SIZE = 100;
+const RIBBON_COUNT = 6;
+
 class Point {
     /**
      * @type {number}
@@ -76,7 +79,7 @@ class Vector2 {
     /**
      * @type {number}
      */
-    size = 80;
+    size = RIBBON_SIZE;
 
     /**
      * @type {Point}
@@ -89,12 +92,20 @@ class Vector2 {
     point2 = null;
 
     /**
+     * @type {number}
+     */
+    percentage = 0;
+
+
+    /**
      * @param point1
      * @param point2
+     * @param percentage
      */
-    constructor(point1, point2) {
+    constructor(point1, point2, percentage) {
         this.point1 = point1;
         this.point2 = point2;
+        this.percentage = percentage;
     }
 
     /**
@@ -116,7 +127,8 @@ class Vector2 {
         if (this.nextRender()) {
             ctx.fillStyle = '#f00';
         } else {
-            ctx.fillStyle = '#a00';
+            var red = 100 + Math.floor((Math.abs(this.point1.y - this.point2.y) / this.percentage) * 100);
+            ctx.fillStyle = `rgb(${red}, 0, 0)`;
         }
 
         if (!this.point1.movement) {
@@ -172,12 +184,22 @@ export default class Ribbon {
     /**
      * @type {number}
      */
-    pointsCount = 10;
+    pointsCount = RIBBON_COUNT;
 
     /**
      * @type {Array}
      */
     vectors = [];
+
+    /**
+     * @type {number}
+     */
+    minTop = 0;
+
+    /**
+     * @type {number}
+     */
+    maxTop = 0;
 
     /**
      * @param canvas
@@ -191,6 +213,9 @@ export default class Ribbon {
         this.ctx = canvas.getContext('2d');
         this.width = width;
         this.height = height;
+
+        this.minTop = height / 3;
+        this.maxTop = this.minTop * 2;
 
         this.points = this._makePoints();
         this.vectors = this._makeVectors();
@@ -207,7 +232,7 @@ export default class Ribbon {
         points.push(new Point(0, this.height / 2, false));
 
         for (var i = 0; i < this.pointsCount; i++) {
-            var point = new Point(Point.rand(chunk * i, chunk * (i + 1)), Point.rand(0, this.height));
+            var point = new Point(Point.rand(chunk * i, chunk * (i + 1)), Point.rand(this.minTop, this.maxTop));
             points.push(point);
         }
 
@@ -224,7 +249,7 @@ export default class Ribbon {
         var vectors = [];
 
         for (var i = 1; i < this.points.length; i++) {
-            var vector = new Vector2(this.points[i - 1], this.points[i]);
+            var vector = new Vector2(this.points[i - 1], this.points[i], this.maxTop - this.minTop);
             vectors.push(vector);
         }
 
@@ -253,11 +278,11 @@ export default class Ribbon {
             this.points[i].y += this.points[i].movementY;
             this.points[i].x += this.points[i].movementX;
 
-            if (this.points[i].y < 0) {
-                this.points[i].y = 1;
+            if (this.points[i].y < this.minTop) {
+                this.points[i].y = this.minTop + 1;
                 this.points[i].randomizeMovement();
-            } else if (this.points[i].y > this.height) {
-                this.points[i].y = this.height - 1;
+            } else if (this.points[i].y > this.maxTop) {
+                this.points[i].y = this.maxTop - 1;
                 this.points[i].randomizeMovement();
             }
 
