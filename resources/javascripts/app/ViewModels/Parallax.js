@@ -63,10 +63,10 @@ export default class Parallax {
 
         if (this.scrollPosition > padding && this.scrollDown && !this.scrolledToContent) {
             this.scrolledToContent = true;
-            this._scrollTo(document.body, this.clientHeight, 300);
+            //this._scrollTo(document.body, this.clientHeight, 300);
         } else if (this.scrollPosition < this.clientHeight - padding && !this.scrollDown && this.scrolledToContent) {
             this.scrolledToContent = false;
-            this._scrollTo(document.body, 0, 300);
+            //this._scrollTo(document.body, 0, 300);
         }
     }
 
