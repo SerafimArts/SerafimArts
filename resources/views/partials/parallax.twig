@@ -1,8 +1,14 @@
-<section class="parallax" data-bind="attr: { style: 'height: ' + height() + 'px' }" data-vm="Parallax">
+<section class="parallax" data-bind="
+    attr: { style: 'height: ' + height() + 'px' },
+    css: { visible: visible }
+" data-vm="Parallax">
+
     <canvas data-id="ribbon"></canvas>
 
     <section class="description">
         <h1>SerafimArts</h1>
         <h2>Nesmeyanov Kirill's Personal Blog</h2>
     </section>
+
+    <div data-id="scrollTo" class="scroll-to"></div>
 </section>
