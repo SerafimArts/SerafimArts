@@ -15,7 +15,7 @@ My Personal Blog %)
 - Использование Enum в PHP
 - Использование контрактного программирования (Design by Contract)
 - Alice фикстурки (database/fixtures/*)
-- Генератор моделей по Propel-like схемам (database/schema/* и app/Domains/Base/*)
+- ~~Генератор моделей по Propel-like схемам (database/schema/* и app/Domains/Base/*)~~
 
 ### Клиент
 
