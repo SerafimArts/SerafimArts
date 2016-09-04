@@ -40,6 +40,11 @@ export default class Parallax {
     ribbons = [];
 
     /**
+     * @type {KnockoutObservable<T>}
+     */
+    hidden = ko.observable(false);
+
+    /**
      * @constructor
      */
     constructor(dom) {
@@ -83,56 +88,19 @@ export default class Parallax {
      * @private
      */
     _checkScroll() {
-        var padding = 100;
+        var padding = 10;
 
         if (this.scrollPosition > padding && this.scrollDown && !this.scrolledToContent) {
-            this.scrolledToContent = true;
-            //this._scrollTo(document.body, this.clientHeight, 300);
+            setTimeout(() => {
+                this.scrolledToContent = true;
+            }, 500);
+            this.hidden(this.clientHeight);
         } else if (this.scrollPosition < this.clientHeight - padding && !this.scrollDown && this.scrolledToContent) {
-            this.scrolledToContent = false;
-            //this._scrollTo(document.body, 0, 300);
+            setTimeout(() => {
+                this.scrolledToContent = false;
+            }, 500);
+            this.hidden(0);
         }
-    }
-
-    /**
-     * @param element
-     * @param to
-     * @param duration
-     * @private
-     */
-    _scrollTo(element, to, duration) {
-        var start     = element.scrollTop,
-            change    = to - start,
-            increment = 20;
-
-        var animateScroll = function (elapsedTime) {
-            elapsedTime += increment;
-            element.scrollTop = Parallax._easeInOut(elapsedTime, start, change, duration);
-            if (elapsedTime < duration) {
-                setTimeout(function () {
-                    animateScroll(elapsedTime);
-                }, increment);
-            }
-        };
-
-        animateScroll(0);
-    }
-
-    /**
-     * @param currentTime
-     * @param start
-     * @param change
-     * @param duration
-     * @return {*}
-     * @private
-     */
-    static _easeInOut(currentTime, start, change, duration) {
-        currentTime /= duration / 2;
-        if (currentTime < 1) {
-            return change / 2 * currentTime * currentTime + start;
-        }
-        currentTime -= 1;
-        return -change / 2 * (currentTime * (currentTime - 2) - 1) + start;
     }
 
     /**
