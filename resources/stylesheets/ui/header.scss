@@ -4,6 +4,7 @@ header {
   height: 132px;
   background: url(/img/header/header.png) center top repeat-x;
   z-index: 20;
+  contain: layout;
   margin-top: 43px;
   top: -43px;
 
