@@ -5,7 +5,7 @@
   overflow: hidden;
   background: #fff;
   opacity: 0;
-  transition: opacity 1s ease;
+  transition: opacity 1s ease, margin .4s ease;
 
   &.visible {
     opacity: 1;
