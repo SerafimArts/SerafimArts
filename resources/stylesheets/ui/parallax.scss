@@ -3,10 +3,9 @@
   height: 1200px;
   position: relative;
   overflow: hidden;
-  background: #fff url(/img/parallax/triangles-white.png) fixed;
+  background: #fff;
   opacity: 0;
-  contain: layout;
-  transition: opacity 1s ease, margin .35s ease;
+  transition: opacity 1s ease;
 
   &.visible {
     opacity: 1;
@@ -36,7 +35,28 @@
     margin-top: -60px;
 
     h1, h2 {
-      display: none;
+      color: #333;
+      position: relative;
+      z-index: 6;
+      display: block;
+      text-align: center;
+      font-family: "Fira Sans", Helvetica, Tahoma, Arial, sans-serif;
+      padding: 0;
+      margin: 0;
+    }
+
+    h1 {
+      font-size: 90px;
+      height: 100px;
+      line-height: 100px;
+    }
+
+    h2 {
+      height: 20px;
+      line-height: 20px;
+      font-size: 18px;
+      font-weight: 300;
+      text-transform: uppercase;
     }
   }
 }
