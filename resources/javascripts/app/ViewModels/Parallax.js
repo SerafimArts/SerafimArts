@@ -131,14 +131,14 @@ export default class Parallax {
         if (this.scrollPosition > padding && this.scrollDown && !this.scrolledToContent) {
             setTimeout(() => {
                 this.scrolledToContent = true;
-                this.visible(false);
             }, 500);
+            this.visible(false);
             this.hidden(this.clientHeight - 250);
         } else if (this.scrollPosition < 10 && !this.scrollDown && this.scrolledToContent) {
             setTimeout(() => {
                 this.scrolledToContent = false;
-                this.visible(true);
             }, 500);
+            this.visible(true);
             this.hidden(0);
         }
     }
