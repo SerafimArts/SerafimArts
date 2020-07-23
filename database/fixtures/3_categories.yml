@@ -1,8 +1,0 @@
-Common\Fixtures\Entity:
-  category_{1..5}:
-    __construct: ['categories']
-    id: <uuid()>
-    title: <word()>
-    description: <words(3, true)>
-    created_at: <dateTimeThisYear()>
-    updated_at: <dateTimeThisYear()>

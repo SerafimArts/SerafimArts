@@ -1,9 +1,0 @@
-Common\Fixtures\Entity:
-  preview_{1..8}:
-    __construct: ['article_previews']
-    id: <uuid()>
-    size: <numberBetween(1, 3)>
-    type: 'Text'
-    content: <sentences(5, true)>
-    order_id: <current()>
-    relation_id: '@article_<numberBetween(1, 5)>'
