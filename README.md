@@ -8,3 +8,7 @@ Implementation of currying and partial application in PHP. Bindings for OpenGL,
 SDL and Vulkan API. A real lexer, grammar parser and compiler, and more...
 
 Watch out for dragons!
+
+---
+
+![SerafimArts's GitHub Stats](https://github-readme-stats.vercel.app/api?username=SerafimArts&include_all_commits=true)
