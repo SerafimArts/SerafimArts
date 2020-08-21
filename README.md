@@ -1,6 +1,6 @@
 ### Welcome to `Dragon Island` 🐉
 
-<img align="right" src="https://raw.githubusercontent.com/SerafimArts/SerafimArts/master/generics.gif" width="200" />
+<img align="right" src="https://raw.githubusercontent.com/SerafimArts/SerafimArts/master/generics.gif" width="300" />
 
 I specialize in things that no one would do in their right mind.
 
